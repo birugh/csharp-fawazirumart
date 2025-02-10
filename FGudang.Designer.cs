@@ -61,6 +61,7 @@
             this.btnTambah.TabIndex = 73;
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = true;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
             // 
             // labelTime
             // 
@@ -97,6 +98,7 @@
             this.btnLogout.TabIndex = 69;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // label1
             // 
@@ -226,6 +228,7 @@
             this.btnEdit.TabIndex = 93;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnHapus
             // 
@@ -235,8 +238,9 @@
             this.btnHapus.TabIndex = 94;
             this.btnHapus.Text = "Hapus";
             this.btnHapus.UseVisualStyleBackColor = true;
+            this.btnHapus.Click += new System.EventHandler(this.btnHapus_Click);
             // 
-            // Form1
+            // FGudang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -263,7 +267,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "FGudang";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

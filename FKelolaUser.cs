@@ -141,5 +141,51 @@ namespace csharp_lksmart
             logForm.Show();
             this.Hide();
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSearchId.Text))
+            {
+                MessageBox.Show("Please provide a valid user ID.");
+                return;
+            }
+
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "SELECT * FROM tbl_user WHERE id_user=@id_user";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@id_user", txtSearchId.Text);
+
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    txtTipeUser.Text = reader["tipe_user"].ToString();
+                    txtNama.Text = reader["nama"].ToString();
+                    txtAlamat.Text = reader["alamat"].ToString();
+                    txtUsername.Text = reader["username"].ToString();
+                    txtTelepon.Text = reader["telepon"].ToString();
+                    txtPassword.Text = reader["password"].ToString();
+                    txtEmail.Text = reader["email"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("User not found.");
+                }
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                txtSearchId.Text = row.Cells["id"].Value.ToString();
+                txtEmail.Text = row.Cells["email"].Value.ToString();
+                txtPassword.Text = row.Cells["password"].Value.ToString();
+                txtTipeUser.Text = row.Cells["tipe_user"].Value.ToString();
+            }
+        }
     }
 }
