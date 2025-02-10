@@ -53,6 +53,9 @@
             this.btnHapus = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSearchId = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,7 +119,7 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(156, 295);
+            this.dataGridView1.Location = new System.Drawing.Point(173, 413);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(619, 277);
             this.dataGridView1.TabIndex = 15;
@@ -132,7 +135,7 @@
             // 
             // btnTambah
             // 
-            this.btnTambah.Location = new System.Drawing.Point(430, 218);
+            this.btnTambah.Location = new System.Drawing.Point(211, 320);
             this.btnTambah.Name = "btnTambah";
             this.btnTambah.Size = new System.Drawing.Size(93, 47);
             this.btnTambah.TabIndex = 19;
@@ -239,7 +242,7 @@
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(530, 218);
+            this.btnEdit.Location = new System.Drawing.Point(311, 320);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 47);
             this.btnEdit.TabIndex = 36;
@@ -249,7 +252,7 @@
             // 
             // btnHapus
             // 
-            this.btnHapus.Location = new System.Drawing.Point(629, 218);
+            this.btnHapus.Location = new System.Drawing.Point(410, 320);
             this.btnHapus.Name = "btnHapus";
             this.btnHapus.Size = new System.Drawing.Size(93, 47);
             this.btnHapus.TabIndex = 37;
@@ -273,11 +276,39 @@
             this.txtEmail.Size = new System.Drawing.Size(193, 20);
             this.txtEmail.TabIndex = 38;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(427, 202);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(39, 13);
+            this.label4.TabIndex = 41;
+            this.label4.Text = "Cari ID";
+            // 
+            // txtSearchId
+            // 
+            this.txtSearchId.Location = new System.Drawing.Point(428, 218);
+            this.txtSearchId.Name = "txtSearchId";
+            this.txtSearchId.Size = new System.Drawing.Size(193, 20);
+            this.txtSearchId.TabIndex = 40;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(428, 244);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(93, 34);
+            this.btnSearch.TabIndex = 42;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
             // FKelolaUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 582);
+            this.ClientSize = new System.Drawing.Size(814, 711);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtSearchId);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.btnHapus);
@@ -338,5 +369,8 @@
         private System.Windows.Forms.Button btnHapus;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtSearchId;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

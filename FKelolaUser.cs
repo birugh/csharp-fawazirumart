@@ -59,7 +59,24 @@ namespace csharp_lksmart
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "UPDATE tbl_user SET tipe_user=@tipe_user, nama=@nama, alamat=@alamat, username=@username, telepon=@telepon, password=@Password, email=@email WHERE id_user=@id_user";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@id_user", txtSearchId.Text);
+                cmd.Parameters.AddWithValue("@tipe_user", txtTipeUser.Text);
+                cmd.Parameters.AddWithValue("@nama", txtNama.Text);
+                cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
+                cmd.Parameters.AddWithValue("@username", txtUsername.Text);
+                cmd.Parameters.AddWithValue("@telepon", txtTelepon.Text);
+                cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                cmd.Parameters.AddWithValue("@email", txtEmail.Text);
 
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("User updated successfully!");
+                LoadUserData();
+            }
         }
 
         private void btnHapus_Click(object sender, EventArgs e)
