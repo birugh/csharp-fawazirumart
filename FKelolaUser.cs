@@ -38,7 +38,23 @@ namespace csharp_lksmart
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "INSERT INTO tbl_user (tipe_user, nama, alamat, username, telepon, password, email) VALUES (@tipe_user, @nama, @alamat, @username, @telepon, @password, @email)";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@tipe_user", txtTipeUser.Text);
+                cmd.Parameters.AddWithValue("@nama", txtNama.Text);
+                cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
+                cmd.Parameters.AddWithValue("@username", txtUsername.Text);
+                cmd.Parameters.AddWithValue("@telepon", txtTelepon.Text);
+                cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                cmd.Parameters.AddWithValue("@email", txtEmail.Text);
 
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("User added successfully!");
+                LoadUserData();
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
