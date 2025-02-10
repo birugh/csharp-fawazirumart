@@ -35,9 +35,26 @@ namespace csharp_lksmart
             labelDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
         }
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtTipeUser.Text) ||
+                string.IsNullOrWhiteSpace(txtNama.Text) ||
+                string.IsNullOrWhiteSpace(txtAlamat.Text) ||
+                string.IsNullOrWhiteSpace(txtUsername.Text) ||
+                string.IsNullOrWhiteSpace(txtTelepon.Text) ||
+                string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                MessageBox.Show("All fields must be filled out.");
+                return false;
+            }
+            return true;
+        }
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
+            if (!ValidateInput()) return;
+
             using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
             {
                 string query = "INSERT INTO tbl_user (tipe_user, nama, alamat, username, telepon, password, email) VALUES (@tipe_user, @nama, @alamat, @username, @telepon, @password, @email)";
@@ -59,6 +76,12 @@ namespace csharp_lksmart
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (!ValidateInput() || string.IsNullOrWhiteSpace(txtSearchId.Text))
+            {
+                MessageBox.Show("Please fill out all fields and provide a valid user ID.");
+                return;
+            }
+
             using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
             {
                 string query = "UPDATE tbl_user SET tipe_user=@tipe_user, nama=@nama, alamat=@alamat, username=@username, telepon=@telepon, password=@Password, email=@email WHERE id_user=@id_user";
@@ -81,6 +104,12 @@ namespace csharp_lksmart
 
         private void btnHapus_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtSearchId.Text))
+            {
+                MessageBox.Show("Please provide a valid user ID.");
+                return;
+            }
+
             using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
             {
                 string query = "DELETE FROM tbl_user WHERE id_user=@id_user";
@@ -96,7 +125,7 @@ namespace csharp_lksmart
 
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("You are in this form right now.");
         }
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
