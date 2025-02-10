@@ -57,7 +57,7 @@
             // labelTime
             // 
             this.labelTime.AutoSize = true;
-            this.labelTime.Location = new System.Drawing.Point(769, 34);
+            this.labelTime.Location = new System.Drawing.Point(662, 34);
             this.labelTime.Name = "labelTime";
             this.labelTime.Size = new System.Drawing.Size(23, 13);
             this.labelTime.TabIndex = 22;
