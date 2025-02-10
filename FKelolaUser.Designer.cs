@@ -1,6 +1,6 @@
 ﻿namespace csharp_lksmart
 {
-    partial class FKelolaBarang
+    partial class FKelolaUser
     {
         /// <summary>
         /// Required designer variable.
@@ -89,6 +89,7 @@
             this.btnLog.TabIndex = 18;
             this.btnLog.Text = "Log Activity";
             this.btnLog.UseVisualStyleBackColor = true;
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
             // 
             // btnKelolaLaporan
             // 
@@ -98,6 +99,7 @@
             this.btnKelolaLaporan.TabIndex = 17;
             this.btnKelolaLaporan.Text = "Kelola Laporan";
             this.btnKelolaLaporan.UseVisualStyleBackColor = true;
+            this.btnKelolaLaporan.Click += new System.EventHandler(this.btnKelolaLaporan_Click);
             // 
             // btnKelolaUser
             // 
@@ -107,6 +109,7 @@
             this.btnKelolaUser.TabIndex = 16;
             this.btnKelolaUser.Text = "Kelola User";
             this.btnKelolaUser.UseVisualStyleBackColor = true;
+            this.btnKelolaUser.Click += new System.EventHandler(this.btnKelolaUser_Click);
             // 
             // dataGridView1
             // 
@@ -133,6 +136,7 @@
             this.btnTambah.TabIndex = 19;
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = true;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
             // 
             // txtTipeUser
             // 
@@ -239,6 +243,7 @@
             this.btnEdit.TabIndex = 36;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnHapus
             // 
@@ -248,6 +253,7 @@
             this.btnHapus.TabIndex = 37;
             this.btnHapus.Text = "Hapus";
             this.btnHapus.UseVisualStyleBackColor = true;
+            this.btnHapus.Click += new System.EventHandler(this.btnHapus_Click);
             // 
             // FKelolaUser
             // 

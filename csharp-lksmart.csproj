@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseConnector.cs" />
     <Compile Include="FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,11 +60,11 @@
     <Compile Include="FLog.Designer.cs">
       <DependentUpon>FLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="FKelolaBarang.cs">
+    <Compile Include="FKelolaUser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FKelolaBarang.Designer.cs">
-      <DependentUpon>FKelolaBarang.cs</DependentUpon>
+    <Compile Include="FKelolaUser.Designer.cs">
+      <DependentUpon>FKelolaUser.cs</DependentUpon>
     </Compile>
     <Compile Include="FGudang.cs">
       <SubType>Form</SubType>
@@ -91,8 +92,8 @@
     <EmbeddedResource Include="FLog.resx">
       <DependentUpon>FLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FKelolaBarang.resx">
-      <DependentUpon>FKelolaBarang.cs</DependentUpon>
+    <EmbeddedResource Include="FKelolaUser.resx">
+      <DependentUpon>FKelolaUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FGudang.resx">
       <DependentUpon>FGudang.cs</DependentUpon>
