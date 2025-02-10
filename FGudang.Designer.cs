@@ -50,6 +50,7 @@
             this.dateExpiredDate = new System.Windows.Forms.DateTimePicker();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnHapus = new System.Windows.Forms.Button();
+            this.btnCari = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,12 +117,13 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(654, 311);
             this.dataGridView1.TabIndex = 78;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(724, 337);
+            this.txtSearch.Location = new System.Drawing.Point(595, 337);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(100, 20);
+            this.txtSearch.Size = new System.Drawing.Size(130, 20);
             this.txtSearch.TabIndex = 79;
             // 
             // txtKodeBarang
@@ -240,11 +242,22 @@
             this.btnHapus.UseVisualStyleBackColor = true;
             this.btnHapus.Click += new System.EventHandler(this.btnHapus_Click);
             // 
+            // btnCari
+            // 
+            this.btnCari.Location = new System.Drawing.Point(731, 326);
+            this.btnCari.Name = "btnCari";
+            this.btnCari.Size = new System.Drawing.Size(93, 31);
+            this.btnCari.TabIndex = 95;
+            this.btnCari.Text = "Cari";
+            this.btnCari.UseVisualStyleBackColor = true;
+            this.btnCari.Click += new System.EventHandler(this.btnCari_Click);
+            // 
             // FGudang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 686);
+            this.Controls.Add(this.btnCari);
             this.Controls.Add(this.btnHapus);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.dateExpiredDate);
@@ -298,5 +311,6 @@
         private System.Windows.Forms.DateTimePicker dateExpiredDate;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnHapus;
+        private System.Windows.Forms.Button btnCari;
     }
 }

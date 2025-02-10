@@ -16,7 +16,7 @@ namespace csharp_lksmart
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FKelolaUser());
+            Application.Run(new FGudang());
         }
     }
 }
