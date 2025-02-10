@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,18 @@ namespace csharp_lksmart
         public FKelolaUser()
         {
             InitializeComponent();
+            LoadUserData();
+        }
+        private void LoadUserData()
+        {
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "SELECT * FROM tbl_user";
+                SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                DataTable dataTable = new DataTable();
+                adapter.Fill(dataTable);
+                dataGridView1.DataSource = dataTable;
+            }
         }
 
         private void btnTambah_Click(object sender, EventArgs e)

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static csharp_lksmart.DatabaseConnector;
 
 namespace csharp_lksmart
 {
@@ -22,12 +23,11 @@ namespace csharp_lksmart
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string connectionString = "Data Source=DESKTOP-GC4N26G\\SQLEXPRESS;Initial Catalog=db_lksmart;Integrated Security=True";
             string query = "SELECT tipe_user FROM tbl_user WHERE email=@Email AND password=@Password";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
