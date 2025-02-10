@@ -110,12 +110,50 @@ namespace csharp_lksmart
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                txtKodeBarang.Text = row.Cells["kode_barang"].Value.ToString();
+                txtNamaBarang.Text = row.Cells["nama_barang"].Value.ToString();
+                txtJumlahBarang.Text = row.Cells["jumlah_barang"].Value.ToString();
+                txtSatuan.Text = row.Cells["satuan"].Value.ToString();
+                dateExpiredDate.Value = Convert.ToDateTime(row.Cells["expired_date"].Value);
+                txtHargaSatuan.Text = row.Cells["harga_satuan"].Value.ToString();
+                txtSearch.Text = row.Cells["id_barang"].Value.ToString();
+            }
         }
 
         private void btnCari_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                MessageBox.Show("Please provide a valid Kode Barang.");
+                return;
+            }
 
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "SELECT * FROM tbl_barang WHERE id_barang=@id_barang";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@id_barang", txtSearch.Text);
+
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    txtKodeBarang.Text = reader["kode_barang"].ToString();
+                    txtNamaBarang.Text = reader["nama_barang"].ToString();
+                    dateExpiredDate.Value = Convert.ToDateTime(reader["expired_date"]);
+                    txtJumlahBarang.Text = reader["jumlah_barang"].ToString();
+                    txtSatuan.Text = reader["satuan"].ToString();
+                    txtHargaSatuan.Text = reader["harga_satuan"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Barang not found.");
+                }
+            }
         }
     }
 }
