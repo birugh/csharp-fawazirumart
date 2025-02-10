@@ -71,6 +71,12 @@
     <Compile Include="FGudang.Designer.cs">
       <DependentUpon>FGudang.cs</DependentUpon>
     </Compile>
+    <Compile Include="FTransaksi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTransaksi.Designer.cs">
+      <DependentUpon>FTransaksi.cs</DependentUpon>
+    </Compile>
     <Compile Include="KelolaFormLaporan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FGudang.resx">
       <DependentUpon>FGudang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTransaksi.resx">
+      <DependentUpon>FTransaksi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KelolaFormLaporan.resx">
       <DependentUpon>KelolaFormLaporan.cs</DependentUpon>
