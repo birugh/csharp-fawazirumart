@@ -1,6 +1,6 @@
 ﻿namespace csharp_lksmart
 {
-    partial class FKelolaUser
+    partial class FKelolaBarang
     {
         /// <summary>
         /// Required designer variable.

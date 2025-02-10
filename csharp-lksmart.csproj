@@ -59,11 +59,17 @@
     <Compile Include="FLog.Designer.cs">
       <DependentUpon>FLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="FKelolaUser.cs">
+    <Compile Include="FKelolaBarang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FKelolaUser.Designer.cs">
-      <DependentUpon>FKelolaUser.cs</DependentUpon>
+    <Compile Include="FKelolaBarang.Designer.cs">
+      <DependentUpon>FKelolaBarang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FGudang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FGudang.Designer.cs">
+      <DependentUpon>FGudang.cs</DependentUpon>
     </Compile>
     <Compile Include="KelolaFormLaporan.cs">
       <SubType>Form</SubType>
@@ -79,8 +85,11 @@
     <EmbeddedResource Include="FLog.resx">
       <DependentUpon>FLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FKelolaUser.resx">
-      <DependentUpon>FKelolaUser.cs</DependentUpon>
+    <EmbeddedResource Include="FKelolaBarang.resx">
+      <DependentUpon>FKelolaBarang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FGudang.resx">
+      <DependentUpon>FGudang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KelolaFormLaporan.resx">
       <DependentUpon>KelolaFormLaporan.cs</DependentUpon>

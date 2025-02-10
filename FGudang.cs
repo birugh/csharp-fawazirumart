@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace csharp_lksmart
 {
-    public partial class FKelolaUser : Form
+    public partial class FGudang : Form
     {
-        public FKelolaUser()
+        public FGudang()
         {
             InitializeComponent();
         }
