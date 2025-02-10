@@ -105,7 +105,9 @@ namespace csharp_lksmart
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-
+            FormLogin loginForm = new FormLogin();
+            loginForm.Show();
+            this.Hide();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
