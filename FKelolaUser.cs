@@ -81,7 +81,17 @@ namespace csharp_lksmart
 
         private void btnHapus_Click(object sender, EventArgs e)
         {
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "DELETE FROM tbl_user WHERE id_user=@id_user";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@id_user", txtSearchId.Text);
 
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("User deleted successfully!");
+                LoadUserData();
+            }
         }
 
         private void btnKelolaUser_Click(object sender, EventArgs e)
@@ -91,12 +101,16 @@ namespace csharp_lksmart
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
-
+            KelolaFormLaporan laporanForm = new KelolaFormLaporan();
+            laporanForm.Show();
+            this.Hide();
         }
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-
+            FLog logForm = new FLog();
+            logForm.Show();
+            this.Hide();
         }
     }
 }
