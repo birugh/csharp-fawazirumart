@@ -56,7 +56,7 @@
             // 
             // btnTambah
             // 
-            this.btnTambah.Location = new System.Drawing.Point(550, 121);
+            this.btnTambah.Location = new System.Drawing.Point(446, 82);
             this.btnTambah.Name = "btnTambah";
             this.btnTambah.Size = new System.Drawing.Size(93, 47);
             this.btnTambah.TabIndex = 73;
@@ -130,7 +130,7 @@
             // 
             this.txtKodeBarang.Location = new System.Drawing.Point(219, 82);
             this.txtKodeBarang.Name = "txtKodeBarang";
-            this.txtKodeBarang.Size = new System.Drawing.Size(181, 20);
+            this.txtKodeBarang.Size = new System.Drawing.Size(200, 20);
             this.txtKodeBarang.TabIndex = 80;
             // 
             // label3
@@ -145,7 +145,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(216, 105);
+            this.label4.Location = new System.Drawing.Point(216, 199);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 13);
             this.label4.TabIndex = 83;
@@ -153,15 +153,15 @@
             // 
             // txtJumlahBarang
             // 
-            this.txtJumlahBarang.Location = new System.Drawing.Point(219, 121);
+            this.txtJumlahBarang.Location = new System.Drawing.Point(219, 215);
             this.txtJumlahBarang.Name = "txtJumlahBarang";
-            this.txtJumlahBarang.Size = new System.Drawing.Size(181, 20);
+            this.txtJumlahBarang.Size = new System.Drawing.Size(200, 20);
             this.txtJumlahBarang.TabIndex = 82;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(216, 150);
+            this.label5.Location = new System.Drawing.Point(216, 110);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(72, 13);
             this.label5.TabIndex = 85;
@@ -169,15 +169,15 @@
             // 
             // txtNamaBarang
             // 
-            this.txtNamaBarang.Location = new System.Drawing.Point(219, 166);
+            this.txtNamaBarang.Location = new System.Drawing.Point(219, 126);
             this.txtNamaBarang.Name = "txtNamaBarang";
-            this.txtNamaBarang.Size = new System.Drawing.Size(181, 20);
+            this.txtNamaBarang.Size = new System.Drawing.Size(200, 20);
             this.txtNamaBarang.TabIndex = 84;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(216, 189);
+            this.label6.Location = new System.Drawing.Point(216, 242);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 13);
             this.label6.TabIndex = 87;
@@ -185,15 +185,15 @@
             // 
             // txtSatuan
             // 
-            this.txtSatuan.Location = new System.Drawing.Point(219, 205);
+            this.txtSatuan.Location = new System.Drawing.Point(219, 258);
             this.txtSatuan.Name = "txtSatuan";
-            this.txtSatuan.Size = new System.Drawing.Size(181, 20);
+            this.txtSatuan.Size = new System.Drawing.Size(200, 20);
             this.txtSatuan.TabIndex = 86;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(216, 234);
+            this.label7.Location = new System.Drawing.Point(216, 150);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(68, 13);
             this.label7.TabIndex = 89;
@@ -202,7 +202,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(216, 276);
+            this.label8.Location = new System.Drawing.Point(216, 286);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(73, 13);
             this.label8.TabIndex = 91;
@@ -210,21 +210,21 @@
             // 
             // txtHargaSatuan
             // 
-            this.txtHargaSatuan.Location = new System.Drawing.Point(219, 292);
+            this.txtHargaSatuan.Location = new System.Drawing.Point(219, 302);
             this.txtHargaSatuan.Name = "txtHargaSatuan";
-            this.txtHargaSatuan.Size = new System.Drawing.Size(181, 20);
+            this.txtHargaSatuan.Size = new System.Drawing.Size(200, 20);
             this.txtHargaSatuan.TabIndex = 90;
             // 
             // dateExpiredDate
             // 
-            this.dateExpiredDate.Location = new System.Drawing.Point(219, 253);
+            this.dateExpiredDate.Location = new System.Drawing.Point(219, 169);
             this.dateExpiredDate.Name = "dateExpiredDate";
             this.dateExpiredDate.Size = new System.Drawing.Size(200, 20);
             this.dateExpiredDate.TabIndex = 92;
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(550, 178);
+            this.btnEdit.Location = new System.Drawing.Point(446, 139);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(93, 47);
             this.btnEdit.TabIndex = 93;
@@ -234,7 +234,7 @@
             // 
             // btnHapus
             // 
-            this.btnHapus.Location = new System.Drawing.Point(550, 234);
+            this.btnHapus.Location = new System.Drawing.Point(446, 195);
             this.btnHapus.Name = "btnHapus";
             this.btnHapus.Size = new System.Drawing.Size(93, 47);
             this.btnHapus.TabIndex = 94;
@@ -256,7 +256,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 686);
+            this.ClientSize = new System.Drawing.Size(867, 686);
             this.Controls.Add(this.btnCari);
             this.Controls.Add(this.btnHapus);
             this.Controls.Add(this.btnEdit);

@@ -74,7 +74,28 @@ namespace csharp_lksmart
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            if (!ValidateInput() || string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                MessageBox.Show("Please fill out all fields and provide a valid Search Id.");
+                return;
+            }
 
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "UPDATE tbl_barang SET kode_barang=@kode_barang, nama_barang=@nama_barang, jumlah_barang=@jumlah_barang, satuan=@satuan, expired_date=@expired_date, harga_satuan=@harga_satuan WHERE id_barang=@id_barang";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@kode_barang", txtKodeBarang.Text);
+                cmd.Parameters.AddWithValue("@nama_barang", txtNamaBarang.Text);
+                cmd.Parameters.AddWithValue("@jumlah_barang", txtJumlahBarang.Text);
+                cmd.Parameters.AddWithValue("@satuan", txtSatuan.Text);
+                cmd.Parameters.AddWithValue("@expired_date", dateExpiredDate.Value);
+                cmd.Parameters.AddWithValue("@harga_satuan", txtHargaSatuan.Text);
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Barang updated successfully!");
+                LoadBarangData();
+            }
         }
 
         private void btnHapus_Click(object sender, EventArgs e)
