@@ -35,6 +35,20 @@ namespace csharp_lksmart
             labelDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
         }
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtKodeBarang.Text) ||
+                string.IsNullOrWhiteSpace(txtNamaBarang.Text) ||
+                string.IsNullOrWhiteSpace(txtJumlahBarang.Text) ||
+                string.IsNullOrWhiteSpace(txtSatuan.Text) ||
+                string.IsNullOrWhiteSpace(txtHargaSatuan.Text) ||
+                dateTimePickerExpiredDate.Value == null)
+            {
+                MessageBox.Show("All fields must be filled out.");
+                return false;
+            }
+            return true;
+        }
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
