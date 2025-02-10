@@ -17,6 +17,7 @@ namespace csharp_lksmart
         {
             InitializeComponent();
             LoadBarangData();
+            UpdateDateTime();
         }
         private void LoadBarangData()
         {
@@ -29,6 +30,12 @@ namespace csharp_lksmart
                 dataGridView1.DataSource = dataTable;
             }
         }
+        private void UpdateDateTime()
+        {
+            labelDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
         private void btnTambah_Click(object sender, EventArgs e)
         {
 
