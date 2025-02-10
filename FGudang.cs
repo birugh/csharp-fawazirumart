@@ -42,7 +42,7 @@ namespace csharp_lksmart
                 string.IsNullOrWhiteSpace(txtJumlahBarang.Text) ||
                 string.IsNullOrWhiteSpace(txtSatuan.Text) ||
                 string.IsNullOrWhiteSpace(txtHargaSatuan.Text) ||
-                dateTimePickerExpiredDate.Value == null)
+                dateExpiredDate.Value == null)
             {
                 MessageBox.Show("All fields must be filled out.");
                 return false;
@@ -52,7 +52,24 @@ namespace csharp_lksmart
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
+            if (!ValidateInput()) return;
 
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "INSERT INTO tbl_barang (kode_barang, nama_barang, jumlah_barang, satuan, expired_date, harga_satuan) VALUES (@kode_barang, @nama_barang, @jumlah_barang, @satuan, @expired_date, @harga_satuan)";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@kode_barang", txtKodeBarang.Text);
+                cmd.Parameters.AddWithValue("@nama_barang", txtNamaBarang.Text);
+                cmd.Parameters.AddWithValue("@jumlah_barang", txtJumlahBarang.Text);
+                cmd.Parameters.AddWithValue("@satuan", txtSatuan.Text);
+                cmd.Parameters.AddWithValue("@expired_date", dateExpiredDate.Value);
+                cmd.Parameters.AddWithValue("@harga_satuan", txtHargaSatuan.Text);
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Barang added successfully!");
+                LoadBarangData();
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
