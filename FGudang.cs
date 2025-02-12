@@ -56,7 +56,7 @@ namespace csharp_lksmart
         {
             if (!ValidateInput()) return;
 
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "INSERT INTO tbl_barang (kode_barang, nama_barang, jumlah_barang, satuan, expired_date, harga_satuan) VALUES (@kode_barang, @nama_barang, @jumlah_barang, @satuan, @expired_date, @harga_satuan)";
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -82,7 +82,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "UPDATE tbl_barang SET kode_barang=@kode_barang, nama_barang=@nama_barang, jumlah_barang=@jumlah_barang, satuan=@satuan, expired_date=@expired_date, harga_satuan=@harga_satuan WHERE id_barang=@id_barang";
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -109,7 +109,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "DELETE FROM tbl_barang WHERE id_barang=@id_barang";
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -152,7 +152,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "SELECT * FROM tbl_barang WHERE id_barang=@id_barang";
                 SqlCommand cmd = new SqlCommand(query, connection);

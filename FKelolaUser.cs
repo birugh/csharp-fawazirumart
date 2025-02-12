@@ -8,11 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace csharp_lksmart
 {
     public partial class FKelolaUser : Form
     {
+        private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
         public FKelolaUser()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace csharp_lksmart
         }
         private void LoadUserData()
         {
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "SELECT * FROM tbl_user";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
@@ -55,7 +57,7 @@ namespace csharp_lksmart
         {
             if (!ValidateInput()) return;
 
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "INSERT INTO tbl_user VALUES (@tipe_user, @nama, @alamat, @username, @telepon, @password, @email)";
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -82,7 +84,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "UPDATE tbl_user SET tipe_user=@tipe_user, nama=@nama, alamat=@alamat, username=@username, telepon=@telepon, password=@Password, email=@email WHERE id_user=@id_user";
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -110,7 +112,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "DELETE FROM tbl_user WHERE id_user=@id_user";
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -150,7 +152,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "SELECT * FROM tbl_user WHERE id_user=@id_user";
                 SqlCommand cmd = new SqlCommand(query, connection);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -14,6 +15,7 @@ namespace csharp_lksmart
 {
     public partial class FormLogin : Form
     {
+        private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
         public FormLogin()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace csharp_lksmart
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+                using (SqlConnection connection = new SqlConnection(connString))
                 {
                     SqlCommand cmd = new SqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
