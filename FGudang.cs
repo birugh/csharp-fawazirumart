@@ -8,11 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace csharp_lksmart
 {
     public partial class FGudang : Form
     {
+        private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
         public FGudang()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace csharp_lksmart
         }
         private void LoadBarangData()
         {
-            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(connString))
             {
                 string query = "SELECT * FROM tbl_barang";
                 SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
