@@ -57,7 +57,7 @@ namespace csharp_lksmart
 
             using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
             {
-                string query = "INSERT INTO tbl_user (tipe_user, nama, alamat, username, telepon, password, email) VALUES (@tipe_user, @nama, @alamat, @username, @telepon, @password, @email)";
+                string query = "INSERT INTO tbl_user VALUES (@tipe_user, @nama, @alamat, @username, @telepon, @password, @email)";
                 SqlCommand cmd = new SqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@tipe_user", txtTipeUser.Text);
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
@@ -181,11 +181,12 @@ namespace csharp_lksmart
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                txtSearchId.Text = row.Cells["id"].Value.ToString();
+                txtSearchId.Text = row.Cells["id_user"].Value.ToString();
                 txtEmail.Text = row.Cells["email"].Value.ToString();
                 txtPassword.Text = row.Cells["password"].Value.ToString();
                 txtTipeUser.Text = row.Cells["tipe_user"].Value.ToString();
             }
         }
+
     }
 }

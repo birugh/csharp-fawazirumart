@@ -56,6 +56,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtSearchId = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -303,11 +304,19 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(537, 271);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 43;
+            // 
             // FKelolaUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 711);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtSearchId);
@@ -374,5 +383,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtSearchId;
         private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Panel panel1;
     }
 }

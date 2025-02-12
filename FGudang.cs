@@ -84,6 +84,7 @@ namespace csharp_lksmart
             {
                 string query = "UPDATE tbl_barang SET kode_barang=@kode_barang, nama_barang=@nama_barang, jumlah_barang=@jumlah_barang, satuan=@satuan, expired_date=@expired_date, harga_satuan=@harga_satuan WHERE id_barang=@id_barang";
                 SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@id_barang", txtSearch.Text);
                 cmd.Parameters.AddWithValue("@kode_barang", txtKodeBarang.Text);
                 cmd.Parameters.AddWithValue("@nama_barang", txtNamaBarang.Text);
                 cmd.Parameters.AddWithValue("@jumlah_barang", txtJumlahBarang.Text);
@@ -100,7 +101,23 @@ namespace csharp_lksmart
 
         private void btnHapus_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            {
+                MessageBox.Show("Please provide a valid Kode Barang.");
+                return;
+            }
 
+            using (SqlConnection connection = new SqlConnection(DatabaseConnector.ConnectionString))
+            {
+                string query = "DELETE FROM tbl_barang WHERE id_barang=@id_barang";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@id_barang", txtKodeBarang.Text);
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Barang deleted successfully!");
+                LoadBarangData();
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
