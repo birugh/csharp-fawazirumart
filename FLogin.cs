@@ -9,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static csharp_lksmart.DatabaseConnector;
 
 namespace csharp_lksmart
 {
     public partial class FormLogin : Form
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
+        private static SqlConnection connection = new SqlConnection(connString);
         public FormLogin()
         {
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace csharp_lksmart
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connString))
+                using (connection)
                 {
                     SqlCommand cmd = new SqlCommand(query, connection);
                     cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
@@ -70,10 +70,19 @@ namespace csharp_lksmart
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (Exception)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}");
+                throw;
             }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+                connection.Dispose();
+            }
+
         }
 
         private void btnReset_Click(object sender, EventArgs e)
