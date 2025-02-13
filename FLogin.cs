@@ -73,15 +73,6 @@ namespace csharp_lksmart
             {
                 throw;
             }
-            finally
-            {
-                if (connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-                connection.Dispose();
-            }
-
         }
 
         private void btnReset_Click(object sender, EventArgs e)
