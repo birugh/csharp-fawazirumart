@@ -19,9 +19,6 @@ namespace csharp_lksmart
         {
             InitializeComponent();
         }
-
-        private void label3_Click(object sender, EventArgs e) {}
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string query = "SELECT tipe_user FROM tbl_user WHERE email=@Email AND password=@Password";
