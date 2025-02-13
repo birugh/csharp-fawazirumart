@@ -19,9 +19,20 @@ namespace csharp_lksmart
         {
             InitializeComponent();
         }
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                MessageBox.Show("All fields must be filled out.");
+                return false;
+            }
+            return true;
+        }
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string query = "SELECT tipe_user FROM tbl_user WHERE email=@Email AND password=@Password";
+            ValidateInput();
             SqlConnection connection = new SqlConnection(connString);
             try
             {
