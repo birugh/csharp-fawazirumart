@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dateStart = new System.Windows.Forms.DateTimePicker();
+            this.dateEnd = new System.Windows.Forms.DateTimePicker();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.btnKelolaUser = new System.Windows.Forms.Button();
             this.btnKelolaLaporan = new System.Windows.Forms.Button();
             this.btnLog = new System.Windows.Forms.Button();
@@ -39,7 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labelDate = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -51,27 +51,28 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Log Activity";
             // 
-            // dateTimePicker
+            // dateStart
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(192, 190);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker.TabIndex = 1;
+            this.dateStart.Location = new System.Drawing.Point(192, 190);
+            this.dateStart.Name = "dateStart";
+            this.dateStart.Size = new System.Drawing.Size(200, 20);
+            this.dateStart.TabIndex = 1;
             // 
-            // dateTimePicker1
+            // dateEnd
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(398, 190);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 2;
+            this.dateEnd.Location = new System.Drawing.Point(398, 190);
+            this.dateEnd.Name = "dateEnd";
+            this.dateEnd.Size = new System.Drawing.Size(200, 20);
+            this.dateEnd.TabIndex = 2;
             // 
-            // dataGridView1
+            // dataGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(192, 232);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(619, 347);
-            this.dataGridView1.TabIndex = 4;
+            this.dataGridView.AllowUserToOrderColumns = true;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(192, 232);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(619, 347);
+            this.dataGridView.TabIndex = 4;
             // 
             // btnKelolaUser
             // 
@@ -81,6 +82,7 @@
             this.btnKelolaUser.TabIndex = 5;
             this.btnKelolaUser.Text = "Kelola User";
             this.btnKelolaUser.UseVisualStyleBackColor = true;
+            this.btnKelolaUser.Click += new System.EventHandler(this.btnKelolaUser_Click);
             // 
             // btnKelolaLaporan
             // 
@@ -90,6 +92,7 @@
             this.btnKelolaLaporan.TabIndex = 6;
             this.btnKelolaLaporan.Text = "Kelola Laporan";
             this.btnKelolaLaporan.UseVisualStyleBackColor = true;
+            this.btnKelolaLaporan.Click += new System.EventHandler(this.btnKelolaLaporan_Click);
             // 
             // btnLog
             // 
@@ -99,6 +102,7 @@
             this.btnLog.TabIndex = 7;
             this.btnLog.Text = "Log Activity";
             this.btnLog.UseVisualStyleBackColor = true;
+            this.btnLog.Click += new System.EventHandler(this.btnLog_Click);
             // 
             // btnFilter
             // 
@@ -108,6 +112,7 @@
             this.btnFilter.TabIndex = 8;
             this.btnFilter.Text = "Filter";
             this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // label2
             // 
@@ -148,13 +153,13 @@
             this.Controls.Add(this.btnLog);
             this.Controls.Add(this.btnKelolaLaporan);
             this.Controls.Add(this.btnKelolaUser);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.dateTimePicker);
+            this.Controls.Add(this.dataGridView);
+            this.Controls.Add(this.dateEnd);
+            this.Controls.Add(this.dateStart);
             this.Controls.Add(this.label1);
             this.Name = "FLog";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,9 +168,9 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DateTimePicker dateStart;
+        private System.Windows.Forms.DateTimePicker dateEnd;
+        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button btnKelolaUser;
         private System.Windows.Forms.Button btnKelolaLaporan;
         private System.Windows.Forms.Button btnLog;
