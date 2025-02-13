@@ -32,7 +32,7 @@ namespace csharp_lksmart
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string query = "SELECT tipe_user FROM tbl_user WHERE email=@Email AND password=@Password";
-            ValidateInput();
+            if (!ValidateInput()) return;
             SqlConnection connection = new SqlConnection(connString);
             try
             {
