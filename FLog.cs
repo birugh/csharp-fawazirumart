@@ -22,7 +22,7 @@ namespace csharp_lksmart
         }
         private void LoadData()
         {
-            string query = "SELECT * FROM tbl_log";
+            string query = "SELECT id_log, waktu, aktivitas, id_user FROM tbl_log";
             SqlConnection conn = new SqlConnection(connString);
             try
             {
@@ -41,17 +41,21 @@ namespace csharp_lksmart
         }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-
+            FKelolaUser kelolaUserForm = new FKelolaUser();
+            kelolaUserForm.Show();
+            this.Hide();
         }
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
-
+            KelolaFormLaporan kelolaLaporanForm = new KelolaFormLaporan();
+            kelolaLaporanForm.Show();
+            this.Hide();
         }
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("You are in this form right now.");
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
