@@ -14,7 +14,7 @@ namespace csharp_lksmart
 {
     public partial class FKelolaUser : Form
     {
-        private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
+        private static string conString = ConfigurationManager.AppSettings["connString"].ToString();
         public FKelolaUser()
         {
             InitializeComponent();
@@ -23,10 +23,11 @@ namespace csharp_lksmart
         }
         private void LoadUserData()
         {
-            using (SqlConnection connection = new SqlConnection(connString))
+            SqlConnection conn = new SqlConnection(conString);
+            using (conn)
             {
                 string query = "SELECT * FROM tbl_user";
-                SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                 DataTable dataTable = new DataTable();
                 adapter.Fill(dataTable);
                 dataGridView1.DataSource = dataTable;
@@ -56,11 +57,11 @@ namespace csharp_lksmart
         private void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-
-            using (SqlConnection connection = new SqlConnection(connString))
+            SqlConnection conn = new SqlConnection(conString);
+            using (conn)
             {
                 string query = "INSERT INTO tbl_user VALUES (@tipe_user, @nama, @alamat, @username, @telepon, @password, @email)";
-                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@tipe_user", txtTipeUser.Text);
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                 cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
@@ -69,7 +70,7 @@ namespace csharp_lksmart
                 cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
                 cmd.Parameters.AddWithValue("@email", txtEmail.Text);
 
-                connection.Open();
+                conn.Open();
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("User added successfully!");
                 LoadUserData();
@@ -80,14 +81,13 @@ namespace csharp_lksmart
         {
             if (!ValidateInput() || string.IsNullOrWhiteSpace(txtSearchId.Text))
             {
-                MessageBox.Show("Please fill out all fields and provide a valid user ID.");
                 return;
             }
-
-            using (SqlConnection connection = new SqlConnection(connString))
+            SqlConnection conn = new SqlConnection(conString);
+            using (conn)
             {
                 string query = "UPDATE tbl_user SET tipe_user=@tipe_user, nama=@nama, alamat=@alamat, username=@username, telepon=@telepon, password=@Password, email=@email WHERE id_user=@id_user";
-                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id_user", txtSearchId.Text);
                 cmd.Parameters.AddWithValue("@tipe_user", txtTipeUser.Text);
                 cmd.Parameters.AddWithValue("@nama", txtNama.Text);
@@ -97,7 +97,7 @@ namespace csharp_lksmart
                 cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
                 cmd.Parameters.AddWithValue("@email", txtEmail.Text);
 
-                connection.Open();
+                conn.Open();
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("User updated successfully!");
                 LoadUserData();
@@ -111,14 +111,14 @@ namespace csharp_lksmart
                 MessageBox.Show("Please provide a valid user ID.");
                 return;
             }
-
-            using (SqlConnection connection = new SqlConnection(connString))
+            SqlConnection conn = new SqlConnection(conString);
+            using (conn)
             {
                 string query = "DELETE FROM tbl_user WHERE id_user=@id_user";
-                SqlCommand cmd = new SqlCommand(query, connection);
+                SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id_user", txtSearchId.Text);
 
-                connection.Open();
+                conn.Open();
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("User deleted successfully!");
                 LoadUserData();
@@ -152,7 +152,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlConnection connection = new SqlConnection(conString))
             {
                 string query = "SELECT * FROM tbl_user WHERE id_user=@id_user";
                 SqlCommand cmd = new SqlCommand(query, connection);
@@ -187,6 +187,7 @@ namespace csharp_lksmart
                 txtEmail.Text = row.Cells["email"].Value.ToString();
                 txtPassword.Text = row.Cells["password"].Value.ToString();
                 txtTipeUser.Text = row.Cells["tipe_user"].Value.ToString();
+
             }
         }
 
