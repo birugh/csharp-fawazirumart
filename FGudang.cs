@@ -51,6 +51,16 @@ namespace csharp_lksmart
             }
             return true;
         }
+        private void ResetInput()
+        {
+            txtKodeBarang.Text = "";
+            txtNamaBarang.Text = "";
+            txtJumlahBarang.Text = "";
+            txtSatuan.Text = "";
+            txtHargaSatuan.Text = "";
+            dateExpiredDate.Value = DateTime.Now;
+            txtSearch.Text = "";
+        }
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
@@ -175,6 +185,11 @@ namespace csharp_lksmart
                     MessageBox.Show("Barang not found.");
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ResetInput();
         }
     }
 }
