@@ -15,7 +15,6 @@ namespace csharp_lksmart
     public partial class FormLogin : Form
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
-        private static SqlConnection connection = new SqlConnection(connString);
         public FormLogin()
         {
             InitializeComponent();
@@ -26,7 +25,7 @@ namespace csharp_lksmart
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string query = "SELECT tipe_user FROM tbl_user WHERE email=@Email AND password=@Password";
-
+            SqlConnection connection = new SqlConnection(connString);
             try
             {
                 using (connection)
