@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,27 @@ namespace csharp_lksmart
         public FLog()
         {
             InitializeComponent();
+            LoadData();
         }
-
+        private void LoadData()
+        {
+            string query = "SELECT * FROM tbl_log";
+            SqlConnection conn = new SqlConnection(connString);
+            try
+            {
+                using (conn)
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView.DataSource = dataTable;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
 
