@@ -20,7 +20,7 @@ namespace csharp_lksmart
         {
             InitializeComponent();
             LoadUserData();
-            UpdateDateTime();
+            InitializeTimer();
         }
         private void LoadUserData()
         {
