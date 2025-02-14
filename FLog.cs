@@ -111,7 +111,7 @@ namespace csharp_lksmart
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@Waktu", DateTime.Now);
                     cmd.Parameters.AddWithValue("@Aktivitas", "Logout");
-                    cmd.Parameters.AddWithValue("@IdUser", "");
+                    cmd.Parameters.AddWithValue("@IdUser", FormLogin.id_user);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -16,6 +17,8 @@ namespace csharp_lksmart
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
         private static SqlConnection connection;
+        private static SqlCommand cmd;
+        public static string id_user;
 
         public FormLogin()
         {
@@ -33,25 +36,28 @@ namespace csharp_lksmart
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string query = "SELECT tipe_user FROM tbl_user WHERE email=@Email AND password=@Password";
+            string query = "SELECT * FROM tbl_user WHERE email=@email AND password=@password";
+            string queryLog = "INSERT INTO tbl_log VALUES (@waktu, @aktivitas, @id_user)";
             if (!ValidateInput()) return;
             connection = new SqlConnection(connString);
             try
             {
                 using (connection)
                 {
-                    SqlCommand cmd = new SqlCommand(query, connection);
-                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                    cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+                    cmd = new SqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@password", txtPassword.Text);
 
-                    connection.Open();
-                    var result = cmd.ExecuteScalar();
-                    Console.WriteLine(result);
-                    if (result != null)
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
                     {
-                        string userType = result.ToString();
+                        id_user = dt.Rows[0]["id_user"].ToString();
+                        string userType = dt.Rows[0]["tipe_user"].ToString();
 
-                        MessageBox.Show("Login successful!");
+                        MessageBox.Show("Login successful!"+id_user);
 
                         switch (userType)
                         {
@@ -72,6 +78,12 @@ namespace csharp_lksmart
                                 break;
                         }
 
+                        connection.Open();
+                        cmd = new SqlCommand(queryLog, connection);
+                        cmd.Parameters.AddWithValue("@waktu", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@aktivitas", "Login");
+                        cmd.Parameters.AddWithValue("@id_user", FormLogin.id_user);
+                        cmd.ExecuteNonQuery();
                         this.Hide();
                     }
                     else
@@ -80,7 +92,10 @@ namespace csharp_lksmart
                     }
                 }
             }
-            catch (Exception) {}
+            catch (Exception) 
+            {
+                throw;
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
