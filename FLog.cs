@@ -15,10 +15,12 @@ namespace csharp_lksmart
     public partial class FLog : Form
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
+        private Timer timer;
         public FLog()
         {
             InitializeComponent();
             LoadData();
+            InitializeTimer();
         }
         private void LoadData()
         {
@@ -38,6 +40,23 @@ namespace csharp_lksmart
             {
                 MessageBox.Show($"An error occurred: {ex.Message}");
             }
+        }
+        private void InitializeTimer()
+        {
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdateDateTime();
+        }
+        private void UpdateDateTime()
+        {
+            labelDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+            labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
         }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
