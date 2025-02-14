@@ -15,6 +15,8 @@ namespace csharp_lksmart
     public partial class FormLogin : Form
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
+        private static SqlConnection connection;
+
         public FormLogin()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace csharp_lksmart
         {
             string query = "SELECT tipe_user FROM tbl_user WHERE email=@Email AND password=@Password";
             if (!ValidateInput()) return;
-            SqlConnection connection = new SqlConnection(connString);
+            connection = new SqlConnection(connString);
             try
             {
                 using (connection)
@@ -44,10 +46,11 @@ namespace csharp_lksmart
 
                     connection.Open();
                     var result = cmd.ExecuteScalar();
-
+                    Console.WriteLine(result);
                     if (result != null)
                     {
                         string userType = result.ToString();
+
                         MessageBox.Show("Login successful!");
 
                         switch (userType)
@@ -77,10 +80,7 @@ namespace csharp_lksmart
                     }
                 }
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (Exception) {}
         }
 
         private void btnReset_Click(object sender, EventArgs e)
