@@ -60,7 +60,17 @@ namespace csharp_lksmart
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-
+            string query = "SELECT * FROM tbl_transaksi WHERE tgl_transaksi BETWEEN @dateStart AND @dateEnd";
+            using (conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@dateStart", dateStart.Value.Date);
+                cmd.Parameters.AddWithValue("@dateEnd", dateEnd.Value.Date);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridViewTransaksi.DataSource = dt;
+            }
         }
 
         private void btnGenerate_Click(object sender, EventArgs e)
