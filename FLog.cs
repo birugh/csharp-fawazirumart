@@ -60,7 +60,26 @@ namespace csharp_lksmart
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            string query = "SELECT id_log, waktu, aktivitas, id_user FROM tbl_log WHERE waktu BETWEEN @DateStart AND @DateEnd";
+            SqlConnection conn = new SqlConnection(connString);
+            try
+            {
+                using (conn)
+                {
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@DateStart", dateStart.Value);
+                    cmd.Parameters.AddWithValue("@DateEnd", dateEnd.Value);
 
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    dataGridView.DataSource = dataTable;
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
         }
     }
 }
