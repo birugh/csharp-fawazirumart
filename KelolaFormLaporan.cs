@@ -22,6 +22,7 @@ namespace csharp_lksmart
         {
             InitializeComponent();
             InitializeTimer();
+            LoadData();
         }
         private void InitializeTimer()
         {
@@ -38,6 +39,17 @@ namespace csharp_lksmart
         {
             labelDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
             labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+        private void LoadData()
+        {
+            string query = "SELECT * FROM tbl_transaksi";
+            using (conn = new SqlConnection(connString))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridViewTransaksi.DataSource = dt;
+            }
         }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
