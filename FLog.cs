@@ -48,7 +48,6 @@ namespace csharp_lksmart
             timer.Tick += new EventHandler(Timer_Tick);
             timer.Start();
         }
-
         private void Timer_Tick(object sender, EventArgs e)
         {
             UpdateDateTime();
@@ -99,6 +98,33 @@ namespace csharp_lksmart
             {
                 MessageBox.Show($"An error occurred: {ex.Message}");
             }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            string query = "INSERT INTO tbl_log (waktu, aktivitas, id_user) VALUES (@Waktu, @Aktivitas, @IdUser)";
+            SqlConnection conn = new SqlConnection(connString);
+            try
+            {
+                using (conn)
+                {
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@Waktu", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@Aktivitas", "Logout");
+                    cmd.Parameters.AddWithValue("@IdUser", "");
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+
+            // Add logic to handle the actual logout process, e.g., closing the form or redirecting to a login form
+            this.Close();
         }
     }
 }
