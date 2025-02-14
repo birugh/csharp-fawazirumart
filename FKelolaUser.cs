@@ -21,6 +21,7 @@ namespace csharp_lksmart
             InitializeComponent();
             LoadUserData();
             InitializeTimer();
+
         }
         private void LoadUserData()
         {
@@ -203,6 +204,9 @@ namespace csharp_lksmart
 
             }
         }
-
+        private void FKelolaUser_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

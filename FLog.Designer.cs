@@ -39,6 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labelDate = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
+            this.btnLogout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,11 +144,22 @@
             this.labelTime.TabIndex = 11;
             this.labelTime.Text = "jam";
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(61, 488);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(93, 47);
+            this.btnLogout.TabIndex = 12;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // FLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(840, 608);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.label2);
@@ -180,5 +192,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Label labelTime;
+        private System.Windows.Forms.Button btnLogout;
     }
 }
