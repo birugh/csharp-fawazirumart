@@ -15,6 +15,7 @@ namespace csharp_lksmart
     public partial class FKelolaUser : Form
     {
         private static string conString = ConfigurationManager.AppSettings["connString"].ToString();
+        private Timer timer;
         public FKelolaUser()
         {
             InitializeComponent();
@@ -32,6 +33,18 @@ namespace csharp_lksmart
                 adapter.Fill(dataTable);
                 dataGridView1.DataSource = dataTable;
             }
+        }
+        private void InitializeTimer()
+        {
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdateDateTime();
         }
         private void UpdateDateTime()
         {
