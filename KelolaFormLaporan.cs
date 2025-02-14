@@ -75,7 +75,21 @@ namespace csharp_lksmart
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            string query = "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi GROUP BY tgl_transaksi";
+            using (conn = new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
 
+                chartOmset.Series.Clear();
+                chartOmset.Series.Add("Omset");
+                chartOmset.Series["Omset"].XValueMember = "tgl_transaksi";
+                chartOmset.Series["Omset"].YValueMembers = "total_bayar";
+                chartOmset.DataSource = dt;
+                chartOmset.DataBind();
+            }
         }
     }
 }
