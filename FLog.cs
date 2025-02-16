@@ -102,29 +102,35 @@ namespace csharp_lksmart
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO tbl_log (waktu, aktivitas, id_user) VALUES (@Waktu, @Aktivitas, @IdUser)";
-            SqlConnection conn = new SqlConnection(connString);
-            try
+            if (MessageBox.Show("Are you sure to logout?", "Warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                using (conn)
+                string query = "INSERT INTO tbl_log (waktu, aktivitas, id_user) VALUES (@Waktu, @Aktivitas, @IdUser)";
+                SqlConnection conn = new SqlConnection(connString);
+                try
                 {
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Waktu", DateTime.Now);
-                    cmd.Parameters.AddWithValue("@Aktivitas", "Logout");
-                    cmd.Parameters.AddWithValue("@IdUser", FormLogin.id_user);
+                    using (conn)
+                    {
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@Waktu", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@Aktivitas", "Logout");
+                        cmd.Parameters.AddWithValue("@IdUser", FormLogin.id_user);
 
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
                 }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}");
-            }
+                catch (SqlException ex)
+                {
+                    throw;
+                }
 
-            // Add logic to handle the actual logout process, e.g., closing the form or redirecting to a login form
-            this.Close();
+                FormLogin.id_user = null;
+
+                FormLogin loginForm = new FormLogin();
+                loginForm.Show();
+                this.Close();
+            }
         }
     }
 }
