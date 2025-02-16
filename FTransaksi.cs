@@ -19,12 +19,14 @@ namespace csharp_lksmart
         private static SqlCommand cmd;
         private static SqlDataAdapter adapter;
         private DataTable dtKeranjang;
+        private string currentNoTransaksi;
         public FTransaksi()
         {
             InitializeComponent();
             LoadMenu();
             LoadPelanggan();
             InitializeKeranjang();
+            GenerateNoTransaksi();
         }
         private void LoadMenu()
         {
@@ -63,18 +65,40 @@ namespace csharp_lksmart
             dtKeranjang.Columns.Add("Total Harga");
             dataGridViewKeranjang.DataSource = dtKeranjang;
         }
+
+        private void GenerateNoTransaksi()
+        {
+            string datePart = DateTime.Now.ToString("yyyyMMdd");
+            string query = "SELECT COUNT(*) FROM tbl_transaksi WHERE CONVERT(VARCHAR, tgl_transaksi, 112) = @datePart";
+            using (conn = new SqlConnection(connString))
+            {
+                cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@datePart", datePart);
+                conn.Open();
+                int count = (int)cmd.ExecuteScalar();
+                conn.Close();
+                currentNoTransaksi = "TR" + datePart + (count + 1).ToString("D3");
+            }
+        }
+        private void UpdateTotalKeseluruhan()
+        {
+            decimal totalKeseluruhan = dtKeranjang.AsEnumerable().Sum(r => Convert.ToDecimal(r["Total Harga"]));
+            labelTotalKeseluruhan.Text = totalKeseluruhan.ToString();
+        }
         private void btnTambah_Click(object sender, EventArgs e)
         {
             if (cboxPilihMenu.SelectedValue != null && int.TryParse(txtQuantitas.Text, out int qty) && decimal.TryParse(txtTotalHarga.Text, out decimal totalHarga))
             {
                 DataRow row = dtKeranjang.NewRow();
-                row["No Transaksi"] = "TR" + (dtKeranjang.Rows.Count + 1).ToString("D3");
+                row["No Transaksi"] = currentNoTransaksi;
                 row["Kode Barang"] = cboxPilihMenu.SelectedValue;
                 row["Nama Barang"] = cboxPilihMenu.Text;
                 row["Harga Satuan"] = txtHargaSatuan.Text;
                 row["Qty"] = txtQuantitas.Text;
                 row["Total Harga"] = txtTotalHarga.Text;
                 dtKeranjang.Rows.Add(row);
+
+                UpdateTotalKeseluruhan();
             }
         }
 
@@ -89,6 +113,8 @@ namespace csharp_lksmart
             txtTotalHarga.Clear();
             txtUang.Clear();
             labelTotalKeseluruhan.Text = "0";
+            GenerateNoTransaksi();
+
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -130,6 +156,8 @@ namespace csharp_lksmart
             {
                 if (uang >= totalKeseluruhan)
                 {
+                    decimal kembalian = uang - totalKeseluruhan;
+                    labelKembalian.Text = kembalian.ToString();
                     MessageBox.Show("Pembayaran berhasil!");
                 }
                 else
@@ -141,6 +169,11 @@ namespace csharp_lksmart
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnSimpan_Click(object sender, EventArgs e)
+        {
             string query = "INSERT INTO tbl_transaksi (no_transaksi, tgl_transaksi, nama_kasir, total_bayar, id_user, id_pelanggan, id_barang) VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan, @id_barang)";
             using (conn = new SqlConnection(connString))
             {
@@ -148,7 +181,7 @@ namespace csharp_lksmart
                 foreach (DataRow row in dtKeranjang.Rows)
                 {
                     cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@no_transaksi", row["No Transaksi"]);
+                    cmd.Parameters.AddWithValue("@no_transaksi", currentNoTransaksi);
                     cmd.Parameters.AddWithValue("@tgl_transaksi", DateTime.Now);
                     cmd.Parameters.AddWithValue("@nama_kasir", "Kasir 1");
                     cmd.Parameters.AddWithValue("@total_bayar", row["Total Harga"]);
@@ -159,20 +192,7 @@ namespace csharp_lksmart
                 }
                 conn.Close();
             }
-        }
-
-        private void btnSimpan_Click(object sender, EventArgs e)
-        {
-            string query = "INSERT INTO tbl_pelanggan (nama, telepon) VALUES (@nama, @telepon)";
-            using (conn = new SqlConnection(connString))
-            {
-                cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@nama", cboxNamaPelanggan.Text);
-                cmd.Parameters.AddWithValue("@telepon", txtTelepon.Text);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
-            }
+            btnReset_Click(sender, e);
         }
 
         private void cboxPilihMenu_SelectedIndexChanged(object sender, EventArgs e)
