@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.labelTime = new System.Windows.Forms.Label();
             this.labelDate = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,6 +44,7 @@
             this.dateStart = new System.Windows.Forms.DateTimePicker();
             this.dateEnd = new System.Windows.Forms.DateTimePicker();
             this.btnFilter = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransaksi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartOmset)).BeginInit();
             this.SuspendLayout();
@@ -134,16 +135,16 @@
             // 
             // chartOmset
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartOmset.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartOmset.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chartOmset.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartOmset.Legends.Add(legend2);
             this.chartOmset.Location = new System.Drawing.Point(217, 425);
             this.chartOmset.Name = "chartOmset";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartOmset.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartOmset.Series.Add(series2);
             this.chartOmset.Size = new System.Drawing.Size(530, 276);
             this.chartOmset.TabIndex = 61;
             this.chartOmset.Text = "chart1";
@@ -172,11 +173,22 @@
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(45, 463);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(93, 47);
+            this.btnLogout.TabIndex = 65;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // KelolaFormLaporan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(897, 713);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.dateEnd);
             this.Controls.Add(this.dateStart);
@@ -213,5 +225,6 @@
         private System.Windows.Forms.DateTimePicker dateStart;
         private System.Windows.Forms.DateTimePicker dateEnd;
         private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.Button btnLogout;
     }
 }
