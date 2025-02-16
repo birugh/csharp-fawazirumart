@@ -31,13 +31,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnTambah = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewKeranjang = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtTelepon = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtNamaPelanggan = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtTotalHarga = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -45,15 +44,17 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtHargaSatuan = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.cboxPilihanMenu = new System.Windows.Forms.ComboBox();
+            this.cboxPilihMenu = new System.Windows.Forms.ComboBox();
             this.labelKasir = new System.Windows.Forms.Label();
-            this.txtCash = new System.Windows.Forms.TextBox();
+            this.txtUang = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.btnBayar = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnSimpan = new System.Windows.Forms.Button();
             this.labelKembalian = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.cboxNamaPelanggan = new System.Windows.Forms.ComboBox();
+            this.labelTotalKeseluruhan = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKeranjang)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -73,6 +74,7 @@
             this.btnTambah.TabIndex = 19;
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = true;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
             // 
             // btnLogout
             // 
@@ -82,14 +84,15 @@
             this.btnLogout.TabIndex = 18;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
-            // dataGridView1
+            // dataGridViewKeranjang
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(201, 291);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(619, 347);
-            this.dataGridView1.TabIndex = 15;
+            this.dataGridViewKeranjang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewKeranjang.Location = new System.Drawing.Point(201, 291);
+            this.dataGridViewKeranjang.Name = "dataGridViewKeranjang";
+            this.dataGridViewKeranjang.Size = new System.Drawing.Size(619, 347);
+            this.dataGridViewKeranjang.TabIndex = 15;
             // 
             // label1
             // 
@@ -108,6 +111,7 @@
             this.btnReset.TabIndex = 23;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // label3
             // 
@@ -134,13 +138,6 @@
             this.label4.TabIndex = 26;
             this.label4.Text = "Telepon";
             // 
-            // txtNamaPelanggan
-            // 
-            this.txtNamaPelanggan.Location = new System.Drawing.Point(201, 220);
-            this.txtNamaPelanggan.Name = "txtNamaPelanggan";
-            this.txtNamaPelanggan.Size = new System.Drawing.Size(153, 20);
-            this.txtNamaPelanggan.TabIndex = 29;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -152,6 +149,7 @@
             // 
             // txtTotalHarga
             // 
+            this.txtTotalHarga.Enabled = false;
             this.txtTotalHarga.Location = new System.Drawing.Point(396, 220);
             this.txtTotalHarga.Name = "txtTotalHarga";
             this.txtTotalHarga.Size = new System.Drawing.Size(153, 20);
@@ -172,6 +170,7 @@
             this.txtQuantitas.Name = "txtQuantitas";
             this.txtQuantitas.Size = new System.Drawing.Size(153, 20);
             this.txtQuantitas.TabIndex = 33;
+            this.txtQuantitas.TextChanged += new System.EventHandler(this.txtQuantitas_TextChanged);
             // 
             // label7
             // 
@@ -184,6 +183,7 @@
             // 
             // txtHargaSatuan
             // 
+            this.txtHargaSatuan.Enabled = false;
             this.txtHargaSatuan.Location = new System.Drawing.Point(396, 110);
             this.txtHargaSatuan.Name = "txtHargaSatuan";
             this.txtHargaSatuan.Size = new System.Drawing.Size(153, 20);
@@ -198,13 +198,14 @@
             this.label8.TabIndex = 30;
             this.label8.Text = "Harga Satuan";
             // 
-            // cboxPilihanMenu
+            // cboxPilihMenu
             // 
-            this.cboxPilihanMenu.FormattingEnabled = true;
-            this.cboxPilihanMenu.Location = new System.Drawing.Point(201, 108);
-            this.cboxPilihanMenu.Name = "cboxPilihanMenu";
-            this.cboxPilihanMenu.Size = new System.Drawing.Size(153, 21);
-            this.cboxPilihanMenu.TabIndex = 36;
+            this.cboxPilihMenu.FormattingEnabled = true;
+            this.cboxPilihMenu.Location = new System.Drawing.Point(201, 108);
+            this.cboxPilihMenu.Name = "cboxPilihMenu";
+            this.cboxPilihMenu.Size = new System.Drawing.Size(153, 21);
+            this.cboxPilihMenu.TabIndex = 36;
+            this.cboxPilihMenu.SelectedIndexChanged += new System.EventHandler(this.cboxPilihMenu_SelectedIndexChanged);
             // 
             // labelKasir
             // 
@@ -215,12 +216,12 @@
             this.labelKasir.TabIndex = 37;
             this.labelKasir.Text = "Kasir 0";
             // 
-            // txtCash
+            // txtUang
             // 
-            this.txtCash.Location = new System.Drawing.Point(251, 650);
-            this.txtCash.Name = "txtCash";
-            this.txtCash.Size = new System.Drawing.Size(133, 20);
-            this.txtCash.TabIndex = 38;
+            this.txtUang.Location = new System.Drawing.Point(251, 650);
+            this.txtUang.Name = "txtUang";
+            this.txtUang.Size = new System.Drawing.Size(133, 20);
+            this.txtUang.TabIndex = 38;
             // 
             // label9
             // 
@@ -239,24 +240,27 @@
             this.btnBayar.TabIndex = 40;
             this.btnBayar.Text = "Bayar";
             this.btnBayar.UseVisualStyleBackColor = true;
+            this.btnBayar.Click += new System.EventHandler(this.btnBayar_Click);
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(613, 650);
+            this.btnPrint.Location = new System.Drawing.Point(628, 698);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(93, 47);
             this.btnPrint.TabIndex = 41;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnSimpan
             // 
-            this.btnSimpan.Location = new System.Drawing.Point(712, 650);
+            this.btnSimpan.Location = new System.Drawing.Point(727, 698);
             this.btnSimpan.Name = "btnSimpan";
             this.btnSimpan.Size = new System.Drawing.Size(93, 47);
             this.btnSimpan.TabIndex = 42;
             this.btnSimpan.Text = "Simpan";
             this.btnSimpan.UseVisualStyleBackColor = true;
+            this.btnSimpan.Click += new System.EventHandler(this.btnSimpan_Click);
             // 
             // labelKembalian
             // 
@@ -267,26 +271,44 @@
             this.labelKembalian.TabIndex = 43;
             this.labelKembalian.Text = "Jumlah Kembalian: ";
             // 
+            // cboxNamaPelanggan
+            // 
+            this.cboxNamaPelanggan.FormattingEnabled = true;
+            this.cboxNamaPelanggan.Location = new System.Drawing.Point(201, 220);
+            this.cboxNamaPelanggan.Name = "cboxNamaPelanggan";
+            this.cboxNamaPelanggan.Size = new System.Drawing.Size(153, 21);
+            this.cboxNamaPelanggan.TabIndex = 44;
+            // 
+            // labelTotalKeseluruhan
+            // 
+            this.labelTotalKeseluruhan.AutoSize = true;
+            this.labelTotalKeseluruhan.Location = new System.Drawing.Point(635, 667);
+            this.labelTotalKeseluruhan.Name = "labelTotalKeseluruhan";
+            this.labelTotalKeseluruhan.Size = new System.Drawing.Size(102, 13);
+            this.labelTotalKeseluruhan.TabIndex = 45;
+            this.labelTotalKeseluruhan.Text = "Total Keseluruhan 0";
+            // 
             // FTransaksi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(904, 715);
+            this.ClientSize = new System.Drawing.Size(904, 771);
+            this.Controls.Add(this.labelTotalKeseluruhan);
+            this.Controls.Add(this.cboxNamaPelanggan);
             this.Controls.Add(this.labelKembalian);
             this.Controls.Add(this.btnSimpan);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnBayar);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.txtCash);
+            this.Controls.Add(this.txtUang);
             this.Controls.Add(this.labelKasir);
-            this.Controls.Add(this.cboxPilihanMenu);
+            this.Controls.Add(this.cboxPilihMenu);
             this.Controls.Add(this.txtTotalHarga);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtQuantitas);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtHargaSatuan);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtNamaPelanggan);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtTelepon);
             this.Controls.Add(this.label4);
@@ -295,11 +317,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnTambah);
             this.Controls.Add(this.btnLogout);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewKeranjang);
             this.Controls.Add(this.label1);
             this.Name = "FTransaksi";
-            this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Text = "FormTransaksi";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKeranjang)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,13 +331,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnTambah;
         private System.Windows.Forms.Button btnLogout;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewKeranjang;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtTelepon;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtNamaPelanggan;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtTotalHarga;
         private System.Windows.Forms.Label label6;
@@ -323,13 +344,15 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtHargaSatuan;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cboxPilihanMenu;
+        private System.Windows.Forms.ComboBox cboxPilihMenu;
         private System.Windows.Forms.Label labelKasir;
-        private System.Windows.Forms.TextBox txtCash;
+        private System.Windows.Forms.TextBox txtUang;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnBayar;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnSimpan;
         private System.Windows.Forms.Label labelKembalian;
+        private System.Windows.Forms.ComboBox cboxNamaPelanggan;
+        private System.Windows.Forms.Label labelTotalKeseluruhan;
     }
 }
