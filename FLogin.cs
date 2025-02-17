@@ -34,6 +34,7 @@ namespace csharp_lksmart
             }
             return true;
         }
+        private void ResetInput()
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string query = "SELECT * FROM tbl_user WHERE email=@email AND password=@password";
