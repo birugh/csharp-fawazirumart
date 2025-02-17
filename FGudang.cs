@@ -80,6 +80,7 @@ namespace csharp_lksmart
                 connection.Open();
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Barang added successfully!");
+                ResetInput();
                 LoadBarangData();
             }
         }
@@ -107,6 +108,7 @@ namespace csharp_lksmart
                 connection.Open();
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Barang updated successfully!");
+                ResetInput();
                 LoadBarangData();
             }
         }
@@ -128,12 +130,14 @@ namespace csharp_lksmart
                 connection.Open();
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Barang deleted successfully!");
+                ResetInput();
                 LoadBarangData();
             }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+                ResetInput();
             FormLogin loginForm = new FormLogin();
             loginForm.Show();
             this.Hide();
@@ -183,6 +187,7 @@ namespace csharp_lksmart
                 else
                 {
                     MessageBox.Show("Barang not found.");
+                    ResetInput();
                 }
             }
         }
