@@ -75,7 +75,7 @@ namespace csharp_lksmart
                 cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@datePart", datePart);
                 conn.Open();
-                int count = (int)cmd.ExecuteScalar();
+                object result = cmd.ExecuteScalar();
                 conn.Close();
 
                 if (result != DBNull.Value && result != null)
