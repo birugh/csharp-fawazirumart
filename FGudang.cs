@@ -12,10 +12,10 @@ using System.Configuration;
 
 namespace csharp_lksmart
 {
-    public partial class FGudang : Form
+    public partial class FormGudang : Form
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
-        public FGudang()
+        public FormGudang()
         {
             InitializeComponent();
             LoadBarangData();
