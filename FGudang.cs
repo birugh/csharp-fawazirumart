@@ -191,5 +191,13 @@ namespace csharp_lksmart
         {
             ResetInput();
         }
+        private void txtSearch_Enter(object sender, EventArgs e)
+        {
+            txtSearch.Text = (txtSearch.Text == "Search by Id") ? "" : txtSearch.Text;
+        }
+        private void txtSearch_Leave(object sender, EventArgs e)
+        {
+            txtSearch.Text = (txtSearch.Text == "") ? "Search by Id" : txtSearch.Text;
+        }
     }
 }
