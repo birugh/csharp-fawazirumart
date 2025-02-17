@@ -69,7 +69,7 @@ namespace csharp_lksmart
         private void GenerateNoTransaksi()
         {
             string datePart = DateTime.Now.ToString("yyyyMMdd");
-            string query = "SELECT COUNT(*) FROM tbl_transaksi WHERE CONVERT(VARCHAR, tgl_transaksi, 112) = @datePart";
+            string query = "SELECT MAX(no_transaksi) FROM tbl_transaksi WHERE CONVERT(VARCHAR, tgl_transaksi, 112) = @datePart";
             using (conn = new SqlConnection(connString))
             {
                 cmd = new SqlCommand(query, conn);
@@ -77,7 +77,17 @@ namespace csharp_lksmart
                 conn.Open();
                 int count = (int)cmd.ExecuteScalar();
                 conn.Close();
-                currentNoTransaksi = "TR" + datePart + (count + 1).ToString("D3");
+
+                if (result != DBNull.Value && result != null)
+                {
+                    string lastNoTransaksi = result.ToString();
+                    int lastNumber = int.Parse(lastNoTransaksi.Substring(10));
+                    currentNoTransaksi = "TR" + datePart + (lastNumber + 1).ToString("D3");
+                }
+                else
+                {
+                    currentNoTransaksi = "TR" + datePart + "001";
+                }
             }
         }
         private void UpdateTotalKeseluruhan()
