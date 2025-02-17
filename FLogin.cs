@@ -29,7 +29,7 @@ namespace csharp_lksmart
             if (string.IsNullOrWhiteSpace(txtPassword.Text) ||
                 string.IsNullOrWhiteSpace(txtEmail.Text))
             {
-                MessageBox.Show("All fields must be filled out.");
+                MessageBox.Show("All fields must be filled out.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return true;
@@ -62,7 +62,7 @@ namespace csharp_lksmart
                         id_user = dt.Rows[0]["id_user"].ToString();
                         string userType = dt.Rows[0]["tipe_user"].ToString();
 
-                        MessageBox.Show("Login successful!"+id_user);
+                        MessageBox.Show("Login successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         switch (userType)
                         {
@@ -79,7 +79,7 @@ namespace csharp_lksmart
                                 transaksiForm.Show();
                                 break;
                             default:
-                                MessageBox.Show("Unknown user type.");
+                                MessageBox.Show("Unknown user type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 break;
                         }
 
@@ -94,7 +94,7 @@ namespace csharp_lksmart
                     }
                     else
                     {
-                        MessageBox.Show("Email or Password is incorrect.");
+                        MessageBox.Show("Email or Password is incorrect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         ResetInput();
                     }
                 }
