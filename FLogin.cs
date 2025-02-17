@@ -101,7 +101,7 @@ namespace csharp_lksmart
             }
             catch (Exception) 
             {
-                throw;
+                return;
             }
         }
 
