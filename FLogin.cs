@@ -89,11 +89,13 @@ namespace csharp_lksmart
                         cmd.Parameters.AddWithValue("@aktivitas", "Login");
                         cmd.Parameters.AddWithValue("@id_user", FormLogin.id_user);
                         cmd.ExecuteNonQuery();
+                        ResetInput();
                         this.Hide();
                     }
                     else
                     {
                         MessageBox.Show("Email or Password is incorrect.");
+                        ResetInput();
                     }
                 }
             }
@@ -105,8 +107,7 @@ namespace csharp_lksmart
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            txtEmail.Clear();
-            txtPassword.Clear();
+            ResetInput();
         }
     }
 }
