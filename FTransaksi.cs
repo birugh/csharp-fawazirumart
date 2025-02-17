@@ -28,6 +28,18 @@ namespace csharp_lksmart
             InitializeKeranjang();
             GenerateNoTransaksi();
         }
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtQuantitas.Text) ||
+                string.IsNullOrWhiteSpace(txtTelepon.Text) ||
+                cboxPilihMenu.SelectedIndex == -1 ||
+                cboxNamaPelanggan.SelectedIndex == -1)
+            {
+                MessageBox.Show("All fields must be filled out.");
+                return false;
+            }
+            return true;
+        }
         private void LoadMenu()
         {
             string query = "SELECT id_barang, nama_barang, harga_satuan FROM tbl_barang";
