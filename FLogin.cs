@@ -71,7 +71,7 @@ namespace csharp_lksmart
                                 adminForm.Show();
                                 break;
                             case "Gudang":
-                                FGudang gudangForm = new FGudang();
+                                FormGudang gudangForm = new FormGudang();
                                 gudangForm.Show();
                                 break;
                             case "Kasir":
