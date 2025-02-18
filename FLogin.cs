@@ -43,10 +43,7 @@ namespace csharp_lksmart
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM tbl_user WHERE email=@email AND password=@password";
-            string queryLog = "INSERT INTO tbl_log VALUES (@waktu, @aktivitas, @id_user)";
             if (!ValidateInput()) return;
-            connection = new SqlConnection(connString);
             try
             {
                 using (conn = new SqlConnection(connString))
