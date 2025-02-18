@@ -39,6 +39,7 @@ namespace csharp_lksmart
         {
             txtEmail.Clear();
             txtPassword.Clear();
+            txtEmail.Focus();
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
