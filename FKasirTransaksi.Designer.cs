@@ -217,7 +217,7 @@
             this.labelKasir.Name = "labelKasir";
             this.labelKasir.Size = new System.Drawing.Size(39, 13);
             this.labelKasir.TabIndex = 37;
-            this.labelKasir.Text = "Kasir 0";
+            this.labelKasir.Text = "Kasir ?";
             // 
             // txtUang
             // 

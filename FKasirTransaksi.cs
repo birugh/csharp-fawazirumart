@@ -37,7 +37,20 @@ namespace csharp_lksmart
             GenerateNoTransaksi();
             ResetInput();
             cboxNamaPelanggan.SelectedIndex = -1;
+            LoadKasir();
         }
+        private void LoadKasir()
+        {
+            if (FormLogin.id_user == null || FormLogin.id_user == "")
+            {
+                labelKasir.Text = "Kasir ?";
+            }
+            else
+            {
+                labelKasir.Text = "Kasir " + FormLogin.id_user;
+            }
+        }
+
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(txtQuantitas.Text) ||
