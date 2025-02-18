@@ -86,8 +86,9 @@ namespace csharp_lksmart
                                 break;
                         }
 
-                        connection.Open();
-                        cmd = new SqlCommand(queryLog, connection);
+                        conn.Open();
+                        query = "INSERT INTO tbl_log VALUES (@waktu, @aktivitas, @id_user)";
+                        cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@waktu", DateTime.Now);
                         cmd.Parameters.AddWithValue("@aktivitas", "Login");
                         cmd.Parameters.AddWithValue("@id_user", FormLogin.id_user);
