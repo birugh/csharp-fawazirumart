@@ -67,15 +67,15 @@ namespace csharp_lksmart
                         switch (userType)
                         {
                             case "Admin":
-                                FKelolaUser adminForm = new FKelolaUser();
+                                FormAdminUser adminForm = new FormAdminUser();
                                 adminForm.Show();
                                 break;
                             case "Gudang":
-                                FormGudang gudangForm = new FormGudang();
+                                FormGudangBarang gudangForm = new FormGudangBarang();
                                 gudangForm.Show();
                                 break;
                             case "Kasir":
-                                FTransaksi transaksiForm = new FTransaksi();
+                                FormKasirTransaksi transaksiForm = new FormKasirTransaksi();
                                 transaksiForm.Show();
                                 break;
                             default:
