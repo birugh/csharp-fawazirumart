@@ -17,7 +17,9 @@ namespace csharp_lksmart
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
         private static SqlConnection conn;
+        private static SqlDataAdapter adp;
         private static SqlCommand cmd;
+        private static DataTable dt;
         private static string query;
         public static string id_user;
 
@@ -53,9 +55,9 @@ namespace csharp_lksmart
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text);
                     cmd.Parameters.AddWithValue("@password", txtPassword.Text);
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
+                    adp = new SqlDataAdapter(cmd);
+                    dt = new DataTable();
+                    adp.Fill(dt);
 
                     if (dt.Rows.Count > 0)
                     {
