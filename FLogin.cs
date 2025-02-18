@@ -49,9 +49,10 @@ namespace csharp_lksmart
             connection = new SqlConnection(connString);
             try
             {
-                using (connection)
+                using (conn = new SqlConnection(connString))
                 {
-                    cmd = new SqlCommand(query, connection);
+                    query = "SELECT * FROM tbl_user WHERE email=@email AND password=@password";
+                    cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text);
                     cmd.Parameters.AddWithValue("@password", txtPassword.Text);
 
