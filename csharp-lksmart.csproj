@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp">
+      <HintPath>.\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -54,55 +57,55 @@
     <Compile Include="FLogin.Designer.cs">
       <DependentUpon>FLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="FLog.cs">
+    <Compile Include="FAdminLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FLog.Designer.cs">
-      <DependentUpon>FLog.cs</DependentUpon>
+    <Compile Include="FAdminLog.Designer.cs">
+      <DependentUpon>FAdminLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="FKelolaUser.cs">
+    <Compile Include="FAdminUsers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FKelolaUser.Designer.cs">
-      <DependentUpon>FKelolaUser.cs</DependentUpon>
+    <Compile Include="FAdminUsers.Designer.cs">
+      <DependentUpon>FAdminUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="FGudang.cs">
+    <Compile Include="FGudangBarang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FGudang.Designer.cs">
-      <DependentUpon>FGudang.cs</DependentUpon>
+    <Compile Include="FGudangBarang.Designer.cs">
+      <DependentUpon>FGudangBarang.cs</DependentUpon>
     </Compile>
-    <Compile Include="FTransaksi.cs">
+    <Compile Include="FKasirTransaksi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FTransaksi.Designer.cs">
-      <DependentUpon>FTransaksi.cs</DependentUpon>
+    <Compile Include="FKasirTransaksi.Designer.cs">
+      <DependentUpon>FKasirTransaksi.cs</DependentUpon>
     </Compile>
-    <Compile Include="KelolaFormLaporan.cs">
+    <Compile Include="FAdminLaporan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KelolaFormLaporan.Designer.cs">
-      <DependentUpon>KelolaFormLaporan.cs</DependentUpon>
+    <Compile Include="FAdminLaporan.Designer.cs">
+      <DependentUpon>FAdminLaporan.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FLog.resx">
-      <DependentUpon>FLog.cs</DependentUpon>
+    <EmbeddedResource Include="FAdminLog.resx">
+      <DependentUpon>FAdminLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FKelolaUser.resx">
-      <DependentUpon>FKelolaUser.cs</DependentUpon>
+    <EmbeddedResource Include="FAdminUsers.resx">
+      <DependentUpon>FAdminUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FGudang.resx">
-      <DependentUpon>FGudang.cs</DependentUpon>
+    <EmbeddedResource Include="FGudangBarang.resx">
+      <DependentUpon>FGudangBarang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FTransaksi.resx">
-      <DependentUpon>FTransaksi.cs</DependentUpon>
+    <EmbeddedResource Include="FKasirTransaksi.resx">
+      <DependentUpon>FKasirTransaksi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KelolaFormLaporan.resx">
-      <DependentUpon>KelolaFormLaporan.cs</DependentUpon>
+    <EmbeddedResource Include="FAdminLaporan.resx">
+      <DependentUpon>FAdminLaporan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
