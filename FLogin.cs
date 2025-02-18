@@ -16,8 +16,9 @@ namespace csharp_lksmart
     public partial class FormLogin : Form
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
-        private static SqlConnection connection;
+        private static SqlConnection conn;
         private static SqlCommand cmd;
+        private static string query;
         public static string id_user;
 
         public FormLogin()
