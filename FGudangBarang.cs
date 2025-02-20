@@ -115,7 +115,7 @@ namespace csharp_lksmart
                 MessageBox.Show("Please fill out all fields and provide a valid Search Id.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!int.TryParse(txtSearch.Text, out _))
+            else if (!int.TryParse(txtSearch.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
             {
                 MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
