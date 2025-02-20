@@ -20,6 +20,7 @@ namespace csharp_lksmart
         private static SqlDataAdapter adp;
         private static SqlDataReader dr;
         private static DataTable dt;
+        private static DataView dv;
         private static string query;
         public FormGudangBarang()
         {
@@ -38,6 +39,8 @@ namespace csharp_lksmart
                     dt = new DataTable();
                     adp.Fill(dt);
                     dataGridViewBarang.DataSource = dt;
+                    dv = new DataView(dt);
+                    dataGridViewBarang.DataSource = dv;
                 }
             }
             catch
@@ -251,6 +254,7 @@ namespace csharp_lksmart
             }
             else
             {
+                dv.RowFilter = $"id_barang   = {txtSearch.Text}";
                 try
                 {
                     using (conn = new SqlConnection(connString))
