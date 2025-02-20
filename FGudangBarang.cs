@@ -81,6 +81,11 @@ namespace csharp_lksmart
         private void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
+            else if (!int.TryParse(txtSearch.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
+            {
+                MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 using (conn = new SqlConnection(connString))
