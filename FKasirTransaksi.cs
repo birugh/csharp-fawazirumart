@@ -284,6 +284,7 @@ namespace csharp_lksmart
                         cmd.Parameters.AddWithValue("@id_barang", idBarang);
                         conn.Open();
                         txtHargaSatuan.Text = cmd.ExecuteScalar().ToString();
+                        txtQuantitas_TextChanged(sender, e);
                         conn.Close();
                     }
                 }
