@@ -37,7 +37,6 @@
             this.dataGridViewUsers = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnTambah = new System.Windows.Forms.Button();
-            this.txtTipeUser = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtNama = new System.Windows.Forms.TextBox();
@@ -57,7 +56,8 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.cboxTipeUser = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,15 +152,6 @@
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = true;
             this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
-            // 
-            // txtTipeUser
-            // 
-            this.txtTipeUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtTipeUser.Location = new System.Drawing.Point(176, 109);
-            this.txtTipeUser.Name = "txtTipeUser";
-            this.txtTipeUser.Size = new System.Drawing.Size(193, 20);
-            this.txtTipeUser.TabIndex = 23;
             // 
             // label5
             // 
@@ -331,22 +322,35 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // button1
+            // btnRefresh
             // 
-            this.button1.Location = new System.Drawing.Point(702, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 26);
-            this.button1.TabIndex = 46;
-            this.button1.Text = "Refresh";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnRefresh.Location = new System.Drawing.Point(702, 227);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(93, 26);
+            this.btnRefresh.TabIndex = 46;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // cboxTipeUser
+            // 
+            this.cboxTipeUser.FormattingEnabled = true;
+            this.cboxTipeUser.Items.AddRange(new object[] {
+            "Admin",
+            "Gudang",
+            "Kasir"});
+            this.cboxTipeUser.Location = new System.Drawing.Point(176, 109);
+            this.cboxTipeUser.Name = "cboxTipeUser";
+            this.cboxTipeUser.Size = new System.Drawing.Size(193, 21);
+            this.cboxTipeUser.TabIndex = 47;
             // 
             // FormAdminUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 711);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cboxTipeUser);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnSearch);
@@ -366,7 +370,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtNama);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtTipeUser);
             this.Controls.Add(this.labelTime);
             this.Controls.Add(this.labelDate);
             this.Controls.Add(this.label2);
@@ -397,7 +400,6 @@
         private System.Windows.Forms.DataGridView dataGridViewUsers;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnTambah;
-        private System.Windows.Forms.TextBox txtTipeUser;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtNama;
@@ -417,6 +419,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ComboBox cboxTipeUser;
     }
 }
