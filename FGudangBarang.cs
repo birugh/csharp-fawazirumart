@@ -318,5 +318,20 @@ namespace csharp_lksmart
         {
             LoadBarangData();
         }
+
+        private void dataGridViewBarang_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridViewBarang.Rows[e.RowIndex];
+                txtKodeBarang.Text = row.Cells["kode_barang"].Value.ToString();
+                txtNamaBarang.Text = row.Cells["nama_barang"].Value.ToString();
+                txtJumlahBarang.Text = row.Cells["jumlah_barang"].Value.ToString();
+                txtSatuan.Text = row.Cells["satuan"].Value.ToString();
+                dateExpiredDate.Value = Convert.ToDateTime(row.Cells["expired_date"].Value);
+                txtHargaSatuan.Text = row.Cells["harga_satuan"].Value.ToString();
+                txtSearch.Text = row.Cells["id_barang"].Value.ToString();
+            }
+        }
     }
 }
