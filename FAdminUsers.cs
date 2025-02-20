@@ -20,6 +20,7 @@ namespace csharp_lksmart
         private static SqlDataReader dr;
         private static SqlCommand cmd;
         private static DataTable dt;
+        private static DataView dv;
         private static string query;
         private Timer timer;
         public FormAdminUser()
@@ -39,6 +40,8 @@ namespace csharp_lksmart
                     dt = new DataTable();
                     adp.Fill(dt);
                     dataGridViewUsers.DataSource = dt;
+                    dv = new DataView(dt);
+                    dataGridViewUsers.DataSource = dv;
                 }
             }
             catch
@@ -249,6 +252,7 @@ namespace csharp_lksmart
             }
             else
             {
+                dv.RowFilter = $"id_user = {txtSearch.Text}";
                 try
                 {
                     using (conn = new SqlConnection(conString))
