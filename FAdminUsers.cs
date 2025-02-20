@@ -254,7 +254,7 @@ namespace csharp_lksmart
         {
             if (ValidateSwitch() == true)
             {
-                if (MessageBox.Show("There is unsaved data, continue to switch form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("There is unsaved data, continue to switch form?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     ResetInput();
                     FormAdminLog logForm = new FormAdminLog();
