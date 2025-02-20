@@ -81,6 +81,20 @@ namespace csharp_lksmart
             }
             return true;
         }
+        private bool ValidateSwitch()
+        {
+            if (!string.IsNullOrWhiteSpace(txtTipeUser.Text) ||
+                !string.IsNullOrWhiteSpace(txtNama.Text) ||
+                !string.IsNullOrWhiteSpace(txtAlamat.Text) ||
+                !string.IsNullOrWhiteSpace(txtUsername.Text) ||
+                !string.IsNullOrWhiteSpace(txtTelepon.Text) ||
+                !string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                !string.IsNullOrWhiteSpace(txtEmail.Text))
+            {
+                return true;
+            }
+            return false;
+        }
         private void ResetInput()
         {
             txtTipeUser.Text = "";
