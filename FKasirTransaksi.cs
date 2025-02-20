@@ -272,6 +272,7 @@ namespace csharp_lksmart
         {
             if (cboxPilihMenu.SelectedItem != null)
             {
+                txtQuantitas.Enabled = true;
                 DataRowView selectedRow = cboxPilihMenu.SelectedItem as DataRowView;
                 if (selectedRow != null)
                 {
@@ -286,6 +287,10 @@ namespace csharp_lksmart
                         conn.Close();
                     }
                 }
+            }
+            else
+            {
+                txtQuantitas.Enabled = false;
             }
         }
 
