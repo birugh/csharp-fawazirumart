@@ -52,6 +52,7 @@
             this.btnHapus = new System.Windows.Forms.Button();
             this.btnCari = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBarang)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,7 +122,7 @@
             this.dataGridViewBarang.ReadOnly = true;
             this.dataGridViewBarang.Size = new System.Drawing.Size(654, 432);
             this.dataGridViewBarang.TabIndex = 78;
-            this.dataGridViewBarang.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridViewBarang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBarang_CellClick);
             // 
             // txtSearch
             // 
@@ -269,11 +270,22 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(737, 193);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(87, 24);
+            this.btnRefresh.TabIndex = 97;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // FormGudangBarang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(867, 686);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnCari);
             this.Controls.Add(this.btnHapus);
@@ -333,5 +345,6 @@
         private System.Windows.Forms.Button btnHapus;
         private System.Windows.Forms.Button btnCari;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
