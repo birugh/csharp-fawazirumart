@@ -63,24 +63,18 @@ namespace csharp_lksmart
         }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to switch the form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                ResetInput();
-                FormAdminUser kelolaUserForm = new FormAdminUser();
-                kelolaUserForm.Show();
-                this.Hide();
-            }
+            ResetInput();
+            FormAdminUser kelolaUserForm = new FormAdminUser();
+            kelolaUserForm.Show();
+            this.Hide();
         }
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to switch the form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                ResetInput();
-                FAdminLaporan laporanForm = new FAdminLaporan();
-                laporanForm.Show();
-                this.Hide();
-            }
+            ResetInput();
+            FAdminLaporan laporanForm = new FAdminLaporan();
+            laporanForm.Show();
+            this.Hide();
         }
 
         private void btnLog_Click(object sender, EventArgs e)
@@ -90,13 +84,13 @@ namespace csharp_lksmart
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            if (dateStart.Value > dateEnd.Value)
-            {
-                MessageBox.Show("Start date cannot be higher than end date", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else if (dateStart.Text == dateEnd.Text)
+            if (dateStart.Text == dateEnd.Text)
             {
                 MessageBox.Show("Date cannot be the same", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (dateStart.Value > dateEnd.Value)
+            {
+                MessageBox.Show("Start date cannot be higher than end date", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
