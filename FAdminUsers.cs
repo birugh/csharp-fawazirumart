@@ -68,7 +68,7 @@ namespace csharp_lksmart
         }
         private bool ValidateInput()
         {
-            if (string.IsNullOrWhiteSpace(txtTipeUser.Text) ||
+            if (cboxTipeUser.SelectedItem == null ||
                 string.IsNullOrWhiteSpace(txtNama.Text) ||
                 string.IsNullOrWhiteSpace(txtAlamat.Text) ||
                 string.IsNullOrWhiteSpace(txtUsername.Text) ||
@@ -83,7 +83,7 @@ namespace csharp_lksmart
         }
         private bool ValidateSwitch()
         {
-            if (!string.IsNullOrWhiteSpace(txtTipeUser.Text) ||
+            if (!(cboxTipeUser.SelectedItem == null) ||
                 !string.IsNullOrWhiteSpace(txtNama.Text) ||
                 !string.IsNullOrWhiteSpace(txtAlamat.Text) ||
                 !string.IsNullOrWhiteSpace(txtUsername.Text) ||
@@ -97,7 +97,7 @@ namespace csharp_lksmart
         }
         private void ResetInput()
         {
-            txtTipeUser.Text = "";
+            cboxTipeUser.SelectedIndex = -1;
             txtNama.Text = "";
             txtTelepon.Text = "";
             txtAlamat.Text = "";
@@ -116,7 +116,7 @@ namespace csharp_lksmart
                 {
                     query = "INSERT INTO tbl_user VALUES (@tipe_user, @nama, @alamat, @username, @telepon, @password, @email)";
                     cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@tipe_user", txtTipeUser.Text);
+                    cmd.Parameters.AddWithValue("@tipe_user", cboxTipeUser.SelectedItem.ToString());
                     cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                     cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
                     cmd.Parameters.AddWithValue("@username", txtUsername.Text);
@@ -161,7 +161,7 @@ namespace csharp_lksmart
                             query = "UPDATE tbl_user SET tipe_user=@tipe_user, nama=@nama, alamat=@alamat, username=@username, telepon=@telepon, password=@Password, email=@email WHERE id_user=@id_user";
                             cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@id_user", txtSearch.Text);
-                            cmd.Parameters.AddWithValue("@tipe_user", txtTipeUser.Text);
+                            cmd.Parameters.AddWithValue("@tipe_user", cboxTipeUser.SelectedItem.ToString());
                             cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                             cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
                             cmd.Parameters.AddWithValue("@username", txtUsername.Text);
@@ -299,7 +299,7 @@ namespace csharp_lksmart
 
                         if (dr.Read())
                         {
-                            txtTipeUser.Text = dr["tipe_user"].ToString();
+                            cboxTipeUser.SelectedItem = dr["tipe_user"].ToString();
                             txtNama.Text = dr["nama"].ToString();
                             txtAlamat.Text = dr["alamat"].ToString();
                             txtUsername.Text = dr["username"].ToString();
@@ -389,7 +389,7 @@ namespace csharp_lksmart
             {
                 DataGridViewRow row = dataGridViewUsers.Rows[e.RowIndex];
                 txtSearch.Text = row.Cells["id_user"].Value.ToString();
-                txtTipeUser.Text = row.Cells["tipe_user"].Value.ToString();
+                cboxTipeUser.SelectedItem = row.Cells["tipe_user"].Value.ToString();
                 txtNama.Text = row.Cells["nama"].Value.ToString();
                 txtAlamat.Text = row.Cells["alamat"].Value.ToString();
                 txtAlamat.Text = row.Cells["alamat"].Value.ToString();
