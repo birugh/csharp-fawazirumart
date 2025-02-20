@@ -92,6 +92,10 @@ namespace csharp_lksmart
             {
                 MessageBox.Show("Date cannot be the same", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else if (dateStart.Value > dateEnd.Value)
+            {
+                MessageBox.Show("Date cannot be the same", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else
             {
                 try
