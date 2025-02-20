@@ -57,6 +57,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,7 +132,7 @@
             this.dataGridViewUsers.ReadOnly = true;
             this.dataGridViewUsers.Size = new System.Drawing.Size(619, 377);
             this.dataGridViewUsers.TabIndex = 15;
-            this.dataGridViewUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridViewUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewUsers_CellClick);
             // 
             // label1
             // 
@@ -330,11 +331,22 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(702, 227);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 26);
+            this.button1.TabIndex = 46;
+            this.button1.Text = "Refresh";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormAdminUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(814, 711);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnSearch);
@@ -405,5 +417,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button button1;
     }
 }
