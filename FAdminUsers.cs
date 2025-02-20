@@ -231,7 +231,17 @@ namespace csharp_lksmart
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to switch the form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (ValidateSwitch() == true)
+            {
+                if (MessageBox.Show("There is unsaved data, continue to switch form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ResetInput();
+                    FAdminLaporan laporanForm = new FAdminLaporan();
+                    laporanForm.Show();
+                    this.Hide();
+                }
+            }
+            else
             {
                 ResetInput();
                 FAdminLaporan laporanForm = new FAdminLaporan();
@@ -242,14 +252,23 @@ namespace csharp_lksmart
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to switch the form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (ValidateSwitch() == true)
+            {
+                if (MessageBox.Show("There is unsaved data, continue to switch form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    ResetInput();
+                    FormAdminLog logForm = new FormAdminLog();
+                    logForm.Show();
+                    this.Hide();
+                }
+            }
+            else
             {
                 ResetInput();
                 FormAdminLog logForm = new FormAdminLog();
                 logForm.Show();
                 this.Hide();
             }
-
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
