@@ -90,7 +90,11 @@ namespace csharp_lksmart
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            if (dateStart.Text == dateEnd.Text)
+            if (dateStart.Value > dateEnd.Value)
+            {
+                MessageBox.Show("Start date cannot be higher than end date", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else if (dateStart.Text == dateEnd.Text)
             {
                 MessageBox.Show("Date cannot be the same", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
