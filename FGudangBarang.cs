@@ -196,7 +196,9 @@ namespace csharp_lksmart
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (ValidateLogout() == true)
+            {
+                if (MessageBox.Show("There is unsaved data, continue to switch form?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
@@ -225,18 +227,13 @@ namespace csharp_lksmart
                 this.Hide();
             }
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+            else
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dataGridViewBarang.Rows[e.RowIndex];
-                txtKodeBarang.Text = row.Cells["kode_barang"].Value.ToString();
-                txtNamaBarang.Text = row.Cells["nama_barang"].Value.ToString();
-                txtJumlahBarang.Text = row.Cells["jumlah_barang"].Value.ToString();
-                txtSatuan.Text = row.Cells["satuan"].Value.ToString();
-                dateExpiredDate.Value = Convert.ToDateTime(row.Cells["expired_date"].Value);
-                txtHargaSatuan.Text = row.Cells["harga_satuan"].Value.ToString();
-                txtSearch.Text = row.Cells["id_barang"].Value.ToString();
+                ResetInput();
+                FormLogin.id_user = null;
+                FormLogin loginForm = new FormLogin();
+                loginForm.Show();
+                this.Hide();
             }
         }
 
