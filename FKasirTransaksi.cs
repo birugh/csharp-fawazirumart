@@ -226,6 +226,8 @@ namespace csharp_lksmart
 
         private void btnSimpan_Click(object sender, EventArgs e)
         {
+            if (dataGridViewKeranjang.Rows.Count > 0)
+            {
             try
             {
                 using (conn = new SqlConnection(connString))
@@ -259,6 +261,11 @@ namespace csharp_lksmart
 
             btnReset_Click(sender, e);
             GenerateNoTransaksi();
+        }
+            else
+            {
+                MessageBox.Show("Please input something to cart!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void cboxPilihMenu_SelectedIndexChanged(object sender, EventArgs e)
