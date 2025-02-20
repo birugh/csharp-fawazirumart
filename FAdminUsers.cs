@@ -286,20 +286,6 @@ namespace csharp_lksmart
                 }
             }
         }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dataGridViewUsers.Rows[e.RowIndex];
-                txtSearch.Text = row.Cells["id_user"].Value.ToString();
-                txtEmail.Text = row.Cells["email"].Value.ToString();
-                txtPassword.Text = row.Cells["password"].Value.ToString();
-                txtTipeUser.Text = row.Cells["tipe_user"].Value.ToString();
-
-            }
-        }
-
         private void btnLogout_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
