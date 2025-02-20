@@ -220,7 +220,7 @@ namespace csharp_lksmart
             }
             else
             {
-                MessageBox.Show("Please input something to chart!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please input something to cart!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -369,7 +369,7 @@ namespace csharp_lksmart
         {
             if (dgv == null || dgv.Rows.Count == 0)
             {
-                MessageBox.Show("Please input something to chart.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please input something to cart.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             try
