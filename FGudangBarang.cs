@@ -67,6 +67,18 @@ namespace csharp_lksmart
             }
             return true;
         }
+        private bool ValidateLogout()
+        {
+            if (!string.IsNullOrWhiteSpace(txtKodeBarang.Text) ||
+                !string.IsNullOrWhiteSpace(txtNamaBarang.Text) ||
+                !string.IsNullOrWhiteSpace(txtJumlahBarang.Text) ||
+                !string.IsNullOrWhiteSpace(txtSatuan.Text) ||
+                !string.IsNullOrWhiteSpace(txtHargaSatuan.Text))
+            {
+                return true;
+            }
+            return false;
+        }
         private void ResetInput()
         {
             txtKodeBarang.Text = "";
