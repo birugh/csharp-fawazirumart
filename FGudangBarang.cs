@@ -22,11 +22,12 @@ namespace csharp_lksmart
         private static DataTable dt;
         private static DataView dv;
         private static string query;
+        private Timer timer;
         public FormGudangBarang()
         {
             InitializeComponent();
             LoadBarangData();
-            UpdateDateTime();
+            InitializeTimer();
         }
         private void LoadBarangData()
         {
@@ -47,6 +48,17 @@ namespace csharp_lksmart
             {
                 return;
             }
+        }
+        private void InitializeTimer()
+        {
+            timer = new Timer();
+            timer.Interval = 1000;
+            timer.Tick += new EventHandler(Timer_Tick);
+            timer.Start();
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdateDateTime();
         }
         private void UpdateDateTime()
         {
