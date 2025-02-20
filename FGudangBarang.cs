@@ -228,36 +228,36 @@ namespace csharp_lksmart
             if (ValidateLogout() == true)
             {
                 if (MessageBox.Show("There is unsaved data, continue to switch form?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                try
                 {
-                    using (conn = new SqlConnection(connString))
+                    try
                     {
-                        query = "INSERT INTO tbl_log (waktu, aktivitas, id_user) VALUES (@Waktu, @Aktivitas, @IdUser)";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@Waktu", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@Aktivitas", "Logout");
-                        cmd.Parameters.AddWithValue("@IdUser", FormLogin.id_user);
+                        using (conn = new SqlConnection(connString))
+                        {
+                            query = "INSERT INTO tbl_log (waktu, aktivitas, id_user) VALUES (@Waktu, @Aktivitas, @IdUser)";
+                            SqlCommand cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@Waktu", DateTime.Now);
+                            cmd.Parameters.AddWithValue("@Aktivitas", "Logout");
+                            cmd.Parameters.AddWithValue("@IdUser", FormLogin.id_user);
 
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    return;
-                }
+                    catch (Exception ex)
+                    {
+                        return;
+                    }
 
-                ResetInput();
-                FormLogin.id_user = null;
-                FormLogin loginForm = new FormLogin();
-                loginForm.Show();
-                this.Hide();
+                    ResetInput();
+                    FormLogin.id_user = null;
+                    FormLogin loginForm = new FormLogin();
+                    loginForm.Show();
+                    this.Hide();
+                }
             }
-        }
             else
-        {
+            {
                 ResetInput();
                 FormLogin.id_user = null;
                 FormLogin loginForm = new FormLogin();
@@ -304,7 +304,6 @@ namespace csharp_lksmart
                         else
                         {
                             MessageBox.Show("Barang not found.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            ResetInput();
                         }
                     }
                 }

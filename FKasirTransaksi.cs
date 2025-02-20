@@ -228,40 +228,36 @@ namespace csharp_lksmart
         {
             if (dataGridViewKeranjang.Rows.Count > 0)
             {
-            try
-            {
-                using (conn = new SqlConnection(connString))
+                try
                 {
-                    query = "INSERT INTO tbl_transaksi (no_transaksi, tgl_transaksi, nama_kasir, total_bayar, id_user, id_pelanggan, id_barang) VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan, @id_barang)";
-                    conn.Open();
-                    foreach (DataRow row in dtKeranjang.Rows)
+                    using (conn = new SqlConnection(connString))
                     {
-                        cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@no_transaksi", currentNoTransaksi);
-                        cmd.Parameters.AddWithValue("@tgl_transaksi", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@nama_kasir", "Kasir "+FormLogin.id_user);
-                        cmd.Parameters.AddWithValue("@total_bayar", row["Total Harga"]);
-                        cmd.Parameters.AddWithValue("@id_user", FormLogin.id_user);
-                        cmd.Parameters.AddWithValue("@id_pelanggan", cboxNamaPelanggan.SelectedValue);
-                        cmd.Parameters.AddWithValue("@id_barang", row["ID Barang"]);
-                        cmd.ExecuteNonQuery();
+                        query = "INSERT INTO tbl_transaksi (no_transaksi, tgl_transaksi, nama_kasir, total_bayar, id_user, id_pelanggan, id_barang) VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan, @id_barang)";
+                        conn.Open();
+                        foreach (DataRow row in dtKeranjang.Rows)
+                        {
+                            cmd = new SqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@no_transaksi", currentNoTransaksi);
+                            cmd.Parameters.AddWithValue("@tgl_transaksi", DateTime.Now);
+                            cmd.Parameters.AddWithValue("@nama_kasir", "Kasir "+FormLogin.id_user);
+                            cmd.Parameters.AddWithValue("@total_bayar", row["Total Harga"]);
+                            cmd.Parameters.AddWithValue("@id_user", FormLogin.id_user);
+                            cmd.Parameters.AddWithValue("@id_pelanggan", cboxNamaPelanggan.SelectedValue);
+                            cmd.Parameters.AddWithValue("@id_barang", row["ID Barang"]);
+                            cmd.ExecuteNonQuery();
+                        }
                     }
                 }
-            }
-            catch
-            {
-                throw;
-            }
+                catch
+                {
+                    throw;
+                }
 
-            MessageBox.Show("Transaction saved successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            if (MessageBox.Show("Do you want to export as pdf?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                btnPrint_Click(sender, e);
-            }
+                MessageBox.Show("Transaction saved successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            btnReset_Click(sender, e);
-            GenerateNoTransaksi();
-        }
+                btnReset_Click(sender, e);
+                GenerateNoTransaksi();
+            }
             else
             {
                 MessageBox.Show("Please input something to cart!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
