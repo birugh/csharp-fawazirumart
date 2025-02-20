@@ -363,5 +363,22 @@ namespace csharp_lksmart
         {
             LoadUserData();
         }
+
+        private void dataGridViewUsers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridViewUsers.Rows[e.RowIndex];
+                txtSearch.Text = row.Cells["id_user"].Value.ToString();
+                txtTipeUser.Text = row.Cells["tipe_user"].Value.ToString();
+                txtNama.Text = row.Cells["nama"].Value.ToString();
+                txtAlamat.Text = row.Cells["alamat"].Value.ToString();
+                txtAlamat.Text = row.Cells["alamat"].Value.ToString();
+                txtUsername.Text = row.Cells["username"].Value.ToString();
+                txtTelepon.Text = row.Cells["telepon"].Value.ToString();
+                txtPassword.Text = row.Cells["password"].Value.ToString();
+                txtEmail.Text = row.Cells["email"].Value.ToString();
+            }
+        }
     }
 }
