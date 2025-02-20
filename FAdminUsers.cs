@@ -358,5 +358,10 @@ namespace csharp_lksmart
         {
             ResetInput();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadUserData();
+        }
     }
 }
