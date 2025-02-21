@@ -69,12 +69,9 @@ namespace csharp_lksmart
         }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to switch the form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                FormAdminUser kelolaUserForm = new FormAdminUser();
-                kelolaUserForm.Show();
-                this.Hide();
-            }
+            FormAdminUser kelolaUserForm = new FormAdminUser();
+            kelolaUserForm.Show();
+            this.Hide();
         }
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
@@ -84,12 +81,9 @@ namespace csharp_lksmart
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to switch the form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                FormAdminLog logForm = new FormAdminLog();
-                logForm.Show();
-                this.Hide();
-            }
+            FormAdminLog logForm = new FormAdminLog();
+            logForm.Show();
+            this.Hide();
         }
         private void btnFilter_Click(object sender, EventArgs e)
         {
