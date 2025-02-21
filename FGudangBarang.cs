@@ -225,7 +225,7 @@ namespace csharp_lksmart
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            if (ValidateLogout() == true)
+            if (MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 if (MessageBox.Show("There is unsaved data, continue to switch form?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
