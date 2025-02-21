@@ -254,16 +254,6 @@ namespace csharp_lksmart
         {
             if (MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (MessageBox.Show("There is unsaved data, continue to switch form?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    ResetInput();
-                    FormAdminLog logForm = new FormAdminLog();
-                    logForm.Show();
-                    this.Hide();
-                }
-            }
-            else
-            {
                 ResetInput();
                 FormAdminLog logForm = new FormAdminLog();
                 logForm.Show();

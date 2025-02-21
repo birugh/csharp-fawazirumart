@@ -227,37 +227,26 @@ namespace csharp_lksmart
         {
             if (MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                if (MessageBox.Show("There is unsaved data, continue to switch form?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                try
                 {
-                    try
+                    using (conn = new SqlConnection(connString))
                     {
-                        using (conn = new SqlConnection(connString))
-                        {
-                            query = "INSERT INTO tbl_log (waktu, aktivitas, id_user) VALUES (@Waktu, @Aktivitas, @IdUser)";
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@Waktu", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@Aktivitas", "Logout");
-                            cmd.Parameters.AddWithValue("@IdUser", FormLogin.id_user);
+                        query = "INSERT INTO tbl_log (waktu, aktivitas, id_user) VALUES (@Waktu, @Aktivitas, @IdUser)";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@Waktu", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@Aktivitas", "Logout");
+                        cmd.Parameters.AddWithValue("@IdUser", FormLogin.id_user);
 
-                            conn.Open();
-                            cmd.ExecuteNonQuery();
-                            conn.Close();
-                        }
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
                     }
-                    catch (Exception ex)
-                    {
-                        return;
-                    }
-
-                    ResetInput();
-                    FormLogin.id_user = null;
-                    FormLogin loginForm = new FormLogin();
-                    loginForm.Show();
-                    this.Hide();
                 }
-            }
-            else
-            {
+                catch (Exception ex)
+                {
+                    return;
+                }
+
                 ResetInput();
                 FormLogin.id_user = null;
                 FormLogin loginForm = new FormLogin();
