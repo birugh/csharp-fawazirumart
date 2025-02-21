@@ -62,6 +62,11 @@ namespace csharp_lksmart
                 return;
             }
         }
+        private void ResetInput()
+        {
+            dateStart.ResetText();
+            dateEnd.ResetText();
+        }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to switch the form?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
