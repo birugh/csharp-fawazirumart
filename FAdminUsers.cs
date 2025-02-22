@@ -12,7 +12,7 @@ using System.Configuration;
 
 namespace csharp_lksmart
 {
-    public partial class FormAdminUser : Form
+    public partial class FormAdminKelolaUser : Form
     {
         private static string conString = ConfigurationManager.AppSettings["connString"].ToString();
         private static SqlConnection conn = new SqlConnection();
@@ -23,7 +23,7 @@ namespace csharp_lksmart
         private static DataView dv;
         private static string query;
         private Timer timer;
-        public FormAdminUser()
+        public FormAdminKelolaUser()
         {
             InitializeComponent();
             LoadUserData();
@@ -104,7 +104,7 @@ namespace csharp_lksmart
             txtUsername.Text = "";
             txtPassword.Text = "";
             txtEmail.Text = "";
-            txtSearch.Text = "Search by Id";
+            txtCari.Text = "Search by Id";
         }
 
         private void btnTambah_Click(object sender, EventArgs e)
@@ -140,12 +140,12 @@ namespace csharp_lksmart
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtSearch.Text) || txtSearch.Text == "Search by Id")
+            if (string.IsNullOrWhiteSpace(txtCari.Text) || txtCari.Text == "Search by Id")
             {
                 MessageBox.Show("Please fill out all fields and provide a valid Search Id.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!int.TryParse(txtSearch.Text, out _))
+            else if (!int.TryParse(txtCari.Text, out _))
             {
                 MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -160,7 +160,7 @@ namespace csharp_lksmart
                         {
                             query = "UPDATE tbl_user SET tipe_user=@tipe_user, nama=@nama, alamat=@alamat, username=@username, telepon=@telepon, password=@Password, email=@email WHERE id_user=@id_user";
                             cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@id_user", txtSearch.Text);
+                            cmd.Parameters.AddWithValue("@id_user", txtCari.Text);
                             cmd.Parameters.AddWithValue("@tipe_user", cboxTipeUser.SelectedItem.ToString());
                             cmd.Parameters.AddWithValue("@nama", txtNama.Text);
                             cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text);
@@ -186,12 +186,12 @@ namespace csharp_lksmart
 
         private void btnHapus_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtSearch.Text) || txtSearch.Text == "Search by Id")
+            if (string.IsNullOrWhiteSpace(txtCari.Text) || txtCari.Text == "Search by Id")
             {
                 MessageBox.Show("Please provide a valid user ID.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!int.TryParse(txtSearch.Text, out _))
+            else if (!int.TryParse(txtCari.Text, out _))
             {
                 MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -206,7 +206,7 @@ namespace csharp_lksmart
                         {
                             query = "DELETE FROM tbl_user WHERE id_user=@id_user";
                             cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@id_user", txtSearch.Text);
+                            cmd.Parameters.AddWithValue("@id_user", txtCari.Text);
 
                             conn.Open();
                             cmd.ExecuteNonQuery();
@@ -263,26 +263,26 @@ namespace csharp_lksmart
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtSearch.Text) || txtSearch.Text == "Search by Id")
+            if (string.IsNullOrWhiteSpace(txtCari.Text) || txtCari.Text == "Search by Id")
             {
                 MessageBox.Show("Please provide a valid user ID.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!int.TryParse(txtSearch.Text, out _))
+            else if (!int.TryParse(txtCari.Text, out _))
             {
                 MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                dv.RowFilter = $"id_user = {txtSearch.Text}";
+                dv.RowFilter = $"id_user = {txtCari.Text}";
                 try
                 {
                     using (conn = new SqlConnection(conString))
                     {
                         query = "SELECT * FROM tbl_user WHERE id_user=@id_user";
                         cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@id_user", txtSearch.Text);
+                        cmd.Parameters.AddWithValue("@id_user", txtCari.Text);
 
                         conn.Open();
                         dr = cmd.ExecuteReader();
@@ -355,12 +355,12 @@ namespace csharp_lksmart
 
         private void txtSearchId_Enter(object sender, EventArgs e)
         {
-            txtSearch.Text = (txtSearch.Text == "Search by Id") ? "" : txtSearch.Text;
+            txtCari.Text = (txtCari.Text == "Search by Id") ? "" : txtCari.Text;
         }
 
         private void txtSearchId_Leave(object sender, EventArgs e)
         {
-            txtSearch.Text = (txtSearch.Text == "") ? "Search by Id" : txtSearch.Text;
+            txtCari.Text = (txtCari.Text == "") ? "Search by Id" : txtCari.Text;
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -378,7 +378,7 @@ namespace csharp_lksmart
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridViewUsers.Rows[e.RowIndex];
-                txtSearch.Text = row.Cells["id_user"].Value.ToString();
+                txtCari.Text = row.Cells["id_user"].Value.ToString();
                 cboxTipeUser.SelectedItem = row.Cells["tipe_user"].Value.ToString();
                 txtNama.Text = row.Cells["nama"].Value.ToString();
                 txtAlamat.Text = row.Cells["alamat"].Value.ToString();
