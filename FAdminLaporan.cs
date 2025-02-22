@@ -69,7 +69,7 @@ namespace csharp_lksmart
         }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            FormAdminUser kelolaUserForm = new FormAdminUser();
+            FormAdminKelolaUser kelolaUserForm = new FormAdminKelolaUser();
             kelolaUserForm.Show();
             this.Hide();
         }
@@ -81,7 +81,7 @@ namespace csharp_lksmart
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-            FormAdminLog logForm = new FormAdminLog();
+            FormAdminLogActivity logForm = new FormAdminLogActivity();
             logForm.Show();
             this.Hide();
         }
