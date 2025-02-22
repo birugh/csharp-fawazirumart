@@ -143,7 +143,7 @@ namespace csharp_lksmart
         {
             cboxPilihMenu.SelectedIndex = -1;
 
-            txtHargaSatuan.Clear();
+            txtTotalHarga.Clear();
             txtQuantitas.Clear();
             txtTotalHarga.Clear();
             txtUang.Clear();
@@ -159,7 +159,7 @@ namespace csharp_lksmart
                 row["No Transaksi"] = currentNoTransaksi;
                 row["ID Barang"] = cboxPilihMenu.SelectedValue;
                 row["Nama Barang"] = cboxPilihMenu.Text;
-                row["Harga Satuan"] = txtHargaSatuan.Text;
+                row["Harga Satuan"] = txtTotalHarga.Text;
                 row["Qty"] = txtQuantitas.Text;
                 row["Total Harga"] = txtTotalHarga.Text;
 
@@ -279,7 +279,7 @@ namespace csharp_lksmart
                         cmd = new SqlCommand(query, conn);
                         cmd.Parameters.AddWithValue("@id_barang", idBarang);
                         conn.Open();
-                        txtHargaSatuan.Text = cmd.ExecuteScalar().ToString();
+                        txtTotalHarga.Text = cmd.ExecuteScalar().ToString();
                         txtQuantitas_TextChanged(sender, e);
                         conn.Close();
                     }
@@ -293,7 +293,7 @@ namespace csharp_lksmart
 
         private void txtQuantitas_TextChanged(object sender, EventArgs e)
         {
-            if (int.TryParse(txtQuantitas.Text, out int qty) && decimal.TryParse(txtHargaSatuan.Text, out decimal hargaSatuan))
+            if (int.TryParse(txtQuantitas.Text, out int qty) && decimal.TryParse(txtTotalHarga.Text, out decimal hargaSatuan))
             {
                 txtTotalHarga.Text = (qty * hargaSatuan).ToString();
             }
