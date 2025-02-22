@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace csharp_lksmart
 {
@@ -30,7 +31,7 @@ namespace csharp_lksmart
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(txtPassword.Text) ||
-                string.IsNullOrWhiteSpace(txtEmail.Text))
+                string.IsNullOrWhiteSpace(txtUsername.Text))
             {
                 MessageBox.Show("All fields must be filled out.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -39,20 +40,31 @@ namespace csharp_lksmart
         }
         private void ResetInput()
         {
-            txtEmail.Clear();
+            txtUsername.Clear();
             txtPassword.Clear();
-            txtEmail.Focus();
+            txtUsername.Focus();
         }
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+        private void btnLogin_Click_1(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
             try
             {
                 using (conn = new SqlConnection(connString))
                 {
-                    query = "SELECT * FROM tbl_user WHERE email=@email AND password=@password";
+                    query = "SELECT * FROM tbl_user WHERE username=@username AND password=@password";
                     cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@username", txtUsername.Text);
                     cmd.Parameters.AddWithValue("@password", txtPassword.Text);
 
                     adp = new SqlDataAdapter(cmd);
@@ -69,7 +81,7 @@ namespace csharp_lksmart
                         switch (userType)
                         {
                             case "Admin":
-                                FormAdminUser adminForm = new FormAdminUser();
+                                FormAdminKelolaUser adminForm = new FormAdminKelolaUser();
                                 adminForm.Show();
                                 break;
                             case "Gudang":
@@ -97,31 +109,35 @@ namespace csharp_lksmart
                     }
                     else
                     {
-                        MessageBox.Show("Email or Password is incorrect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Username or Password is incorrect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         ResetInput();
                     }
                 }
             }
-            catch (Exception) 
+            catch (Exception)
             {
                 return;
             }
         }
-        private void btnReset_Click(object sender, EventArgs e)
+
+        private void btnReset_Click_1(object sender, EventArgs e)
         {
             ResetInput();
         }
 
-        private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
+        private void txtPassword_OnIconRightClick(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (txtPassword.PasswordChar == '*')
             {
-                Environment.Exit(0);
+                txtPassword.IconRight = csharp_lksmart.Properties.Resources.Eye_Outline;
+                txtPassword.PasswordChar = '\0';
             }
             else
             {
-                e.Cancel = true;
+                txtPassword.IconRight = csharp_lksmart.Properties.Resources.Eye_Disable_Outline;
+                txtPassword.PasswordChar = '*';
             }
+
         }
     }
 }
