@@ -87,6 +87,11 @@ namespace csharp_lksmart
         }
         private void btnFilter_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void FilterTable()
+        {
             if (dateStart.Text == dateEnd.Text)
             {
                 MessageBox.Show("Date cannot be the same", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -117,21 +122,27 @@ namespace csharp_lksmart
                 }
             }
         }
-
         private void btnGenerate_Click(object sender, EventArgs e)
         {
+            FilterTable();
             try
             {
                 using (conn = new SqlConnection(connString))
                 {
-                    string query = "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi GROUP BY tgl_transaksi";
+                    string query = "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi WHERE tgl_transaksi BETWEEN @dateStart AND @dateEnd GROUP BY tgl_transaksi";
                     cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@dateStart", dateStart.Value.Date);
+                    cmd.Parameters.AddWithValue("@dateEnd", dateEnd.Value.Date);
                     adp = new SqlDataAdapter(cmd);
                     dt = new DataTable();
+
+                    dt.Clear();
                     adp.Fill(dt);
 
                     chartOmset.Series.Clear();
+                    chartOmset.DataSource = null; // Reset data source
                     chartOmset.Series.Add("Omset");
+
                     chartOmset.Series["Omset"].XValueMember = "tgl_transaksi";
                     chartOmset.Series["Omset"].YValueMembers = "total_bayar";
                     chartOmset.DataSource = dt;
