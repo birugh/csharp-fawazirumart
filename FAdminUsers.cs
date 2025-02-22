@@ -255,7 +255,7 @@ namespace csharp_lksmart
             if (MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ResetInput();
-                FormAdminLog logForm = new FormAdminLog();
+                FormAdminLogActivity logForm = new FormAdminLogActivity();
                 logForm.Show();
                 this.Hide();
             }

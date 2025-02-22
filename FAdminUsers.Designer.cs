@@ -1069,7 +1069,7 @@
             this.btnLogout.BackColor1 = System.Drawing.Color.Crimson;
             this.btnLogout.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLogout.BackgroundImage")));
             this.btnLogout.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
-            this.btnLogout.ButtonText = "Reset";
+            this.btnLogout.ButtonText = "Logout";
             this.btnLogout.ButtonTextMarginLeft = 0;
             this.btnLogout.ColorContrastOnClick = 45;
             this.btnLogout.ColorContrastOnHover = 45;
