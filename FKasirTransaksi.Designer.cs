@@ -1075,6 +1075,7 @@
             this.txtQuantitas.TextPlaceholder = "";
             this.txtQuantitas.UseSystemPasswordChar = false;
             this.txtQuantitas.WordWrap = true;
+            this.txtQuantitas.TextChange += new System.EventHandler(this.txtQuantitas_TextChanged);
             // 
             // labelTotalKeseluruhan
             // 
@@ -1122,7 +1123,7 @@
             this.btnBayar.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnBayar.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnBayar.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
-            this.btnBayar.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
+            this.btnBayar.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Idle;
             this.btnBayar.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.btnBayar.ForeColor = System.Drawing.Color.White;
             this.btnBayar.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1167,11 +1168,11 @@
             this.btnBayar.OnIdleState.ForeColor = System.Drawing.Color.White;
             this.btnBayar.OnIdleState.IconLeftImage = null;
             this.btnBayar.OnIdleState.IconRightImage = null;
-            this.btnBayar.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnBayar.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(82)))), ((int)(((byte)(43)))));
             this.btnBayar.OnPressedState.BorderRadius = 15;
             this.btnBayar.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnBayar.OnPressedState.BorderThickness = 1;
-            this.btnBayar.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnBayar.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(82)))), ((int)(((byte)(43)))));
             this.btnBayar.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.btnBayar.OnPressedState.IconLeftImage = null;
             this.btnBayar.OnPressedState.IconRightImage = null;
@@ -1182,6 +1183,7 @@
             this.btnBayar.TextMarginLeft = 0;
             this.btnBayar.TextPadding = new System.Windows.Forms.Padding(0);
             this.btnBayar.UseDefaultRadiusAndThickness = true;
+            this.btnBayar.Click += new System.EventHandler(this.btnBayar_Click);
             // 
             // bunifuLabel14
             // 
@@ -1275,11 +1277,11 @@
             this.btnSimpan.OnIdleState.ForeColor = System.Drawing.Color.White;
             this.btnSimpan.OnIdleState.IconLeftImage = null;
             this.btnSimpan.OnIdleState.IconRightImage = null;
-            this.btnSimpan.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(82)))), ((int)(((byte)(43)))));
             this.btnSimpan.OnPressedState.BorderRadius = 15;
             this.btnSimpan.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnSimpan.OnPressedState.BorderThickness = 1;
-            this.btnSimpan.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(82)))), ((int)(((byte)(43)))));
             this.btnSimpan.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.btnSimpan.OnPressedState.IconLeftImage = null;
             this.btnSimpan.OnPressedState.IconRightImage = null;
@@ -1290,6 +1292,7 @@
             this.btnSimpan.TextMarginLeft = 0;
             this.btnSimpan.TextPadding = new System.Windows.Forms.Padding(0);
             this.btnSimpan.UseDefaultRadiusAndThickness = true;
+            this.btnSimpan.Click += new System.EventHandler(this.btnSimpan_Click);
             // 
             // bunifuLabel11
             // 
@@ -1337,7 +1340,7 @@
             this.btnPrint.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnPrint.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnPrint.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
-            this.btnPrint.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
+            this.btnPrint.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Idle;
             this.btnPrint.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.btnPrint.ForeColor = System.Drawing.Color.White;
             this.btnPrint.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1366,11 +1369,11 @@
             this.btnPrint.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
             this.btnPrint.OnDisabledState.IconLeftImage = null;
             this.btnPrint.OnDisabledState.IconRightImage = null;
-            this.btnPrint.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(142)))), ((int)(((byte)(58)))));
+            this.btnPrint.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(147)))), ((int)(((byte)(61)))));
             this.btnPrint.onHoverState.BorderRadius = 15;
             this.btnPrint.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnPrint.onHoverState.BorderThickness = 1;
-            this.btnPrint.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(142)))), ((int)(((byte)(58)))));
+            this.btnPrint.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(147)))), ((int)(((byte)(61)))));
             this.btnPrint.onHoverState.ForeColor = System.Drawing.Color.White;
             this.btnPrint.onHoverState.IconLeftImage = null;
             this.btnPrint.onHoverState.IconRightImage = null;
@@ -1382,11 +1385,11 @@
             this.btnPrint.OnIdleState.ForeColor = System.Drawing.Color.White;
             this.btnPrint.OnIdleState.IconLeftImage = null;
             this.btnPrint.OnIdleState.IconRightImage = null;
-            this.btnPrint.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(118)))), ((int)(((byte)(49)))));
+            this.btnPrint.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(78)))), ((int)(((byte)(32)))));
             this.btnPrint.OnPressedState.BorderRadius = 15;
             this.btnPrint.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnPrint.OnPressedState.BorderThickness = 1;
-            this.btnPrint.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(154)))), ((int)(((byte)(118)))), ((int)(((byte)(49)))));
+            this.btnPrint.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(78)))), ((int)(((byte)(32)))));
             this.btnPrint.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.btnPrint.OnPressedState.IconLeftImage = null;
             this.btnPrint.OnPressedState.IconRightImage = null;
@@ -1397,6 +1400,7 @@
             this.btnPrint.TextMarginLeft = 0;
             this.btnPrint.TextPadding = new System.Windows.Forms.Padding(0);
             this.btnPrint.UseDefaultRadiusAndThickness = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // bunifuLabel10
             // 
@@ -1489,11 +1493,11 @@
             this.btnReset.OnIdleState.ForeColor = System.Drawing.Color.White;
             this.btnReset.OnIdleState.IconLeftImage = null;
             this.btnReset.OnIdleState.IconRightImage = null;
-            this.btnReset.OnPressedState.BorderColor = System.Drawing.Color.Crimson;
+            this.btnReset.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(15)))), ((int)(((byte)(46)))));
             this.btnReset.OnPressedState.BorderRadius = 15;
             this.btnReset.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnReset.OnPressedState.BorderThickness = 1;
-            this.btnReset.OnPressedState.FillColor = System.Drawing.Color.Crimson;
+            this.btnReset.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(15)))), ((int)(((byte)(46)))));
             this.btnReset.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.btnReset.OnPressedState.IconLeftImage = null;
             this.btnReset.OnPressedState.IconRightImage = null;
@@ -1504,6 +1508,7 @@
             this.btnReset.TextMarginLeft = 0;
             this.btnReset.TextPadding = new System.Windows.Forms.Padding(0);
             this.btnReset.UseDefaultRadiusAndThickness = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnTambah
             // 
@@ -1534,7 +1539,7 @@
             this.btnTambah.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnTambah.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnTambah.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
-            this.btnTambah.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
+            this.btnTambah.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Idle;
             this.btnTambah.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.btnTambah.ForeColor = System.Drawing.Color.White;
             this.btnTambah.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1579,11 +1584,11 @@
             this.btnTambah.OnIdleState.ForeColor = System.Drawing.Color.White;
             this.btnTambah.OnIdleState.IconLeftImage = global::csharp_lksmart.Properties.Resources.Tambah1;
             this.btnTambah.OnIdleState.IconRightImage = null;
-            this.btnTambah.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnTambah.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(82)))), ((int)(((byte)(43)))));
             this.btnTambah.OnPressedState.BorderRadius = 15;
             this.btnTambah.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnTambah.OnPressedState.BorderThickness = 1;
-            this.btnTambah.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnTambah.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(82)))), ((int)(((byte)(43)))));
             this.btnTambah.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.btnTambah.OnPressedState.IconLeftImage = null;
             this.btnTambah.OnPressedState.IconRightImage = null;
@@ -1594,6 +1599,7 @@
             this.btnTambah.TextMarginLeft = 0;
             this.btnTambah.TextPadding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnTambah.UseDefaultRadiusAndThickness = true;
+            this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
             // 
             // cboxPilihMenu
             // 
@@ -1637,6 +1643,7 @@
             this.cboxPilihMenu.Text = null;
             this.cboxPilihMenu.TextAlignment = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
             this.cboxPilihMenu.TextLeftMargin = 5;
+            this.cboxPilihMenu.SelectedIndexChanged += new System.EventHandler(this.cboxPilihMenu_SelectedIndexChanged);
             // 
             // cboxNamaPelanggan
             // 
@@ -1680,6 +1687,7 @@
             this.cboxNamaPelanggan.Text = null;
             this.cboxNamaPelanggan.TextAlignment = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
             this.cboxNamaPelanggan.TextLeftMargin = 5;
+            this.cboxNamaPelanggan.SelectedIndexChanged += new System.EventHandler(this.cboxNamaPelanggan_SelectedIndexChanged);
             // 
             // FormKasirTransaksi
             // 
