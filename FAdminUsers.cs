@@ -238,7 +238,7 @@ namespace csharp_lksmart
                 if (MessageBox.Show("There is unsaved data, continue to switch form?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     ResetInput();
-                    FAdminLaporan laporanForm = new FAdminLaporan();
+                    FormAdminLaporan laporanForm = new FormAdminLaporan();
                     laporanForm.Show();
                     this.Hide();
                 }
@@ -246,7 +246,7 @@ namespace csharp_lksmart
             else
             {
                 ResetInput();
-                FAdminLaporan laporanForm = new FAdminLaporan();
+                FormAdminLaporan laporanForm = new FormAdminLaporan();
                 laporanForm.Show();
                 this.Hide();
             }
