@@ -72,7 +72,7 @@ namespace csharp_lksmart
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
             ResetInput();
-            FAdminLaporan laporanForm = new FAdminLaporan();
+            FormAdminLaporan laporanForm = new FormAdminLaporan();
             laporanForm.Show();
             this.Hide();
         }
@@ -156,6 +156,18 @@ namespace csharp_lksmart
         private void btnReset_Click(object sender, EventArgs e)
         {
             ResetInput();
+        }
+
+        private void FormAdminLogActivity_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to close?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
