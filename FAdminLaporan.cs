@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace csharp_lksmart
 {
-    public partial class FAdminLaporan : Form
+    public partial class FormAdminLaporan : Form
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
         private static SqlConnection conn;
@@ -21,7 +21,7 @@ namespace csharp_lksmart
         private static string query;
         private static DataTable dt;
         private Timer timer;
-        public FAdminLaporan()
+        public FormAdminLaporan()
         {
             InitializeComponent();
             InitializeTimer();
@@ -54,7 +54,7 @@ namespace csharp_lksmart
                     adp = new SqlDataAdapter(query, conn);
                     dt = new DataTable();
                     adp.Fill(dt);
-                    dataGridViewTransaksi.DataSource = dt;
+                    dataGridViewLaporan.DataSource = dt;
                 }
             }
             catch (Exception ex)
@@ -66,6 +66,13 @@ namespace csharp_lksmart
         {
             dateStart.ResetText();
             dateEnd.ResetText();
+            ResetChart();
+        }
+        private void ResetChart()
+        {
+            chartOmset.Series.Clear();
+            chartOmset.DataSource = null;
+            chartOmset.Series.Add("Omset");
         }
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
@@ -87,7 +94,7 @@ namespace csharp_lksmart
         }
         private void btnFilter_Click(object sender, EventArgs e)
         {
-
+            FilterTable();
         }
 
         private void FilterTable()
@@ -113,7 +120,7 @@ namespace csharp_lksmart
                         adp = new SqlDataAdapter(cmd);
                         dt = new DataTable();
                         adp.Fill(dt);
-                        dataGridViewTransaksi.DataSource = dt;
+                        dataGridViewLaporan.DataSource = dt;
                     }
                 }
                 catch (Exception ex)
@@ -139,9 +146,7 @@ namespace csharp_lksmart
                     dt.Clear();
                     adp.Fill(dt);
 
-                    chartOmset.Series.Clear();
-                    chartOmset.DataSource = null; // Reset data source
-                    chartOmset.Series.Add("Omset");
+                    ResetChart();
 
                     chartOmset.Series["Omset"].XValueMember = "tgl_transaksi";
                     chartOmset.Series["Omset"].YValueMembers = "total_bayar";
