@@ -137,7 +137,6 @@ namespace csharp_lksmart
                 txtPassword.IconRight = csharp_lksmart.Properties.Resources.Eye_Disable_Outline;
                 txtPassword.PasswordChar = '*';
             }
-
         }
     }
 }
