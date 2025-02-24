@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormKasirTransaksi));
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -57,75 +58,316 @@
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges3 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges4 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges5 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            this.bunifuPanel2 = new Bunifu.UI.WinForms.BunifuPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnLogout = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.dataGridViewKeranjang = new Bunifu.UI.WinForms.BunifuDataGridView();
-            this.txtTelepon = new Bunifu.UI.WinForms.BunifuTextBox();
-            this.txtHargaSatuan = new Bunifu.UI.WinForms.BunifuTextBox();
-            this.txtCash = new Bunifu.UI.WinForms.BunifuTextBox();
-            this.txtTotalHarga = new Bunifu.UI.WinForms.BunifuTextBox();
-            this.txtQuantitas = new Bunifu.UI.WinForms.BunifuTextBox();
-            this.btnBayar = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.btnPrint = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.btnReset = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.cboxPilihMenu = new Bunifu.UI.WinForms.BunifuDropdown();
-            this.cboxNamaPelanggan = new Bunifu.UI.WinForms.BunifuDropdown();
-            this.btnTambah = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.bunifuPanel1 = new Bunifu.UI.WinForms.BunifuPanel();
-            this.bunifuLabel8 = new Bunifu.UI.WinForms.BunifuLabel();
-            this.bunifuLabel12 = new Bunifu.UI.WinForms.BunifuLabel();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges6 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            this.snackBar = new Bunifu.UI.WinForms.BunifuSnackbar(this.components);
             this.bunifuLabel13 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.bunifuLabel12 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.bunifuLabel8 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.bunifuLabel3 = new Bunifu.UI.WinForms.BunifuLabel();
             this.bunifuLabel4 = new Bunifu.UI.WinForms.BunifuLabel();
             this.bunifuLabel5 = new Bunifu.UI.WinForms.BunifuLabel();
             this.bunifuLabel7 = new Bunifu.UI.WinForms.BunifuLabel();
-            this.labelTotalKeseluruhan = new Bunifu.UI.WinForms.BunifuLabel();
-            this.labelJumlahKembalian = new Bunifu.UI.WinForms.BunifuLabel();
             this.bunifuLabel6 = new Bunifu.UI.WinForms.BunifuLabel();
             this.bunifuLabel9 = new Bunifu.UI.WinForms.BunifuLabel();
             this.bunifuLabel1 = new Bunifu.UI.WinForms.BunifuLabel();
             this.bunifuLabel2 = new Bunifu.UI.WinForms.BunifuLabel();
-            this.labelDate = new Bunifu.UI.WinForms.BunifuLabel();
-            this.labelKasir = new Bunifu.UI.WinForms.BunifuLabel();
+            this.btnLogout = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.bunifuPanel2 = new Bunifu.UI.WinForms.BunifuPanel();
             this.labelTime = new Bunifu.UI.WinForms.BunifuLabel();
-            this.bunifuPanel2.SuspendLayout();
+            this.labelKasir = new Bunifu.UI.WinForms.BunifuLabel();
+            this.labelDate = new Bunifu.UI.WinForms.BunifuLabel();
+            this.bunifuLabel21 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.bunifuLabel20 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.dataGridViewKeranjang = new Bunifu.UI.WinForms.BunifuDataGridView();
+            this.txtTelepon = new Bunifu.UI.WinForms.BunifuTextBox();
+            this.bunifuLabel17 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.txtHargaSatuan = new Bunifu.UI.WinForms.BunifuTextBox();
+            this.bunifuLabel16 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.txtCash = new Bunifu.UI.WinForms.BunifuTextBox();
+            this.bunifuLabel15 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.txtTotalHarga = new Bunifu.UI.WinForms.BunifuTextBox();
+            this.labelJumlahKembalian = new Bunifu.UI.WinForms.BunifuLabel();
+            this.txtQuantitas = new Bunifu.UI.WinForms.BunifuTextBox();
+            this.labelTotalKeseluruhan = new Bunifu.UI.WinForms.BunifuLabel();
+            this.btnBayar = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.bunifuLabel14 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.btnSimpan = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.bunifuLabel11 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.btnPrint = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.bunifuLabel10 = new Bunifu.UI.WinForms.BunifuLabel();
+            this.btnReset = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.btnTambah = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.cboxPilihMenu = new Bunifu.UI.WinForms.BunifuDropdown();
+            this.cboxNamaPelanggan = new Bunifu.UI.WinForms.BunifuDropdown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.bunifuPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKeranjang)).BeginInit();
-            this.bunifuPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // bunifuPanel2
+            // snackBar
             // 
-            this.bunifuPanel2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(101)))), ((int)(((byte)(133)))));
-            this.bunifuPanel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuPanel2.BackgroundImage")));
-            this.bunifuPanel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bunifuPanel2.BorderColor = System.Drawing.Color.Transparent;
-            this.bunifuPanel2.BorderRadius = 3;
-            this.bunifuPanel2.BorderThickness = 1;
-            this.bunifuPanel2.Controls.Add(this.btnLogout);
-            this.bunifuPanel2.Controls.Add(this.bunifuLabel13);
-            this.bunifuPanel2.Controls.Add(this.bunifuLabel12);
-            this.bunifuPanel2.Controls.Add(this.bunifuLabel8);
-            this.bunifuPanel2.Controls.Add(this.pictureBox1);
-            this.bunifuPanel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.bunifuPanel2.Location = new System.Drawing.Point(0, 0);
-            this.bunifuPanel2.Name = "bunifuPanel2";
-            this.bunifuPanel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.bunifuPanel2.ShowBorders = true;
-            this.bunifuPanel2.Size = new System.Drawing.Size(300, 661);
-            this.bunifuPanel2.TabIndex = 14;
+            this.snackBar.AllowDragging = false;
+            this.snackBar.AllowMultipleViews = true;
+            this.snackBar.ClickToClose = true;
+            this.snackBar.DoubleClickToClose = true;
+            this.snackBar.DurationAfterIdle = 3000;
+            this.snackBar.ErrorOptions.ActionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.snackBar.ErrorOptions.ActionBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.snackBar.ErrorOptions.ActionBorderRadius = 1;
+            this.snackBar.ErrorOptions.ActionFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.snackBar.ErrorOptions.ActionForeColor = System.Drawing.Color.Black;
+            this.snackBar.ErrorOptions.BackColor = System.Drawing.Color.White;
+            this.snackBar.ErrorOptions.BorderColor = System.Drawing.Color.White;
+            this.snackBar.ErrorOptions.CloseIconColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(204)))), ((int)(((byte)(199)))));
+            this.snackBar.ErrorOptions.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.snackBar.ErrorOptions.ForeColor = System.Drawing.Color.Black;
+            this.snackBar.ErrorOptions.Icon = ((System.Drawing.Image)(resources.GetObject("resource.Icon")));
+            this.snackBar.ErrorOptions.IconLeftMargin = 12;
+            this.snackBar.FadeCloseIcon = false;
+            this.snackBar.Host = Bunifu.UI.WinForms.BunifuSnackbar.Hosts.FormOwner;
+            this.snackBar.InformationOptions.ActionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.snackBar.InformationOptions.ActionBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.snackBar.InformationOptions.ActionBorderRadius = 1;
+            this.snackBar.InformationOptions.ActionFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.snackBar.InformationOptions.ActionForeColor = System.Drawing.Color.Black;
+            this.snackBar.InformationOptions.BackColor = System.Drawing.Color.White;
+            this.snackBar.InformationOptions.BorderColor = System.Drawing.Color.White;
+            this.snackBar.InformationOptions.CloseIconColor = System.Drawing.Color.FromArgb(((int)(((byte)(145)))), ((int)(((byte)(213)))), ((int)(((byte)(255)))));
+            this.snackBar.InformationOptions.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.snackBar.InformationOptions.ForeColor = System.Drawing.Color.Black;
+            this.snackBar.InformationOptions.Icon = ((System.Drawing.Image)(resources.GetObject("resource.Icon1")));
+            this.snackBar.InformationOptions.IconLeftMargin = 12;
+            this.snackBar.Margin = 10;
+            this.snackBar.MaximumSize = new System.Drawing.Size(0, 0);
+            this.snackBar.MaximumViews = 7;
+            this.snackBar.MessageRightMargin = 15;
+            this.snackBar.MinimumSize = new System.Drawing.Size(0, 0);
+            this.snackBar.ShowBorders = false;
+            this.snackBar.ShowCloseIcon = false;
+            this.snackBar.ShowIcon = true;
+            this.snackBar.ShowShadows = true;
+            this.snackBar.SuccessOptions.ActionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.snackBar.SuccessOptions.ActionBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.snackBar.SuccessOptions.ActionBorderRadius = 1;
+            this.snackBar.SuccessOptions.ActionFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.snackBar.SuccessOptions.ActionForeColor = System.Drawing.Color.Black;
+            this.snackBar.SuccessOptions.BackColor = System.Drawing.Color.White;
+            this.snackBar.SuccessOptions.BorderColor = System.Drawing.Color.White;
+            this.snackBar.SuccessOptions.CloseIconColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(255)))), ((int)(((byte)(237)))));
+            this.snackBar.SuccessOptions.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.snackBar.SuccessOptions.ForeColor = System.Drawing.Color.Black;
+            this.snackBar.SuccessOptions.Icon = ((System.Drawing.Image)(resources.GetObject("resource.Icon2")));
+            this.snackBar.SuccessOptions.IconLeftMargin = 12;
+            this.snackBar.ViewsMargin = 7;
+            this.snackBar.WarningOptions.ActionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.snackBar.WarningOptions.ActionBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.snackBar.WarningOptions.ActionBorderRadius = 1;
+            this.snackBar.WarningOptions.ActionFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold);
+            this.snackBar.WarningOptions.ActionForeColor = System.Drawing.Color.Black;
+            this.snackBar.WarningOptions.BackColor = System.Drawing.Color.White;
+            this.snackBar.WarningOptions.BorderColor = System.Drawing.Color.White;
+            this.snackBar.WarningOptions.CloseIconColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(229)))), ((int)(((byte)(143)))));
+            this.snackBar.WarningOptions.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.snackBar.WarningOptions.ForeColor = System.Drawing.Color.Black;
+            this.snackBar.WarningOptions.Icon = ((System.Drawing.Image)(resources.GetObject("resource.Icon3")));
+            this.snackBar.WarningOptions.IconLeftMargin = 12;
+            this.snackBar.ZoomCloseIcon = true;
+            // 
+            // bunifuLabel13
+            // 
+            this.bunifuLabel13.AllowParentOverrides = false;
+            this.bunifuLabel13.AutoEllipsis = false;
+            this.bunifuLabel13.CursorType = null;
+            this.bunifuLabel13.Font = new System.Drawing.Font("Poppins SemiBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuLabel13.ForeColor = System.Drawing.Color.White;
+            this.bunifuLabel13.Location = new System.Drawing.Point(56, 407);
+            this.bunifuLabel13.Name = "bunifuLabel13";
+            this.bunifuLabel13.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel13.Size = new System.Drawing.Size(173, 63);
+            this.bunifuLabel13.TabIndex = 20;
+            this.bunifuLabel13.Text = "Transaksi";
+            this.bunifuLabel13.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuLabel13.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel12
+            // 
+            this.bunifuLabel12.AllowParentOverrides = false;
+            this.bunifuLabel12.AutoEllipsis = false;
+            this.bunifuLabel12.CursorType = null;
+            this.bunifuLabel12.Font = new System.Drawing.Font("Poppins SemiBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuLabel12.ForeColor = System.Drawing.Color.White;
+            this.bunifuLabel12.Location = new System.Drawing.Point(85, 365);
+            this.bunifuLabel12.Name = "bunifuLabel12";
+            this.bunifuLabel12.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel12.Size = new System.Drawing.Size(111, 63);
+            this.bunifuLabel12.TabIndex = 20;
+            this.bunifuLabel12.Text = "Kelola";
+            this.bunifuLabel12.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.bunifuLabel12.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel8
+            // 
+            this.bunifuLabel8.AllowParentOverrides = false;
+            this.bunifuLabel8.AutoEllipsis = false;
+            this.bunifuLabel8.CursorType = null;
+            this.bunifuLabel8.Font = new System.Drawing.Font("Poppins SemiBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuLabel8.ForeColor = System.Drawing.Color.White;
+            this.bunifuLabel8.Location = new System.Drawing.Point(100, 61);
+            this.bunifuLabel8.Name = "bunifuLabel8";
+            this.bunifuLabel8.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel8.Size = new System.Drawing.Size(90, 62);
+            this.bunifuLabel8.TabIndex = 20;
+            this.bunifuLabel8.Text = "Kasir";
+            this.bunifuLabel8.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel8.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::csharp_lksmart.Properties.Resources.cashier_1;
-            this.pictureBox1.Location = new System.Drawing.Point(79, 146);
+            this.pictureBox1.Location = new System.Drawing.Point(68, 146);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(153, 145);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
+            // 
+            // bunifuLabel3
+            // 
+            this.bunifuLabel3.AllowParentOverrides = false;
+            this.bunifuLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel3.AutoEllipsis = false;
+            this.bunifuLabel3.CursorType = null;
+            this.bunifuLabel3.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel3.Location = new System.Drawing.Point(317, 90);
+            this.bunifuLabel3.Name = "bunifuLabel3";
+            this.bunifuLabel3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel3.Size = new System.Drawing.Size(70, 23);
+            this.bunifuLabel3.TabIndex = 16;
+            this.bunifuLabel3.Text = "Pilih Menu";
+            this.bunifuLabel3.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel3.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel4
+            // 
+            this.bunifuLabel4.AllowParentOverrides = false;
+            this.bunifuLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel4.AutoEllipsis = false;
+            this.bunifuLabel4.CursorType = null;
+            this.bunifuLabel4.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel4.Location = new System.Drawing.Point(317, 147);
+            this.bunifuLabel4.Name = "bunifuLabel4";
+            this.bunifuLabel4.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel4.Size = new System.Drawing.Size(119, 23);
+            this.bunifuLabel4.TabIndex = 16;
+            this.bunifuLabel4.Text = "Nama Pelanggan";
+            this.bunifuLabel4.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel4.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel5
+            // 
+            this.bunifuLabel5.AllowParentOverrides = false;
+            this.bunifuLabel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel5.AutoEllipsis = false;
+            this.bunifuLabel5.CursorType = null;
+            this.bunifuLabel5.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel5.Location = new System.Drawing.Point(579, 205);
+            this.bunifuLabel5.Name = "bunifuLabel5";
+            this.bunifuLabel5.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel5.Size = new System.Drawing.Size(78, 23);
+            this.bunifuLabel5.TabIndex = 16;
+            this.bunifuLabel5.Text = "Total Harga";
+            this.bunifuLabel5.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel5.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel7
+            // 
+            this.bunifuLabel7.AllowParentOverrides = false;
+            this.bunifuLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel7.AutoEllipsis = false;
+            this.bunifuLabel7.CursorType = null;
+            this.bunifuLabel7.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel7.Location = new System.Drawing.Point(579, 91);
+            this.bunifuLabel7.Name = "bunifuLabel7";
+            this.bunifuLabel7.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel7.Size = new System.Drawing.Size(93, 23);
+            this.bunifuLabel7.TabIndex = 16;
+            this.bunifuLabel7.Text = "Harga Satuan";
+            this.bunifuLabel7.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel7.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel6
+            // 
+            this.bunifuLabel6.AllowParentOverrides = false;
+            this.bunifuLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel6.AutoEllipsis = false;
+            this.bunifuLabel6.CursorType = null;
+            this.bunifuLabel6.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel6.Location = new System.Drawing.Point(317, 204);
+            this.bunifuLabel6.Name = "bunifuLabel6";
+            this.bunifuLabel6.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel6.Size = new System.Drawing.Size(54, 23);
+            this.bunifuLabel6.TabIndex = 16;
+            this.bunifuLabel6.Text = "Telepon";
+            this.bunifuLabel6.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel6.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel9
+            // 
+            this.bunifuLabel9.AllowParentOverrides = false;
+            this.bunifuLabel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel9.AutoEllipsis = false;
+            this.bunifuLabel9.CursorType = null;
+            this.bunifuLabel9.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel9.Location = new System.Drawing.Point(579, 146);
+            this.bunifuLabel9.Name = "bunifuLabel9";
+            this.bunifuLabel9.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel9.Size = new System.Drawing.Size(67, 23);
+            this.bunifuLabel9.TabIndex = 16;
+            this.bunifuLabel9.Text = "Quantitas";
+            this.bunifuLabel9.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel9.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel1
+            // 
+            this.bunifuLabel1.AllowParentOverrides = false;
+            this.bunifuLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel1.AutoEllipsis = false;
+            this.bunifuLabel1.CursorType = null;
+            this.bunifuLabel1.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel1.Location = new System.Drawing.Point(317, 12);
+            this.bunifuLabel1.Name = "bunifuLabel1";
+            this.bunifuLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel1.Size = new System.Drawing.Size(127, 23);
+            this.bunifuLabel1.TabIndex = 16;
+            this.bunifuLabel1.Text = "Pages / Dashboard";
+            this.bunifuLabel1.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel1.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel2
+            // 
+            this.bunifuLabel2.AllowParentOverrides = false;
+            this.bunifuLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel2.AutoEllipsis = false;
+            this.bunifuLabel2.CursorType = null;
+            this.bunifuLabel2.Font = new System.Drawing.Font("Poppins SemiBold", 24F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(86)))), ((int)(((byte)(132)))));
+            this.bunifuLabel2.Location = new System.Drawing.Point(317, 32);
+            this.bunifuLabel2.Name = "bunifuLabel2";
+            this.bunifuLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel2.Size = new System.Drawing.Size(203, 56);
+            this.bunifuLabel2.TabIndex = 16;
+            this.bunifuLabel2.Text = "KELOLA USER";
+            this.bunifuLabel2.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel2.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // btnLogout
             // 
@@ -156,7 +398,7 @@
             this.btnLogout.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnLogout.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnLogout.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
-            this.btnLogout.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Pressed;
+            this.btnLogout.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Idle;
             this.btnLogout.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
             this.btnLogout.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -175,7 +417,7 @@
             this.btnLogout.IdleIconLeftImage = null;
             this.btnLogout.IdleIconRightImage = null;
             this.btnLogout.IndicateFocus = false;
-            this.btnLogout.Location = new System.Drawing.Point(66, 548);
+            this.btnLogout.Location = new System.Drawing.Point(55, 548);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnLogout.OnDisabledState.BorderRadius = 15;
@@ -209,20 +451,131 @@
             this.btnLogout.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.btnLogout.OnPressedState.IconLeftImage = null;
             this.btnLogout.OnPressedState.IconRightImage = null;
-            this.btnLogout.Size = new System.Drawing.Size(176, 39);
+            this.btnLogout.Size = new System.Drawing.Size(183, 39);
             this.btnLogout.TabIndex = 22;
             this.btnLogout.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnLogout.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.btnLogout.TextMarginLeft = 0;
             this.btnLogout.TextPadding = new System.Windows.Forms.Padding(0);
             this.btnLogout.UseDefaultRadiusAndThickness = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // bunifuPanel2
+            // 
+            this.bunifuPanel2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(101)))), ((int)(((byte)(133)))));
+            this.bunifuPanel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuPanel2.BackgroundImage")));
+            this.bunifuPanel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bunifuPanel2.BorderColor = System.Drawing.Color.Transparent;
+            this.bunifuPanel2.BorderRadius = 3;
+            this.bunifuPanel2.BorderThickness = 1;
+            this.bunifuPanel2.Controls.Add(this.btnLogout);
+            this.bunifuPanel2.Controls.Add(this.pictureBox1);
+            this.bunifuPanel2.Controls.Add(this.bunifuLabel8);
+            this.bunifuPanel2.Controls.Add(this.bunifuLabel13);
+            this.bunifuPanel2.Controls.Add(this.bunifuLabel12);
+            this.bunifuPanel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.bunifuPanel2.Location = new System.Drawing.Point(0, 0);
+            this.bunifuPanel2.Name = "bunifuPanel2";
+            this.bunifuPanel2.ShowBorders = true;
+            this.bunifuPanel2.Size = new System.Drawing.Size(300, 661);
+            this.bunifuPanel2.TabIndex = 33;
+            // 
+            // labelTime
+            // 
+            this.labelTime.AllowParentOverrides = false;
+            this.labelTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTime.AutoEllipsis = false;
+            this.labelTime.CursorType = null;
+            this.labelTime.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.labelTime.Location = new System.Drawing.Point(912, 31);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTime.Size = new System.Drawing.Size(54, 22);
+            this.labelTime.TabIndex = 57;
+            this.labelTime.Text = "00:00:00";
+            this.labelTime.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTime.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // labelKasir
+            // 
+            this.labelKasir.AllowParentOverrides = false;
+            this.labelKasir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelKasir.AutoEllipsis = false;
+            this.labelKasir.CursorType = null;
+            this.labelKasir.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelKasir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.labelKasir.Location = new System.Drawing.Point(814, 11);
+            this.labelKasir.Name = "labelKasir";
+            this.labelKasir.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelKasir.Size = new System.Drawing.Size(44, 22);
+            this.labelKasir.TabIndex = 59;
+            this.labelKasir.Text = "Kasir ?";
+            this.labelKasir.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelKasir.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // labelDate
+            // 
+            this.labelDate.AllowParentOverrides = false;
+            this.labelDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelDate.AutoEllipsis = false;
+            this.labelDate.CursorType = null;
+            this.labelDate.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.labelDate.Location = new System.Drawing.Point(890, 11);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelDate.Size = new System.Drawing.Size(76, 22);
+            this.labelDate.TabIndex = 58;
+            this.labelDate.Text = "0000/00/00";
+            this.labelDate.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelDate.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel21
+            // 
+            this.bunifuLabel21.AllowParentOverrides = false;
+            this.bunifuLabel21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel21.AutoEllipsis = false;
+            this.bunifuLabel21.CursorType = null;
+            this.bunifuLabel21.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel21.Location = new System.Drawing.Point(318, 11);
+            this.bunifuLabel21.Name = "bunifuLabel21";
+            this.bunifuLabel21.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel21.Size = new System.Drawing.Size(127, 23);
+            this.bunifuLabel21.TabIndex = 56;
+            this.bunifuLabel21.Text = "Pages / Dashboard";
+            this.bunifuLabel21.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel21.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // bunifuLabel20
+            // 
+            this.bunifuLabel20.AllowParentOverrides = false;
+            this.bunifuLabel20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel20.AutoEllipsis = false;
+            this.bunifuLabel20.CursorType = null;
+            this.bunifuLabel20.Font = new System.Drawing.Font("Poppins SemiBold", 24F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(86)))), ((int)(((byte)(132)))));
+            this.bunifuLabel20.Location = new System.Drawing.Point(318, 31);
+            this.bunifuLabel20.Name = "bunifuLabel20";
+            this.bunifuLabel20.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel20.Size = new System.Drawing.Size(203, 56);
+            this.bunifuLabel20.TabIndex = 55;
+            this.bunifuLabel20.Text = "KELOLA USER";
+            this.bunifuLabel20.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel20.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // dataGridViewKeranjang
             // 
             this.dataGridViewKeranjang.AllowCustomTheming = false;
+            this.dataGridViewKeranjang.AllowUserToAddRows = false;
+            this.dataGridViewKeranjang.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dataGridViewKeranjang.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewKeranjang.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewKeranjang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewKeranjang.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewKeranjang.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -267,19 +620,21 @@
             this.dataGridViewKeranjang.HeaderBackColor = System.Drawing.Color.DodgerBlue;
             this.dataGridViewKeranjang.HeaderBgColor = System.Drawing.Color.Empty;
             this.dataGridViewKeranjang.HeaderForeColor = System.Drawing.Color.White;
-            this.dataGridViewKeranjang.Location = new System.Drawing.Point(314, 317);
+            this.dataGridViewKeranjang.Location = new System.Drawing.Point(318, 321);
             this.dataGridViewKeranjang.Name = "dataGridViewKeranjang";
+            this.dataGridViewKeranjang.ReadOnly = true;
             this.dataGridViewKeranjang.RowHeadersVisible = false;
             this.dataGridViewKeranjang.RowTemplate.Height = 40;
             this.dataGridViewKeranjang.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewKeranjang.Size = new System.Drawing.Size(658, 246);
-            this.dataGridViewKeranjang.TabIndex = 17;
+            this.dataGridViewKeranjang.Size = new System.Drawing.Size(648, 246);
+            this.dataGridViewKeranjang.TabIndex = 34;
             this.dataGridViewKeranjang.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Light;
             // 
             // txtTelepon
             // 
             this.txtTelepon.AcceptsReturn = false;
             this.txtTelepon.AcceptsTab = false;
+            this.txtTelepon.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtTelepon.AnimationSpeed = 200;
             this.txtTelepon.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtTelepon.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -289,12 +644,13 @@
             this.txtTelepon.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.txtTelepon.BorderColorHover = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(181)))), ((int)(((byte)(255)))));
             this.txtTelepon.BorderColorIdle = System.Drawing.Color.Silver;
-            this.txtTelepon.BorderRadius = 1;
+            this.txtTelepon.BorderRadius = 15;
             this.txtTelepon.BorderThickness = 1;
             this.txtTelepon.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtTelepon.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTelepon.DefaultFont = new System.Drawing.Font("Segoe UI", 9.25F);
+            this.txtTelepon.DefaultFont = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.txtTelepon.DefaultText = "";
+            this.txtTelepon.Enabled = false;
             this.txtTelepon.FillColor = System.Drawing.Color.White;
             this.txtTelepon.HideSelection = true;
             this.txtTelepon.IconLeft = null;
@@ -303,7 +659,7 @@
             this.txtTelepon.IconRight = null;
             this.txtTelepon.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTelepon.Lines = new string[0];
-            this.txtTelepon.Location = new System.Drawing.Point(314, 227);
+            this.txtTelepon.Location = new System.Drawing.Point(318, 231);
             this.txtTelepon.MaxLength = 32767;
             this.txtTelepon.MinimumSize = new System.Drawing.Size(1, 1);
             this.txtTelepon.Modified = false;
@@ -332,7 +688,7 @@
             this.txtTelepon.Padding = new System.Windows.Forms.Padding(3);
             this.txtTelepon.PasswordChar = '\0';
             this.txtTelepon.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtTelepon.PlaceholderText = "Enter text";
+            this.txtTelepon.PlaceholderText = "";
             this.txtTelepon.ReadOnly = false;
             this.txtTelepon.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtTelepon.SelectedText = "";
@@ -341,19 +697,37 @@
             this.txtTelepon.ShortcutsEnabled = true;
             this.txtTelepon.Size = new System.Drawing.Size(220, 32);
             this.txtTelepon.Style = Bunifu.UI.WinForms.BunifuTextBox._Style.Bunifu;
-            this.txtTelepon.TabIndex = 18;
-            this.txtTelepon.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtTelepon.TabIndex = 38;
+            this.txtTelepon.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtTelepon.TextMarginBottom = 0;
             this.txtTelepon.TextMarginLeft = 3;
             this.txtTelepon.TextMarginTop = 0;
-            this.txtTelepon.TextPlaceholder = "Enter text";
+            this.txtTelepon.TextPlaceholder = "";
             this.txtTelepon.UseSystemPasswordChar = false;
             this.txtTelepon.WordWrap = true;
+            // 
+            // bunifuLabel17
+            // 
+            this.bunifuLabel17.AllowParentOverrides = false;
+            this.bunifuLabel17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel17.AutoEllipsis = false;
+            this.bunifuLabel17.CursorType = null;
+            this.bunifuLabel17.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel17.Location = new System.Drawing.Point(580, 208);
+            this.bunifuLabel17.Name = "bunifuLabel17";
+            this.bunifuLabel17.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel17.Size = new System.Drawing.Size(78, 23);
+            this.bunifuLabel17.TabIndex = 40;
+            this.bunifuLabel17.Text = "Total Harga";
+            this.bunifuLabel17.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel17.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // txtHargaSatuan
             // 
             this.txtHargaSatuan.AcceptsReturn = false;
             this.txtHargaSatuan.AcceptsTab = false;
+            this.txtHargaSatuan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtHargaSatuan.AnimationSpeed = 200;
             this.txtHargaSatuan.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtHargaSatuan.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -363,12 +737,13 @@
             this.txtHargaSatuan.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.txtHargaSatuan.BorderColorHover = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(181)))), ((int)(((byte)(255)))));
             this.txtHargaSatuan.BorderColorIdle = System.Drawing.Color.Silver;
-            this.txtHargaSatuan.BorderRadius = 1;
+            this.txtHargaSatuan.BorderRadius = 15;
             this.txtHargaSatuan.BorderThickness = 1;
             this.txtHargaSatuan.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtHargaSatuan.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtHargaSatuan.DefaultFont = new System.Drawing.Font("Segoe UI", 9.25F);
+            this.txtHargaSatuan.DefaultFont = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.txtHargaSatuan.DefaultText = "";
+            this.txtHargaSatuan.Enabled = false;
             this.txtHargaSatuan.FillColor = System.Drawing.Color.White;
             this.txtHargaSatuan.HideSelection = true;
             this.txtHargaSatuan.IconLeft = null;
@@ -377,7 +752,7 @@
             this.txtHargaSatuan.IconRight = null;
             this.txtHargaSatuan.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
             this.txtHargaSatuan.Lines = new string[0];
-            this.txtHargaSatuan.Location = new System.Drawing.Point(576, 113);
+            this.txtHargaSatuan.Location = new System.Drawing.Point(580, 117);
             this.txtHargaSatuan.MaxLength = 32767;
             this.txtHargaSatuan.MinimumSize = new System.Drawing.Size(1, 1);
             this.txtHargaSatuan.Modified = false;
@@ -406,7 +781,7 @@
             this.txtHargaSatuan.Padding = new System.Windows.Forms.Padding(3);
             this.txtHargaSatuan.PasswordChar = '\0';
             this.txtHargaSatuan.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtHargaSatuan.PlaceholderText = "Enter text";
+            this.txtHargaSatuan.PlaceholderText = "";
             this.txtHargaSatuan.ReadOnly = false;
             this.txtHargaSatuan.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtHargaSatuan.SelectedText = "";
@@ -415,19 +790,37 @@
             this.txtHargaSatuan.ShortcutsEnabled = true;
             this.txtHargaSatuan.Size = new System.Drawing.Size(220, 32);
             this.txtHargaSatuan.Style = Bunifu.UI.WinForms.BunifuTextBox._Style.Bunifu;
-            this.txtHargaSatuan.TabIndex = 18;
+            this.txtHargaSatuan.TabIndex = 39;
             this.txtHargaSatuan.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtHargaSatuan.TextMarginBottom = 0;
             this.txtHargaSatuan.TextMarginLeft = 3;
             this.txtHargaSatuan.TextMarginTop = 0;
-            this.txtHargaSatuan.TextPlaceholder = "Enter text";
+            this.txtHargaSatuan.TextPlaceholder = "";
             this.txtHargaSatuan.UseSystemPasswordChar = false;
             this.txtHargaSatuan.WordWrap = true;
+            // 
+            // bunifuLabel16
+            // 
+            this.bunifuLabel16.AllowParentOverrides = false;
+            this.bunifuLabel16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel16.AutoEllipsis = false;
+            this.bunifuLabel16.CursorType = null;
+            this.bunifuLabel16.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel16.Location = new System.Drawing.Point(580, 150);
+            this.bunifuLabel16.Name = "bunifuLabel16";
+            this.bunifuLabel16.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel16.Size = new System.Drawing.Size(67, 23);
+            this.bunifuLabel16.TabIndex = 42;
+            this.bunifuLabel16.Text = "Quantitas";
+            this.bunifuLabel16.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel16.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // txtCash
             // 
             this.txtCash.AcceptsReturn = false;
             this.txtCash.AcceptsTab = false;
+            this.txtCash.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCash.AnimationSpeed = 200;
             this.txtCash.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtCash.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -451,7 +844,7 @@
             this.txtCash.IconRight = null;
             this.txtCash.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
             this.txtCash.Lines = new string[0];
-            this.txtCash.Location = new System.Drawing.Point(314, 577);
+            this.txtCash.Location = new System.Drawing.Point(318, 581);
             this.txtCash.MaxLength = 32767;
             this.txtCash.MinimumSize = new System.Drawing.Size(1, 1);
             this.txtCash.Modified = false;
@@ -487,10 +880,10 @@
             this.txtCash.SelectionLength = 0;
             this.txtCash.SelectionStart = 0;
             this.txtCash.ShortcutsEnabled = true;
-            this.txtCash.Size = new System.Drawing.Size(125, 32);
+            this.txtCash.Size = new System.Drawing.Size(172, 32);
             this.txtCash.Style = Bunifu.UI.WinForms.BunifuTextBox._Style.Bunifu;
-            this.txtCash.TabIndex = 18;
-            this.txtCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtCash.TabIndex = 37;
+            this.txtCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtCash.TextMarginBottom = 0;
             this.txtCash.TextMarginLeft = 3;
             this.txtCash.TextMarginTop = 0;
@@ -498,10 +891,28 @@
             this.txtCash.UseSystemPasswordChar = false;
             this.txtCash.WordWrap = true;
             // 
+            // bunifuLabel15
+            // 
+            this.bunifuLabel15.AllowParentOverrides = false;
+            this.bunifuLabel15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel15.AutoEllipsis = false;
+            this.bunifuLabel15.CursorType = null;
+            this.bunifuLabel15.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel15.Location = new System.Drawing.Point(580, 93);
+            this.bunifuLabel15.Name = "bunifuLabel15";
+            this.bunifuLabel15.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel15.Size = new System.Drawing.Size(93, 23);
+            this.bunifuLabel15.TabIndex = 44;
+            this.bunifuLabel15.Text = "Harga Satuan";
+            this.bunifuLabel15.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel15.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
             // txtTotalHarga
             // 
             this.txtTotalHarga.AcceptsReturn = false;
             this.txtTotalHarga.AcceptsTab = false;
+            this.txtTotalHarga.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTotalHarga.AnimationSpeed = 200;
             this.txtTotalHarga.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtTotalHarga.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -511,12 +922,13 @@
             this.txtTotalHarga.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.txtTotalHarga.BorderColorHover = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(181)))), ((int)(((byte)(255)))));
             this.txtTotalHarga.BorderColorIdle = System.Drawing.Color.Silver;
-            this.txtTotalHarga.BorderRadius = 1;
+            this.txtTotalHarga.BorderRadius = 15;
             this.txtTotalHarga.BorderThickness = 1;
             this.txtTotalHarga.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtTotalHarga.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTotalHarga.DefaultFont = new System.Drawing.Font("Segoe UI", 9.25F);
+            this.txtTotalHarga.DefaultFont = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.txtTotalHarga.DefaultText = "";
+            this.txtTotalHarga.Enabled = false;
             this.txtTotalHarga.FillColor = System.Drawing.Color.White;
             this.txtTotalHarga.HideSelection = true;
             this.txtTotalHarga.IconLeft = null;
@@ -525,7 +937,7 @@
             this.txtTotalHarga.IconRight = null;
             this.txtTotalHarga.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTotalHarga.Lines = new string[0];
-            this.txtTotalHarga.Location = new System.Drawing.Point(576, 227);
+            this.txtTotalHarga.Location = new System.Drawing.Point(580, 231);
             this.txtTotalHarga.MaxLength = 32767;
             this.txtTotalHarga.MinimumSize = new System.Drawing.Size(1, 1);
             this.txtTotalHarga.Modified = false;
@@ -554,7 +966,7 @@
             this.txtTotalHarga.Padding = new System.Windows.Forms.Padding(3);
             this.txtTotalHarga.PasswordChar = '\0';
             this.txtTotalHarga.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtTotalHarga.PlaceholderText = "Enter text";
+            this.txtTotalHarga.PlaceholderText = "";
             this.txtTotalHarga.ReadOnly = false;
             this.txtTotalHarga.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtTotalHarga.SelectedText = "";
@@ -563,19 +975,37 @@
             this.txtTotalHarga.ShortcutsEnabled = true;
             this.txtTotalHarga.Size = new System.Drawing.Size(220, 32);
             this.txtTotalHarga.Style = Bunifu.UI.WinForms.BunifuTextBox._Style.Bunifu;
-            this.txtTotalHarga.TabIndex = 18;
+            this.txtTotalHarga.TabIndex = 35;
             this.txtTotalHarga.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtTotalHarga.TextMarginBottom = 0;
             this.txtTotalHarga.TextMarginLeft = 3;
             this.txtTotalHarga.TextMarginTop = 0;
-            this.txtTotalHarga.TextPlaceholder = "Enter text";
+            this.txtTotalHarga.TextPlaceholder = "";
             this.txtTotalHarga.UseSystemPasswordChar = false;
             this.txtTotalHarga.WordWrap = true;
+            // 
+            // labelJumlahKembalian
+            // 
+            this.labelJumlahKembalian.AllowParentOverrides = false;
+            this.labelJumlahKembalian.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelJumlahKembalian.AutoEllipsis = false;
+            this.labelJumlahKembalian.CursorType = null;
+            this.labelJumlahKembalian.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelJumlahKembalian.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.labelJumlahKembalian.Location = new System.Drawing.Point(496, 613);
+            this.labelJumlahKembalian.Name = "labelJumlahKembalian";
+            this.labelJumlahKembalian.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelJumlahKembalian.Size = new System.Drawing.Size(105, 23);
+            this.labelJumlahKembalian.TabIndex = 46;
+            this.labelJumlahKembalian.Text = "Kembalian: Rp?";
+            this.labelJumlahKembalian.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.labelJumlahKembalian.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // txtQuantitas
             // 
             this.txtQuantitas.AcceptsReturn = false;
             this.txtQuantitas.AcceptsTab = false;
+            this.txtQuantitas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtQuantitas.AnimationSpeed = 200;
             this.txtQuantitas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
             this.txtQuantitas.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
@@ -585,11 +1015,11 @@
             this.txtQuantitas.BorderColorDisabled = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.txtQuantitas.BorderColorHover = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(181)))), ((int)(((byte)(255)))));
             this.txtQuantitas.BorderColorIdle = System.Drawing.Color.Silver;
-            this.txtQuantitas.BorderRadius = 1;
+            this.txtQuantitas.BorderRadius = 15;
             this.txtQuantitas.BorderThickness = 1;
             this.txtQuantitas.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtQuantitas.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtQuantitas.DefaultFont = new System.Drawing.Font("Segoe UI", 9.25F);
+            this.txtQuantitas.DefaultFont = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
             this.txtQuantitas.DefaultText = "";
             this.txtQuantitas.FillColor = System.Drawing.Color.White;
             this.txtQuantitas.HideSelection = true;
@@ -599,7 +1029,7 @@
             this.txtQuantitas.IconRight = null;
             this.txtQuantitas.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
             this.txtQuantitas.Lines = new string[0];
-            this.txtQuantitas.Location = new System.Drawing.Point(576, 170);
+            this.txtQuantitas.Location = new System.Drawing.Point(580, 174);
             this.txtQuantitas.MaxLength = 32767;
             this.txtQuantitas.MinimumSize = new System.Drawing.Size(1, 1);
             this.txtQuantitas.Modified = false;
@@ -637,7 +1067,7 @@
             this.txtQuantitas.ShortcutsEnabled = true;
             this.txtQuantitas.Size = new System.Drawing.Size(220, 32);
             this.txtQuantitas.Style = Bunifu.UI.WinForms.BunifuTextBox._Style.Bunifu;
-            this.txtQuantitas.TabIndex = 18;
+            this.txtQuantitas.TabIndex = 36;
             this.txtQuantitas.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.txtQuantitas.TextMarginBottom = 0;
             this.txtQuantitas.TextMarginLeft = 3;
@@ -645,6 +1075,23 @@
             this.txtQuantitas.TextPlaceholder = "";
             this.txtQuantitas.UseSystemPasswordChar = false;
             this.txtQuantitas.WordWrap = true;
+            // 
+            // labelTotalKeseluruhan
+            // 
+            this.labelTotalKeseluruhan.AllowParentOverrides = false;
+            this.labelTotalKeseluruhan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotalKeseluruhan.AutoEllipsis = false;
+            this.labelTotalKeseluruhan.CursorType = null;
+            this.labelTotalKeseluruhan.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelTotalKeseluruhan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.labelTotalKeseluruhan.Location = new System.Drawing.Point(496, 584);
+            this.labelTotalKeseluruhan.Name = "labelTotalKeseluruhan";
+            this.labelTotalKeseluruhan.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTotalKeseluruhan.Size = new System.Drawing.Size(153, 23);
+            this.labelTotalKeseluruhan.TabIndex = 47;
+            this.labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp?";
+            this.labelTotalKeseluruhan.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.labelTotalKeseluruhan.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // btnBayar
             // 
@@ -694,7 +1141,7 @@
             this.btnBayar.IdleIconLeftImage = null;
             this.btnBayar.IdleIconRightImage = null;
             this.btnBayar.IndicateFocus = false;
-            this.btnBayar.Location = new System.Drawing.Point(314, 615);
+            this.btnBayar.Location = new System.Drawing.Point(318, 619);
             this.btnBayar.Name = "btnBayar";
             this.btnBayar.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnBayar.OnDisabledState.BorderRadius = 15;
@@ -704,11 +1151,11 @@
             this.btnBayar.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
             this.btnBayar.OnDisabledState.IconLeftImage = null;
             this.btnBayar.OnDisabledState.IconRightImage = null;
-            this.btnBayar.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(130)))), ((int)(((byte)(171)))));
+            this.btnBayar.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(182)))), ((int)(((byte)(95)))));
             this.btnBayar.onHoverState.BorderRadius = 15;
             this.btnBayar.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnBayar.onHoverState.BorderThickness = 1;
-            this.btnBayar.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(130)))), ((int)(((byte)(171)))));
+            this.btnBayar.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(182)))), ((int)(((byte)(95)))));
             this.btnBayar.onHoverState.ForeColor = System.Drawing.Color.White;
             this.btnBayar.onHoverState.IconLeftImage = null;
             this.btnBayar.onHoverState.IconRightImage = null;
@@ -728,20 +1175,145 @@
             this.btnBayar.OnPressedState.ForeColor = System.Drawing.Color.White;
             this.btnBayar.OnPressedState.IconLeftImage = null;
             this.btnBayar.OnPressedState.IconRightImage = null;
-            this.btnBayar.Size = new System.Drawing.Size(125, 32);
-            this.btnBayar.TabIndex = 23;
+            this.btnBayar.Size = new System.Drawing.Size(172, 32);
+            this.btnBayar.TabIndex = 41;
             this.btnBayar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnBayar.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.btnBayar.TextMarginLeft = 0;
             this.btnBayar.TextPadding = new System.Windows.Forms.Padding(0);
             this.btnBayar.UseDefaultRadiusAndThickness = true;
             // 
+            // bunifuLabel14
+            // 
+            this.bunifuLabel14.AllowParentOverrides = false;
+            this.bunifuLabel14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel14.AutoEllipsis = false;
+            this.bunifuLabel14.CursorType = null;
+            this.bunifuLabel14.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel14.Location = new System.Drawing.Point(318, 208);
+            this.bunifuLabel14.Name = "bunifuLabel14";
+            this.bunifuLabel14.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel14.Size = new System.Drawing.Size(78, 23);
+            this.bunifuLabel14.TabIndex = 49;
+            this.bunifuLabel14.Text = "No. Telepon";
+            this.bunifuLabel14.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel14.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // btnSimpan
+            // 
+            this.btnSimpan.AllowAnimations = true;
+            this.btnSimpan.AllowMouseEffects = true;
+            this.btnSimpan.AllowToggling = false;
+            this.btnSimpan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSimpan.AnimationSpeed = 200;
+            this.btnSimpan.AutoGenerateColors = false;
+            this.btnSimpan.AutoRoundBorders = false;
+            this.btnSimpan.AutoSizeLeftIcon = true;
+            this.btnSimpan.AutoSizeRightIcon = true;
+            this.btnSimpan.BackColor = System.Drawing.Color.Transparent;
+            this.btnSimpan.BackColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSimpan.BackgroundImage")));
+            this.btnSimpan.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnSimpan.ButtonText = "Simpan";
+            this.btnSimpan.ButtonTextMarginLeft = 0;
+            this.btnSimpan.ColorContrastOnClick = 45;
+            this.btnSimpan.ColorContrastOnHover = 45;
+            this.btnSimpan.Cursor = System.Windows.Forms.Cursors.Default;
+            borderEdges3.BottomLeft = true;
+            borderEdges3.BottomRight = true;
+            borderEdges3.TopLeft = true;
+            borderEdges3.TopRight = true;
+            this.btnSimpan.CustomizableEdges = borderEdges3;
+            this.btnSimpan.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.btnSimpan.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.btnSimpan.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.btnSimpan.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.btnSimpan.Enabled = false;
+            this.btnSimpan.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Idle;
+            this.btnSimpan.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
+            this.btnSimpan.ForeColor = System.Drawing.Color.White;
+            this.btnSimpan.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSimpan.IconLeftCursor = System.Windows.Forms.Cursors.Default;
+            this.btnSimpan.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
+            this.btnSimpan.IconMarginLeft = 11;
+            this.btnSimpan.IconPadding = 10;
+            this.btnSimpan.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSimpan.IconRightCursor = System.Windows.Forms.Cursors.Default;
+            this.btnSimpan.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
+            this.btnSimpan.IconSize = 25;
+            this.btnSimpan.IdleBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.IdleBorderRadius = 15;
+            this.btnSimpan.IdleBorderThickness = 1;
+            this.btnSimpan.IdleFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.IdleIconLeftImage = null;
+            this.btnSimpan.IdleIconRightImage = null;
+            this.btnSimpan.IndicateFocus = false;
+            this.btnSimpan.Location = new System.Drawing.Point(710, 581);
+            this.btnSimpan.Name = "btnSimpan";
+            this.btnSimpan.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.btnSimpan.OnDisabledState.BorderRadius = 15;
+            this.btnSimpan.OnDisabledState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnSimpan.OnDisabledState.BorderThickness = 1;
+            this.btnSimpan.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.btnSimpan.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.btnSimpan.OnDisabledState.IconLeftImage = null;
+            this.btnSimpan.OnDisabledState.IconRightImage = null;
+            this.btnSimpan.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(182)))), ((int)(((byte)(95)))));
+            this.btnSimpan.onHoverState.BorderRadius = 15;
+            this.btnSimpan.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnSimpan.onHoverState.BorderThickness = 1;
+            this.btnSimpan.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(182)))), ((int)(((byte)(95)))));
+            this.btnSimpan.onHoverState.ForeColor = System.Drawing.Color.White;
+            this.btnSimpan.onHoverState.IconLeftImage = null;
+            this.btnSimpan.onHoverState.IconRightImage = null;
+            this.btnSimpan.OnIdleState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.OnIdleState.BorderRadius = 15;
+            this.btnSimpan.OnIdleState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnSimpan.OnIdleState.BorderThickness = 1;
+            this.btnSimpan.OnIdleState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.OnIdleState.ForeColor = System.Drawing.Color.White;
+            this.btnSimpan.OnIdleState.IconLeftImage = null;
+            this.btnSimpan.OnIdleState.IconRightImage = null;
+            this.btnSimpan.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.OnPressedState.BorderRadius = 15;
+            this.btnSimpan.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.btnSimpan.OnPressedState.BorderThickness = 1;
+            this.btnSimpan.OnPressedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
+            this.btnSimpan.OnPressedState.ForeColor = System.Drawing.Color.White;
+            this.btnSimpan.OnPressedState.IconLeftImage = null;
+            this.btnSimpan.OnPressedState.IconRightImage = null;
+            this.btnSimpan.Size = new System.Drawing.Size(125, 32);
+            this.btnSimpan.TabIndex = 45;
+            this.btnSimpan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSimpan.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            this.btnSimpan.TextMarginLeft = 0;
+            this.btnSimpan.TextPadding = new System.Windows.Forms.Padding(0);
+            this.btnSimpan.UseDefaultRadiusAndThickness = true;
+            // 
+            // bunifuLabel11
+            // 
+            this.bunifuLabel11.AllowParentOverrides = false;
+            this.bunifuLabel11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel11.AutoEllipsis = false;
+            this.bunifuLabel11.CursorType = null;
+            this.bunifuLabel11.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel11.Location = new System.Drawing.Point(318, 150);
+            this.bunifuLabel11.Name = "bunifuLabel11";
+            this.bunifuLabel11.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel11.Size = new System.Drawing.Size(74, 23);
+            this.bunifuLabel11.TabIndex = 48;
+            this.bunifuLabel11.Text = "Pelanggan";
+            this.bunifuLabel11.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel11.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
             // btnPrint
             // 
             this.btnPrint.AllowAnimations = true;
             this.btnPrint.AllowMouseEffects = true;
             this.btnPrint.AllowToggling = false;
-            this.btnPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrint.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnPrint.AnimationSpeed = 200;
             this.btnPrint.AutoGenerateColors = false;
             this.btnPrint.AutoRoundBorders = false;
@@ -756,11 +1328,11 @@
             this.btnPrint.ColorContrastOnClick = 45;
             this.btnPrint.ColorContrastOnHover = 45;
             this.btnPrint.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges3.BottomLeft = true;
-            borderEdges3.BottomRight = true;
-            borderEdges3.TopLeft = true;
-            borderEdges3.TopRight = true;
-            this.btnPrint.CustomizableEdges = borderEdges3;
+            borderEdges4.BottomLeft = true;
+            borderEdges4.BottomRight = true;
+            borderEdges4.TopLeft = true;
+            borderEdges4.TopRight = true;
+            this.btnPrint.CustomizableEdges = borderEdges4;
             this.btnPrint.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnPrint.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnPrint.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -784,7 +1356,7 @@
             this.btnPrint.IdleIconLeftImage = null;
             this.btnPrint.IdleIconRightImage = null;
             this.btnPrint.IndicateFocus = false;
-            this.btnPrint.Location = new System.Drawing.Point(847, 577);
+            this.btnPrint.Location = new System.Drawing.Point(841, 581);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnPrint.OnDisabledState.BorderRadius = 15;
@@ -794,11 +1366,11 @@
             this.btnPrint.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
             this.btnPrint.OnDisabledState.IconLeftImage = null;
             this.btnPrint.OnDisabledState.IconRightImage = null;
-            this.btnPrint.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(130)))), ((int)(((byte)(171)))));
+            this.btnPrint.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(142)))), ((int)(((byte)(58)))));
             this.btnPrint.onHoverState.BorderRadius = 15;
             this.btnPrint.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnPrint.onHoverState.BorderThickness = 1;
-            this.btnPrint.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(130)))), ((int)(((byte)(171)))));
+            this.btnPrint.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(142)))), ((int)(((byte)(58)))));
             this.btnPrint.onHoverState.ForeColor = System.Drawing.Color.White;
             this.btnPrint.onHoverState.IconLeftImage = null;
             this.btnPrint.onHoverState.IconRightImage = null;
@@ -819,19 +1391,36 @@
             this.btnPrint.OnPressedState.IconLeftImage = null;
             this.btnPrint.OnPressedState.IconRightImage = null;
             this.btnPrint.Size = new System.Drawing.Size(125, 32);
-            this.btnPrint.TabIndex = 24;
+            this.btnPrint.TabIndex = 50;
             this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnPrint.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.btnPrint.TextMarginLeft = 0;
             this.btnPrint.TextPadding = new System.Windows.Forms.Padding(0);
             this.btnPrint.UseDefaultRadiusAndThickness = true;
             // 
+            // bunifuLabel10
+            // 
+            this.bunifuLabel10.AllowParentOverrides = false;
+            this.bunifuLabel10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel10.AutoEllipsis = false;
+            this.bunifuLabel10.CursorType = null;
+            this.bunifuLabel10.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
+            this.bunifuLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
+            this.bunifuLabel10.Location = new System.Drawing.Point(318, 93);
+            this.bunifuLabel10.Name = "bunifuLabel10";
+            this.bunifuLabel10.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.bunifuLabel10.Size = new System.Drawing.Size(70, 23);
+            this.bunifuLabel10.TabIndex = 43;
+            this.bunifuLabel10.Text = "Pilih Menu";
+            this.bunifuLabel10.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.bunifuLabel10.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
             // btnReset
             // 
             this.btnReset.AllowAnimations = true;
             this.btnReset.AllowMouseEffects = true;
             this.btnReset.AllowToggling = false;
-            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReset.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnReset.AnimationSpeed = 200;
             this.btnReset.AutoGenerateColors = false;
             this.btnReset.AutoRoundBorders = false;
@@ -846,12 +1435,12 @@
             this.btnReset.ColorContrastOnClick = 45;
             this.btnReset.ColorContrastOnHover = 45;
             this.btnReset.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges4.BottomLeft = true;
-            borderEdges4.BottomRight = true;
-            borderEdges4.TopLeft = true;
-            borderEdges4.TopRight = true;
-            this.btnReset.CustomizableEdges = borderEdges4;
-            this.btnReset.DialogResult = System.Windows.Forms.DialogResult.None;
+            borderEdges5.BottomLeft = true;
+            borderEdges5.BottomRight = true;
+            borderEdges5.TopLeft = true;
+            borderEdges5.TopRight = true;
+            this.btnReset.CustomizableEdges = borderEdges5;
+            this.btnReset.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnReset.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnReset.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.btnReset.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
@@ -874,7 +1463,7 @@
             this.btnReset.IdleIconLeftImage = null;
             this.btnReset.IdleIconRightImage = null;
             this.btnReset.IndicateFocus = false;
-            this.btnReset.Location = new System.Drawing.Point(694, 265);
+            this.btnReset.Location = new System.Drawing.Point(698, 269);
             this.btnReset.Name = "btnReset";
             this.btnReset.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnReset.OnDisabledState.BorderRadius = 15;
@@ -884,11 +1473,11 @@
             this.btnReset.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
             this.btnReset.OnDisabledState.IconLeftImage = null;
             this.btnReset.OnDisabledState.IconRightImage = null;
-            this.btnReset.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(130)))), ((int)(((byte)(171)))));
+            this.btnReset.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(23)))), ((int)(((byte)(54)))));
             this.btnReset.onHoverState.BorderRadius = 15;
             this.btnReset.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnReset.onHoverState.BorderThickness = 1;
-            this.btnReset.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(130)))), ((int)(((byte)(171)))));
+            this.btnReset.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(23)))), ((int)(((byte)(54)))));
             this.btnReset.onHoverState.ForeColor = System.Drawing.Color.White;
             this.btnReset.onHoverState.IconLeftImage = null;
             this.btnReset.onHoverState.IconRightImage = null;
@@ -909,94 +1498,12 @@
             this.btnReset.OnPressedState.IconLeftImage = null;
             this.btnReset.OnPressedState.IconRightImage = null;
             this.btnReset.Size = new System.Drawing.Size(102, 32);
-            this.btnReset.TabIndex = 24;
+            this.btnReset.TabIndex = 51;
             this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnReset.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.btnReset.TextMarginLeft = 0;
             this.btnReset.TextPadding = new System.Windows.Forms.Padding(0);
             this.btnReset.UseDefaultRadiusAndThickness = true;
-            // 
-            // cboxPilihMenu
-            // 
-            this.cboxPilihMenu.BackColor = System.Drawing.Color.Transparent;
-            this.cboxPilihMenu.BackgroundColor = System.Drawing.Color.White;
-            this.cboxPilihMenu.BorderColor = System.Drawing.Color.Silver;
-            this.cboxPilihMenu.BorderRadius = 1;
-            this.cboxPilihMenu.Color = System.Drawing.Color.Silver;
-            this.cboxPilihMenu.Direction = Bunifu.UI.WinForms.BunifuDropdown.Directions.Down;
-            this.cboxPilihMenu.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.cboxPilihMenu.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.cboxPilihMenu.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.cboxPilihMenu.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.cboxPilihMenu.DisabledIndicatorColor = System.Drawing.Color.DarkGray;
-            this.cboxPilihMenu.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboxPilihMenu.DropdownBorderThickness = Bunifu.UI.WinForms.BunifuDropdown.BorderThickness.Thin;
-            this.cboxPilihMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxPilihMenu.DropDownTextAlign = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
-            this.cboxPilihMenu.FillDropDown = true;
-            this.cboxPilihMenu.FillIndicator = false;
-            this.cboxPilihMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxPilihMenu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cboxPilihMenu.ForeColor = System.Drawing.Color.Black;
-            this.cboxPilihMenu.FormattingEnabled = true;
-            this.cboxPilihMenu.Icon = null;
-            this.cboxPilihMenu.IndicatorAlignment = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
-            this.cboxPilihMenu.IndicatorColor = System.Drawing.Color.Gray;
-            this.cboxPilihMenu.IndicatorLocation = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
-            this.cboxPilihMenu.ItemBackColor = System.Drawing.Color.White;
-            this.cboxPilihMenu.ItemBorderColor = System.Drawing.Color.White;
-            this.cboxPilihMenu.ItemForeColor = System.Drawing.Color.Black;
-            this.cboxPilihMenu.ItemHeight = 26;
-            this.cboxPilihMenu.ItemHighLightColor = System.Drawing.Color.DodgerBlue;
-            this.cboxPilihMenu.ItemHighLightForeColor = System.Drawing.Color.White;
-            this.cboxPilihMenu.ItemTopMargin = 3;
-            this.cboxPilihMenu.Location = new System.Drawing.Point(314, 113);
-            this.cboxPilihMenu.Name = "cboxPilihMenu";
-            this.cboxPilihMenu.Size = new System.Drawing.Size(220, 32);
-            this.cboxPilihMenu.TabIndex = 27;
-            this.cboxPilihMenu.TextAlignment = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
-            this.cboxPilihMenu.TextLeftMargin = 5;
-            // 
-            // cboxNamaPelanggan
-            // 
-            this.cboxNamaPelanggan.BackColor = System.Drawing.Color.Transparent;
-            this.cboxNamaPelanggan.BackgroundColor = System.Drawing.Color.White;
-            this.cboxNamaPelanggan.BorderColor = System.Drawing.Color.Silver;
-            this.cboxNamaPelanggan.BorderRadius = 1;
-            this.cboxNamaPelanggan.Color = System.Drawing.Color.Silver;
-            this.cboxNamaPelanggan.Direction = Bunifu.UI.WinForms.BunifuDropdown.Directions.Down;
-            this.cboxNamaPelanggan.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.cboxNamaPelanggan.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.cboxNamaPelanggan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-            this.cboxNamaPelanggan.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            this.cboxNamaPelanggan.DisabledIndicatorColor = System.Drawing.Color.DarkGray;
-            this.cboxNamaPelanggan.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cboxNamaPelanggan.DropdownBorderThickness = Bunifu.UI.WinForms.BunifuDropdown.BorderThickness.Thin;
-            this.cboxNamaPelanggan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboxNamaPelanggan.DropDownTextAlign = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
-            this.cboxNamaPelanggan.FillDropDown = true;
-            this.cboxNamaPelanggan.FillIndicator = false;
-            this.cboxNamaPelanggan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cboxNamaPelanggan.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cboxNamaPelanggan.ForeColor = System.Drawing.Color.Black;
-            this.cboxNamaPelanggan.FormattingEnabled = true;
-            this.cboxNamaPelanggan.Icon = null;
-            this.cboxNamaPelanggan.IndicatorAlignment = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
-            this.cboxNamaPelanggan.IndicatorColor = System.Drawing.Color.Gray;
-            this.cboxNamaPelanggan.IndicatorLocation = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
-            this.cboxNamaPelanggan.ItemBackColor = System.Drawing.Color.White;
-            this.cboxNamaPelanggan.ItemBorderColor = System.Drawing.Color.White;
-            this.cboxNamaPelanggan.ItemForeColor = System.Drawing.Color.Black;
-            this.cboxNamaPelanggan.ItemHeight = 26;
-            this.cboxNamaPelanggan.ItemHighLightColor = System.Drawing.Color.DodgerBlue;
-            this.cboxNamaPelanggan.ItemHighLightForeColor = System.Drawing.Color.White;
-            this.cboxNamaPelanggan.ItemTopMargin = 3;
-            this.cboxNamaPelanggan.Location = new System.Drawing.Point(314, 170);
-            this.cboxNamaPelanggan.Name = "cboxNamaPelanggan";
-            this.cboxNamaPelanggan.Size = new System.Drawing.Size(220, 32);
-            this.cboxNamaPelanggan.TabIndex = 27;
-            this.cboxNamaPelanggan.TextAlignment = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
-            this.cboxNamaPelanggan.TextLeftMargin = 5;
             // 
             // btnTambah
             // 
@@ -1018,11 +1525,11 @@
             this.btnTambah.ColorContrastOnClick = 45;
             this.btnTambah.ColorContrastOnHover = 45;
             this.btnTambah.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges5.BottomLeft = true;
-            borderEdges5.BottomRight = true;
-            borderEdges5.TopLeft = true;
-            borderEdges5.TopRight = true;
-            this.btnTambah.CustomizableEdges = borderEdges5;
+            borderEdges6.BottomLeft = true;
+            borderEdges6.BottomRight = true;
+            borderEdges6.TopLeft = true;
+            borderEdges6.TopRight = true;
+            this.btnTambah.CustomizableEdges = borderEdges6;
             this.btnTambah.DialogResult = System.Windows.Forms.DialogResult.None;
             this.btnTambah.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnTambah.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -1046,7 +1553,7 @@
             this.btnTambah.IdleIconLeftImage = global::csharp_lksmart.Properties.Resources.Tambah1;
             this.btnTambah.IdleIconRightImage = null;
             this.btnTambah.IndicateFocus = false;
-            this.btnTambah.Location = new System.Drawing.Point(576, 265);
+            this.btnTambah.Location = new System.Drawing.Point(580, 269);
             this.btnTambah.Name = "btnTambah";
             this.btnTambah.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnTambah.OnDisabledState.BorderRadius = 15;
@@ -1056,11 +1563,11 @@
             this.btnTambah.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
             this.btnTambah.OnDisabledState.IconLeftImage = null;
             this.btnTambah.OnDisabledState.IconRightImage = null;
-            this.btnTambah.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(130)))), ((int)(((byte)(171)))));
+            this.btnTambah.onHoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(182)))), ((int)(((byte)(95)))));
             this.btnTambah.onHoverState.BorderRadius = 15;
             this.btnTambah.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.btnTambah.onHoverState.BorderThickness = 1;
-            this.btnTambah.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(130)))), ((int)(((byte)(171)))));
+            this.btnTambah.onHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(182)))), ((int)(((byte)(95)))));
             this.btnTambah.onHoverState.ForeColor = System.Drawing.Color.White;
             this.btnTambah.onHoverState.IconLeftImage = null;
             this.btnTambah.onHoverState.IconRightImage = null;
@@ -1081,377 +1588,186 @@
             this.btnTambah.OnPressedState.IconLeftImage = null;
             this.btnTambah.OnPressedState.IconRightImage = null;
             this.btnTambah.Size = new System.Drawing.Size(102, 32);
-            this.btnTambah.TabIndex = 28;
+            this.btnTambah.TabIndex = 54;
             this.btnTambah.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnTambah.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.btnTambah.TextMarginLeft = 0;
             this.btnTambah.TextPadding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnTambah.UseDefaultRadiusAndThickness = true;
             // 
-            // bunifuPanel1
+            // cboxPilihMenu
             // 
-            this.bunifuPanel1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.bunifuPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuPanel1.BackgroundImage")));
-            this.bunifuPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.bunifuPanel1.BorderColor = System.Drawing.Color.Transparent;
-            this.bunifuPanel1.BorderRadius = 3;
-            this.bunifuPanel1.BorderThickness = 1;
-            this.bunifuPanel1.Controls.Add(this.btnTambah);
-            this.bunifuPanel1.Controls.Add(this.cboxNamaPelanggan);
-            this.bunifuPanel1.Controls.Add(this.cboxPilihMenu);
-            this.bunifuPanel1.Controls.Add(this.labelTime);
-            this.bunifuPanel1.Controls.Add(this.labelKasir);
-            this.bunifuPanel1.Controls.Add(this.labelDate);
-            this.bunifuPanel1.Controls.Add(this.btnReset);
-            this.bunifuPanel1.Controls.Add(this.btnPrint);
-            this.bunifuPanel1.Controls.Add(this.btnBayar);
-            this.bunifuPanel1.Controls.Add(this.txtQuantitas);
-            this.bunifuPanel1.Controls.Add(this.txtTotalHarga);
-            this.bunifuPanel1.Controls.Add(this.txtCash);
-            this.bunifuPanel1.Controls.Add(this.txtHargaSatuan);
-            this.bunifuPanel1.Controls.Add(this.txtTelepon);
-            this.bunifuPanel1.Controls.Add(this.dataGridViewKeranjang);
-            this.bunifuPanel1.Controls.Add(this.bunifuLabel2);
-            this.bunifuPanel1.Controls.Add(this.bunifuLabel1);
-            this.bunifuPanel1.Controls.Add(this.bunifuLabel9);
-            this.bunifuPanel1.Controls.Add(this.bunifuLabel6);
-            this.bunifuPanel1.Controls.Add(this.labelJumlahKembalian);
-            this.bunifuPanel1.Controls.Add(this.labelTotalKeseluruhan);
-            this.bunifuPanel1.Controls.Add(this.bunifuLabel7);
-            this.bunifuPanel1.Controls.Add(this.bunifuLabel5);
-            this.bunifuPanel1.Controls.Add(this.bunifuLabel4);
-            this.bunifuPanel1.Controls.Add(this.bunifuLabel3);
-            this.bunifuPanel1.Controls.Add(this.bunifuPanel2);
-            this.bunifuPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bunifuPanel1.Location = new System.Drawing.Point(0, 0);
-            this.bunifuPanel1.Name = "bunifuPanel1";
-            this.bunifuPanel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.bunifuPanel1.ShowBorders = true;
-            this.bunifuPanel1.Size = new System.Drawing.Size(984, 661);
-            this.bunifuPanel1.TabIndex = 53;
+            this.cboxPilihMenu.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cboxPilihMenu.BackColor = System.Drawing.Color.Transparent;
+            this.cboxPilihMenu.BackgroundColor = System.Drawing.Color.White;
+            this.cboxPilihMenu.BorderColor = System.Drawing.Color.Silver;
+            this.cboxPilihMenu.BorderRadius = 7;
+            this.cboxPilihMenu.Color = System.Drawing.Color.Silver;
+            this.cboxPilihMenu.Direction = Bunifu.UI.WinForms.BunifuDropdown.Directions.Down;
+            this.cboxPilihMenu.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.cboxPilihMenu.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.cboxPilihMenu.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.cboxPilihMenu.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.cboxPilihMenu.DisabledIndicatorColor = System.Drawing.Color.DarkGray;
+            this.cboxPilihMenu.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboxPilihMenu.DropdownBorderThickness = Bunifu.UI.WinForms.BunifuDropdown.BorderThickness.Thin;
+            this.cboxPilihMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxPilihMenu.DropDownTextAlign = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
+            this.cboxPilihMenu.FillDropDown = true;
+            this.cboxPilihMenu.FillIndicator = false;
+            this.cboxPilihMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxPilihMenu.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
+            this.cboxPilihMenu.ForeColor = System.Drawing.Color.Black;
+            this.cboxPilihMenu.FormattingEnabled = true;
+            this.cboxPilihMenu.Icon = null;
+            this.cboxPilihMenu.IndicatorAlignment = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
+            this.cboxPilihMenu.IndicatorColor = System.Drawing.Color.Gray;
+            this.cboxPilihMenu.IndicatorLocation = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
+            this.cboxPilihMenu.ItemBackColor = System.Drawing.Color.White;
+            this.cboxPilihMenu.ItemBorderColor = System.Drawing.Color.White;
+            this.cboxPilihMenu.ItemForeColor = System.Drawing.Color.Black;
+            this.cboxPilihMenu.ItemHeight = 26;
+            this.cboxPilihMenu.ItemHighLightColor = System.Drawing.Color.DodgerBlue;
+            this.cboxPilihMenu.ItemHighLightForeColor = System.Drawing.Color.White;
+            this.cboxPilihMenu.ItemTopMargin = 3;
+            this.cboxPilihMenu.Location = new System.Drawing.Point(318, 117);
+            this.cboxPilihMenu.Name = "cboxPilihMenu";
+            this.cboxPilihMenu.Size = new System.Drawing.Size(220, 32);
+            this.cboxPilihMenu.TabIndex = 53;
+            this.cboxPilihMenu.Text = null;
+            this.cboxPilihMenu.TextAlignment = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
+            this.cboxPilihMenu.TextLeftMargin = 5;
             // 
-            // bunifuLabel8
+            // cboxNamaPelanggan
             // 
-            this.bunifuLabel8.AllowParentOverrides = false;
-            this.bunifuLabel8.AutoEllipsis = false;
-            this.bunifuLabel8.CursorType = null;
-            this.bunifuLabel8.Font = new System.Drawing.Font("Poppins SemiBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuLabel8.ForeColor = System.Drawing.Color.White;
-            this.bunifuLabel8.Location = new System.Drawing.Point(111, 61);
-            this.bunifuLabel8.Name = "bunifuLabel8";
-            this.bunifuLabel8.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel8.Size = new System.Drawing.Size(90, 62);
-            this.bunifuLabel8.TabIndex = 20;
-            this.bunifuLabel8.Text = "Kasir";
-            this.bunifuLabel8.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel8.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel12
-            // 
-            this.bunifuLabel12.AllowParentOverrides = false;
-            this.bunifuLabel12.AutoEllipsis = false;
-            this.bunifuLabel12.CursorType = null;
-            this.bunifuLabel12.Font = new System.Drawing.Font("Poppins SemiBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuLabel12.ForeColor = System.Drawing.Color.White;
-            this.bunifuLabel12.Location = new System.Drawing.Point(96, 365);
-            this.bunifuLabel12.Name = "bunifuLabel12";
-            this.bunifuLabel12.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel12.Size = new System.Drawing.Size(111, 63);
-            this.bunifuLabel12.TabIndex = 20;
-            this.bunifuLabel12.Text = "Kelola";
-            this.bunifuLabel12.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.bunifuLabel12.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel13
-            // 
-            this.bunifuLabel13.AllowParentOverrides = false;
-            this.bunifuLabel13.AutoEllipsis = false;
-            this.bunifuLabel13.CursorType = null;
-            this.bunifuLabel13.Font = new System.Drawing.Font("Poppins SemiBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bunifuLabel13.ForeColor = System.Drawing.Color.White;
-            this.bunifuLabel13.Location = new System.Drawing.Point(67, 407);
-            this.bunifuLabel13.Name = "bunifuLabel13";
-            this.bunifuLabel13.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel13.Size = new System.Drawing.Size(173, 63);
-            this.bunifuLabel13.TabIndex = 20;
-            this.bunifuLabel13.Text = "Transaksi";
-            this.bunifuLabel13.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.bunifuLabel13.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel3
-            // 
-            this.bunifuLabel3.AllowParentOverrides = false;
-            this.bunifuLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuLabel3.AutoEllipsis = false;
-            this.bunifuLabel3.CursorType = null;
-            this.bunifuLabel3.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.bunifuLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.bunifuLabel3.Location = new System.Drawing.Point(314, 90);
-            this.bunifuLabel3.Name = "bunifuLabel3";
-            this.bunifuLabel3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel3.Size = new System.Drawing.Size(70, 23);
-            this.bunifuLabel3.TabIndex = 16;
-            this.bunifuLabel3.Text = "Pilih Menu";
-            this.bunifuLabel3.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel3.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel4
-            // 
-            this.bunifuLabel4.AllowParentOverrides = false;
-            this.bunifuLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuLabel4.AutoEllipsis = false;
-            this.bunifuLabel4.CursorType = null;
-            this.bunifuLabel4.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.bunifuLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.bunifuLabel4.Location = new System.Drawing.Point(314, 147);
-            this.bunifuLabel4.Name = "bunifuLabel4";
-            this.bunifuLabel4.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel4.Size = new System.Drawing.Size(119, 23);
-            this.bunifuLabel4.TabIndex = 16;
-            this.bunifuLabel4.Text = "Nama Pelanggan";
-            this.bunifuLabel4.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel4.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel5
-            // 
-            this.bunifuLabel5.AllowParentOverrides = false;
-            this.bunifuLabel5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuLabel5.AutoEllipsis = false;
-            this.bunifuLabel5.CursorType = null;
-            this.bunifuLabel5.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.bunifuLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.bunifuLabel5.Location = new System.Drawing.Point(576, 205);
-            this.bunifuLabel5.Name = "bunifuLabel5";
-            this.bunifuLabel5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel5.Size = new System.Drawing.Size(78, 23);
-            this.bunifuLabel5.TabIndex = 16;
-            this.bunifuLabel5.Text = "Total Harga";
-            this.bunifuLabel5.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel5.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel7
-            // 
-            this.bunifuLabel7.AllowParentOverrides = false;
-            this.bunifuLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuLabel7.AutoEllipsis = false;
-            this.bunifuLabel7.CursorType = null;
-            this.bunifuLabel7.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.bunifuLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.bunifuLabel7.Location = new System.Drawing.Point(576, 91);
-            this.bunifuLabel7.Name = "bunifuLabel7";
-            this.bunifuLabel7.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel7.Size = new System.Drawing.Size(93, 23);
-            this.bunifuLabel7.TabIndex = 16;
-            this.bunifuLabel7.Text = "Harga Satuan";
-            this.bunifuLabel7.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel7.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // labelTotalKeseluruhan
-            // 
-            this.labelTotalKeseluruhan.AllowParentOverrides = false;
-            this.labelTotalKeseluruhan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotalKeseluruhan.AutoEllipsis = false;
-            this.labelTotalKeseluruhan.CursorType = null;
-            this.labelTotalKeseluruhan.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.labelTotalKeseluruhan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.labelTotalKeseluruhan.Location = new System.Drawing.Point(449, 581);
-            this.labelTotalKeseluruhan.Name = "labelTotalKeseluruhan";
-            this.labelTotalKeseluruhan.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTotalKeseluruhan.Size = new System.Drawing.Size(136, 23);
-            this.labelTotalKeseluruhan.TabIndex = 16;
-            this.labelTotalKeseluruhan.Text = "Total Keseluruhan: ?";
-            this.labelTotalKeseluruhan.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.labelTotalKeseluruhan.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // labelJumlahKembalian
-            // 
-            this.labelJumlahKembalian.AllowParentOverrides = false;
-            this.labelJumlahKembalian.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelJumlahKembalian.AutoEllipsis = false;
-            this.labelJumlahKembalian.CursorType = null;
-            this.labelJumlahKembalian.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.labelJumlahKembalian.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.labelJumlahKembalian.Location = new System.Drawing.Point(449, 610);
-            this.labelJumlahKembalian.Name = "labelJumlahKembalian";
-            this.labelJumlahKembalian.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelJumlahKembalian.Size = new System.Drawing.Size(143, 23);
-            this.labelJumlahKembalian.TabIndex = 16;
-            this.labelJumlahKembalian.Text = "Jumlah Kembalian: ?";
-            this.labelJumlahKembalian.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.labelJumlahKembalian.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel6
-            // 
-            this.bunifuLabel6.AllowParentOverrides = false;
-            this.bunifuLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuLabel6.AutoEllipsis = false;
-            this.bunifuLabel6.CursorType = null;
-            this.bunifuLabel6.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.bunifuLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.bunifuLabel6.Location = new System.Drawing.Point(314, 204);
-            this.bunifuLabel6.Name = "bunifuLabel6";
-            this.bunifuLabel6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel6.Size = new System.Drawing.Size(54, 23);
-            this.bunifuLabel6.TabIndex = 16;
-            this.bunifuLabel6.Text = "Telepon";
-            this.bunifuLabel6.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel6.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel9
-            // 
-            this.bunifuLabel9.AllowParentOverrides = false;
-            this.bunifuLabel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuLabel9.AutoEllipsis = false;
-            this.bunifuLabel9.CursorType = null;
-            this.bunifuLabel9.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.bunifuLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.bunifuLabel9.Location = new System.Drawing.Point(576, 146);
-            this.bunifuLabel9.Name = "bunifuLabel9";
-            this.bunifuLabel9.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel9.Size = new System.Drawing.Size(67, 23);
-            this.bunifuLabel9.TabIndex = 16;
-            this.bunifuLabel9.Text = "Quantitas";
-            this.bunifuLabel9.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel9.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel1
-            // 
-            this.bunifuLabel1.AllowParentOverrides = false;
-            this.bunifuLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuLabel1.AutoEllipsis = false;
-            this.bunifuLabel1.CursorType = null;
-            this.bunifuLabel1.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.bunifuLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.bunifuLabel1.Location = new System.Drawing.Point(314, 12);
-            this.bunifuLabel1.Name = "bunifuLabel1";
-            this.bunifuLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel1.Size = new System.Drawing.Size(127, 23);
-            this.bunifuLabel1.TabIndex = 16;
-            this.bunifuLabel1.Text = "Pages / Dashboard";
-            this.bunifuLabel1.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel1.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // bunifuLabel2
-            // 
-            this.bunifuLabel2.AllowParentOverrides = false;
-            this.bunifuLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.bunifuLabel2.AutoEllipsis = false;
-            this.bunifuLabel2.CursorType = null;
-            this.bunifuLabel2.Font = new System.Drawing.Font("Poppins SemiBold", 24F, System.Drawing.FontStyle.Bold);
-            this.bunifuLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(78)))), ((int)(((byte)(86)))), ((int)(((byte)(132)))));
-            this.bunifuLabel2.Location = new System.Drawing.Point(314, 32);
-            this.bunifuLabel2.Name = "bunifuLabel2";
-            this.bunifuLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel2.Size = new System.Drawing.Size(203, 56);
-            this.bunifuLabel2.TabIndex = 16;
-            this.bunifuLabel2.Text = "KELOLA USER";
-            this.bunifuLabel2.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.bunifuLabel2.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // labelDate
-            // 
-            this.labelDate.AllowParentOverrides = false;
-            this.labelDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelDate.AutoEllipsis = false;
-            this.labelDate.CursorType = null;
-            this.labelDate.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.labelDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.labelDate.Location = new System.Drawing.Point(896, 12);
-            this.labelDate.Name = "labelDate";
-            this.labelDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelDate.Size = new System.Drawing.Size(76, 22);
-            this.labelDate.TabIndex = 26;
-            this.labelDate.Text = "0000/00/00";
-            this.labelDate.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelDate.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // labelKasir
-            // 
-            this.labelKasir.AllowParentOverrides = false;
-            this.labelKasir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelKasir.AutoEllipsis = false;
-            this.labelKasir.CursorType = null;
-            this.labelKasir.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.labelKasir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.labelKasir.Location = new System.Drawing.Point(835, 12);
-            this.labelKasir.Name = "labelKasir";
-            this.labelKasir.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelKasir.Size = new System.Drawing.Size(44, 22);
-            this.labelKasir.TabIndex = 26;
-            this.labelKasir.Text = "Kasir ?";
-            this.labelKasir.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelKasir.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            // 
-            // labelTime
-            // 
-            this.labelTime.AllowParentOverrides = false;
-            this.labelTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTime.AutoEllipsis = false;
-            this.labelTime.CursorType = null;
-            this.labelTime.Font = new System.Drawing.Font("Poppins SemiBold", 10F, System.Drawing.FontStyle.Bold);
-            this.labelTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(93)))), ((int)(((byte)(142)))));
-            this.labelTime.Location = new System.Drawing.Point(918, 32);
-            this.labelTime.Name = "labelTime";
-            this.labelTime.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTime.Size = new System.Drawing.Size(54, 22);
-            this.labelTime.TabIndex = 26;
-            this.labelTime.Text = "00:00:00";
-            this.labelTime.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelTime.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            this.cboxNamaPelanggan.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cboxNamaPelanggan.BackColor = System.Drawing.Color.Transparent;
+            this.cboxNamaPelanggan.BackgroundColor = System.Drawing.Color.White;
+            this.cboxNamaPelanggan.BorderColor = System.Drawing.Color.Silver;
+            this.cboxNamaPelanggan.BorderRadius = 7;
+            this.cboxNamaPelanggan.Color = System.Drawing.Color.Silver;
+            this.cboxNamaPelanggan.Direction = Bunifu.UI.WinForms.BunifuDropdown.Directions.Down;
+            this.cboxNamaPelanggan.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.cboxNamaPelanggan.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.cboxNamaPelanggan.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.cboxNamaPelanggan.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.cboxNamaPelanggan.DisabledIndicatorColor = System.Drawing.Color.DarkGray;
+            this.cboxNamaPelanggan.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboxNamaPelanggan.DropdownBorderThickness = Bunifu.UI.WinForms.BunifuDropdown.BorderThickness.Thin;
+            this.cboxNamaPelanggan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboxNamaPelanggan.DropDownTextAlign = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
+            this.cboxNamaPelanggan.FillDropDown = true;
+            this.cboxNamaPelanggan.FillIndicator = false;
+            this.cboxNamaPelanggan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboxNamaPelanggan.Font = new System.Drawing.Font("Poppins SemiBold", 9F, System.Drawing.FontStyle.Bold);
+            this.cboxNamaPelanggan.ForeColor = System.Drawing.Color.Black;
+            this.cboxNamaPelanggan.FormattingEnabled = true;
+            this.cboxNamaPelanggan.Icon = null;
+            this.cboxNamaPelanggan.IndicatorAlignment = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
+            this.cboxNamaPelanggan.IndicatorColor = System.Drawing.Color.Gray;
+            this.cboxNamaPelanggan.IndicatorLocation = Bunifu.UI.WinForms.BunifuDropdown.Indicator.Right;
+            this.cboxNamaPelanggan.ItemBackColor = System.Drawing.Color.White;
+            this.cboxNamaPelanggan.ItemBorderColor = System.Drawing.Color.White;
+            this.cboxNamaPelanggan.ItemForeColor = System.Drawing.Color.Black;
+            this.cboxNamaPelanggan.ItemHeight = 26;
+            this.cboxNamaPelanggan.ItemHighLightColor = System.Drawing.Color.DodgerBlue;
+            this.cboxNamaPelanggan.ItemHighLightForeColor = System.Drawing.Color.White;
+            this.cboxNamaPelanggan.ItemTopMargin = 3;
+            this.cboxNamaPelanggan.Location = new System.Drawing.Point(318, 174);
+            this.cboxNamaPelanggan.Name = "cboxNamaPelanggan";
+            this.cboxNamaPelanggan.Size = new System.Drawing.Size(220, 32);
+            this.cboxNamaPelanggan.TabIndex = 52;
+            this.cboxNamaPelanggan.Text = null;
+            this.cboxNamaPelanggan.TextAlignment = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
+            this.cboxNamaPelanggan.TextLeftMargin = 5;
             // 
             // FormKasirTransaksi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
-            this.Controls.Add(this.bunifuPanel1);
+            this.Controls.Add(this.labelTime);
+            this.Controls.Add(this.labelKasir);
+            this.Controls.Add(this.labelDate);
+            this.Controls.Add(this.bunifuLabel21);
+            this.Controls.Add(this.bunifuLabel20);
+            this.Controls.Add(this.dataGridViewKeranjang);
+            this.Controls.Add(this.txtTelepon);
+            this.Controls.Add(this.bunifuLabel17);
+            this.Controls.Add(this.txtHargaSatuan);
+            this.Controls.Add(this.bunifuLabel16);
+            this.Controls.Add(this.txtCash);
+            this.Controls.Add(this.bunifuLabel15);
+            this.Controls.Add(this.txtTotalHarga);
+            this.Controls.Add(this.labelJumlahKembalian);
+            this.Controls.Add(this.txtQuantitas);
+            this.Controls.Add(this.labelTotalKeseluruhan);
+            this.Controls.Add(this.btnBayar);
+            this.Controls.Add(this.bunifuLabel14);
+            this.Controls.Add(this.btnSimpan);
+            this.Controls.Add(this.bunifuLabel11);
+            this.Controls.Add(this.btnPrint);
+            this.Controls.Add(this.bunifuLabel10);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.btnTambah);
+            this.Controls.Add(this.cboxPilihMenu);
+            this.Controls.Add(this.cboxNamaPelanggan);
+            this.Controls.Add(this.bunifuPanel2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormKasirTransaksi";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form Transaksi";
+            this.Text = "Transaksi Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTransaksi_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.bunifuPanel2.ResumeLayout(false);
             this.bunifuPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewKeranjang)).EndInit();
-            this.bunifuPanel1.ResumeLayout(false);
-            this.bunifuPanel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private Bunifu.UI.WinForms.BunifuPanel bunifuPanel2;
-        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnLogout;
+        private Bunifu.UI.WinForms.BunifuSnackbar snackBar;
         private Bunifu.UI.WinForms.BunifuLabel bunifuLabel13;
         private Bunifu.UI.WinForms.BunifuLabel bunifuLabel12;
         private Bunifu.UI.WinForms.BunifuLabel bunifuLabel8;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Bunifu.UI.WinForms.BunifuDataGridView dataGridViewKeranjang;
-        private Bunifu.UI.WinForms.BunifuTextBox txtTelepon;
-        private Bunifu.UI.WinForms.BunifuTextBox txtHargaSatuan;
-        private Bunifu.UI.WinForms.BunifuTextBox txtCash;
-        private Bunifu.UI.WinForms.BunifuTextBox txtTotalHarga;
-        private Bunifu.UI.WinForms.BunifuTextBox txtQuantitas;
-        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnBayar;
-        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnPrint;
-        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnReset;
-        private Bunifu.UI.WinForms.BunifuDropdown cboxPilihMenu;
-        private Bunifu.UI.WinForms.BunifuDropdown cboxNamaPelanggan;
-        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnTambah;
-        private Bunifu.UI.WinForms.BunifuPanel bunifuPanel1;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel3;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel4;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel5;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel7;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel6;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel9;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel1;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel2;
+        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnLogout;
+        private Bunifu.UI.WinForms.BunifuPanel bunifuPanel2;
         private Bunifu.UI.WinForms.BunifuLabel labelTime;
         private Bunifu.UI.WinForms.BunifuLabel labelKasir;
         private Bunifu.UI.WinForms.BunifuLabel labelDate;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel2;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel1;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel9;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel6;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel21;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel20;
+        private Bunifu.UI.WinForms.BunifuDataGridView dataGridViewKeranjang;
+        private Bunifu.UI.WinForms.BunifuTextBox txtTelepon;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel17;
+        private Bunifu.UI.WinForms.BunifuTextBox txtHargaSatuan;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel16;
+        private Bunifu.UI.WinForms.BunifuTextBox txtCash;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel15;
+        private Bunifu.UI.WinForms.BunifuTextBox txtTotalHarga;
         private Bunifu.UI.WinForms.BunifuLabel labelJumlahKembalian;
+        private Bunifu.UI.WinForms.BunifuTextBox txtQuantitas;
         private Bunifu.UI.WinForms.BunifuLabel labelTotalKeseluruhan;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel7;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel5;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel4;
-        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel3;
+        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnBayar;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel14;
+        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnSimpan;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel11;
+        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnPrint;
+        private Bunifu.UI.WinForms.BunifuLabel bunifuLabel10;
+        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnReset;
+        private Bunifu.UI.WinForms.BunifuButton.BunifuButton btnTambah;
+        private Bunifu.UI.WinForms.BunifuDropdown cboxPilihMenu;
+        private Bunifu.UI.WinForms.BunifuDropdown cboxNamaPelanggan;
     }
 }
