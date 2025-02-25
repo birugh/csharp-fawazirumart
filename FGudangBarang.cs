@@ -72,7 +72,7 @@ namespace csharp_lksmart
                 string.IsNullOrWhiteSpace(txtJumlahBarang.Text) ||
                 string.IsNullOrWhiteSpace(txtSatuan.Text) ||
                 string.IsNullOrWhiteSpace(txtHargaSatuan.Text) ||
-                dateExpiredDate.Value == null)
+                dateExpired.Value == null)
             {
                 MessageBox.Show("All fields must be filled out.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
@@ -98,14 +98,14 @@ namespace csharp_lksmart
             txtJumlahBarang.Text = "";
             txtSatuan.Text = "";
             txtHargaSatuan.Text = "";
-            txtSearch.Text = "Search by Id";
-            dateExpiredDate.Value = DateTime.Now;
+            txtCari.Text = "Search by Id";
+            dateExpired.Value = DateTime.Now;
         }
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-            else if (!int.TryParse(txtSearch.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
+            else if (!int.TryParse(txtCari.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
             {
                 MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -120,7 +120,7 @@ namespace csharp_lksmart
                     cmd.Parameters.AddWithValue("@nama_barang", txtNamaBarang.Text);
                     cmd.Parameters.AddWithValue("@jumlah_barang", txtJumlahBarang.Text);
                     cmd.Parameters.AddWithValue("@satuan", txtSatuan.Text);
-                    cmd.Parameters.AddWithValue("@expired_date", dateExpiredDate.Value);
+                    cmd.Parameters.AddWithValue("@expired_date", dateExpired.Value);
                     cmd.Parameters.AddWithValue("@harga_satuan", txtHargaSatuan.Text);
 
                     conn.Open();
@@ -139,12 +139,12 @@ namespace csharp_lksmart
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtSearch.Text) || txtSearch.Text == "Search by Id")
+            if (string.IsNullOrWhiteSpace(txtCari.Text) || txtCari.Text == "Search by Id")
             {
                 MessageBox.Show("Please fill out all fields and provide a valid Search Id.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!int.TryParse(txtSearch.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
+            else if (!int.TryParse(txtCari.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
             {
                 MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -159,12 +159,12 @@ namespace csharp_lksmart
                         {
                             query = "UPDATE tbl_barang SET kode_barang=@kode_barang, nama_barang=@nama_barang, jumlah_barang=@jumlah_barang, satuan=@satuan, expired_date=@expired_date, harga_satuan=@harga_satuan WHERE id_barang=@id_barang";
                             cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@id_barang", txtSearch.Text);
+                            cmd.Parameters.AddWithValue("@id_barang", txtCari.Text);
                             cmd.Parameters.AddWithValue("@kode_barang", txtKodeBarang.Text);
                             cmd.Parameters.AddWithValue("@nama_barang", txtNamaBarang.Text);
                             cmd.Parameters.AddWithValue("@jumlah_barang", txtJumlahBarang.Text);
                             cmd.Parameters.AddWithValue("@satuan", txtSatuan.Text);
-                            cmd.Parameters.AddWithValue("@expired_date", dateExpiredDate.Value);
+                            cmd.Parameters.AddWithValue("@expired_date", dateExpired.Value);
                             cmd.Parameters.AddWithValue("@harga_satuan", txtHargaSatuan.Text);
 
                             conn.Open();
@@ -185,12 +185,12 @@ namespace csharp_lksmart
 
         private void btnHapus_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtSearch.Text) || txtSearch.Text == "Search by Id")
+            if (string.IsNullOrWhiteSpace(txtCari.Text) || txtCari.Text == "Search by Id")
             {
                 MessageBox.Show("Please provide a valid Kode Barang.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!int.TryParse(txtSearch.Text, out _))
+            else if (!int.TryParse(txtCari.Text, out _))
             {
                 MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -205,7 +205,7 @@ namespace csharp_lksmart
                         {
                             query = "DELETE FROM tbl_barang WHERE id_barang=@id_barang";
                             cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@id_barang", txtSearch.Text);
+                            cmd.Parameters.AddWithValue("@id_barang", txtCari.Text);
 
                             conn.Open();
                             cmd.ExecuteNonQuery();
@@ -257,26 +257,26 @@ namespace csharp_lksmart
 
         private void btnCari_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtSearch.Text))
+            if (string.IsNullOrWhiteSpace(txtCari.Text))
             {
                 MessageBox.Show("Please provide a valid Kode Barang.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            else if (!int.TryParse(txtSearch.Text, out _))
+            else if (!int.TryParse(txtCari.Text, out _))
             {
                 MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
             {
-                dv.RowFilter = $"id_barang   = {txtSearch.Text}";
+                dv.RowFilter = $"id_barang   = {txtCari.Text}";
                 try
                 {
                     using (conn = new SqlConnection(connString))
                     {
                         query = "SELECT * FROM tbl_barang WHERE id_barang=@id_barang";
                         cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@id_barang", txtSearch.Text);
+                        cmd.Parameters.AddWithValue("@id_barang", txtCari.Text);
 
                         conn.Open();
                         dr = cmd.ExecuteReader();
@@ -285,7 +285,7 @@ namespace csharp_lksmart
                         {
                             txtKodeBarang.Text = dr["kode_barang"].ToString();
                             txtNamaBarang.Text = dr["nama_barang"].ToString();
-                            dateExpiredDate.Value = Convert.ToDateTime(dr["expired_date"]);
+                            dateExpired.Value = Convert.ToDateTime(dr["expired_date"]);
                             txtJumlahBarang.Text = dr["jumlah_barang"].ToString();
                             txtSatuan.Text = dr["satuan"].ToString();
                             txtHargaSatuan.Text = dr["harga_satuan"].ToString();
@@ -303,17 +303,13 @@ namespace csharp_lksmart
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ResetInput();
-        }
         private void txtSearch_Enter(object sender, EventArgs e)
         {
-            txtSearch.Text = (txtSearch.Text == "Search by Id") ? "" : txtSearch.Text;
+
         }
         private void txtSearch_Leave(object sender, EventArgs e)
         {
-            txtSearch.Text = (txtSearch.Text == "") ? "Search by Id" : txtSearch.Text;
+
         }
 
         private void FormGudang_FormClosing(object sender, FormClosingEventArgs e)
@@ -342,10 +338,15 @@ namespace csharp_lksmart
                 txtNamaBarang.Text = row.Cells["nama_barang"].Value.ToString();
                 txtJumlahBarang.Text = row.Cells["jumlah_barang"].Value.ToString();
                 txtSatuan.Text = row.Cells["satuan"].Value.ToString();
-                dateExpiredDate.Value = Convert.ToDateTime(row.Cells["expired_date"].Value);
+                dateExpired.Value = Convert.ToDateTime(row.Cells["expired_date"].Value);
                 txtHargaSatuan.Text = row.Cells["harga_satuan"].Value.ToString();
-                txtSearch.Text = row.Cells["id_barang"].Value.ToString();
+                txtCari.Text = row.Cells["id_barang"].Value.ToString();
             }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ResetInput();
         }
     }
 }

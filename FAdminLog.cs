@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace csharp_lksmart
 {
-    public partial class FormAdminLog : Form
+    public partial class FormAdminLogActivity : Form
     {
         private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
         private static SqlDataAdapter adp;
@@ -21,7 +21,7 @@ namespace csharp_lksmart
         private static DataTable dt;
         private static string query;
         private Timer timer;
-        public FormAdminLog()
+        public FormAdminLogActivity()
         {
             InitializeComponent();
             LoadData();
@@ -64,7 +64,7 @@ namespace csharp_lksmart
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
             ResetInput();
-            FormAdminUser kelolaUserForm = new FormAdminUser();
+            FormAdminKelolaUser kelolaUserForm = new FormAdminKelolaUser();
             kelolaUserForm.Show();
             this.Hide();
         }
@@ -72,7 +72,7 @@ namespace csharp_lksmart
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
             ResetInput();
-            FAdminLaporan laporanForm = new FAdminLaporan();
+            FormAdminLaporan laporanForm = new FormAdminLaporan();
             laporanForm.Show();
             this.Hide();
         }
@@ -156,6 +156,18 @@ namespace csharp_lksmart
         private void btnReset_Click(object sender, EventArgs e)
         {
             ResetInput();
+        }
+
+        private void FormAdminLogActivity_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to close?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

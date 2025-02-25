@@ -1,17 +1,13 @@
 ﻿using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Bunifu.UI.WinForms;
 
 namespace csharp_lksmart
 {
@@ -39,18 +35,6 @@ namespace csharp_lksmart
             cboxNamaPelanggan.SelectedIndex = -1;
             LoadKasir();
         }
-        private void LoadKasir()
-        {
-            if (FormLogin.id_user == null || FormLogin.id_user == "")
-            {
-                labelKasir.Text = "Kasir ?";
-            }
-            else
-            {
-                labelKasir.Text = "Kasir " + FormLogin.id_user;
-            }
-        }
-
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(txtQuantitas.Text) ||
@@ -78,7 +62,7 @@ namespace csharp_lksmart
                     cboxPilihMenu.ValueMember = "id_barang";
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return;
             }
@@ -96,6 +80,17 @@ namespace csharp_lksmart
                 cboxNamaPelanggan.ValueMember = "id_pelanggan";
             }
         }
+        private void LoadKasir()
+        {
+            if (FormLogin.id_user == null || FormLogin.id_user == "")
+            {
+                labelKasir.Text = "Kasir ?";
+            }
+            else
+            {
+                labelKasir.Text = "Kasir " + FormLogin.id_user;
+            }
+        }
         private void InitializeKeranjang()
         {
             dtKeranjang = new DataTable();
@@ -107,7 +102,6 @@ namespace csharp_lksmart
             dtKeranjang.Columns.Add("Total Harga");
             dataGridViewKeranjang.DataSource = dtKeranjang;
         }
-
         private void GenerateNoTransaksi()
         {
             try
@@ -134,7 +128,7 @@ namespace csharp_lksmart
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return;
             }
@@ -142,17 +136,22 @@ namespace csharp_lksmart
         private void ResetInput()
         {
             cboxPilihMenu.SelectedIndex = -1;
-
             txtHargaSatuan.Clear();
             txtQuantitas.Clear();
             txtTotalHarga.Clear();
-            txtUang.Clear();
-            labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp0";
-            labelKembalian.Text = "Jumlah Kembalian: Rp0";
+            txtCash.Clear();
+            labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp?";
+            labelJumlahKembalian.Text = "Jumlah Kembalian: Rp?";
         }
         private void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
+            if (!int.TryParse(txtQuantitas.Text, out _))
+            {
+                MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtQuantitas.Clear();
+                return;
+            }
             if (cboxPilihMenu.SelectedValue != null && int.TryParse(txtQuantitas.Text, out int qty) && decimal.TryParse(txtTotalHarga.Text, out decimal totalHarga))
             {
                 DataRow row = dtKeranjang.NewRow();
@@ -164,20 +163,24 @@ namespace csharp_lksmart
                 row["Total Harga"] = txtTotalHarga.Text;
 
                 dtKeranjang.Rows.Add(row);
-                MessageBox.Show("Item successfully added to cart", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                snackBar.Show(this, "Barang berhasil di tambahkan!",
+                Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+                3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+                cboxNamaPelanggan.Enabled = false;
                 ResetInput();
                 UpdateTotalKeseluruhan();
             }
         }
-
         private void btnReset_Click(object sender, EventArgs e)
         {
             ResetInput();
+            btnBayar.Enabled = true;
+            btnSimpan.Enabled = false;
             dtKeranjang.Clear();
             cboxNamaPelanggan.SelectedIndex = -1;
+            cboxNamaPelanggan.Enabled = true;
             txtTelepon.Clear();
         }
-
         private void btnLogout_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -197,7 +200,7 @@ namespace csharp_lksmart
                         conn.Close();
                     }
                 }
-                catch (SqlException ex)
+                catch
                 {
                     return;
                 }
@@ -208,8 +211,6 @@ namespace csharp_lksmart
                 this.Hide();
             }
         }
-
-
         private void btnPrint_Click(object sender, EventArgs e)
         {
             string defaultFileName = "ExportedDataKeranjang.pdf";
@@ -217,13 +218,15 @@ namespace csharp_lksmart
             if (dataGridViewKeranjang.Rows.Count > 0)
             {
                 ExportGridToPdf(dataGridViewKeranjang, defaultFileName);
+                snackBar.Show(this, "Data berhasil di print!",
+                Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+                3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
             }
             else
             {
                 MessageBox.Show("Please input something to cart!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         private void btnSimpan_Click(object sender, EventArgs e)
         {
             if (dataGridViewKeranjang.Rows.Count > 0)
@@ -250,11 +253,11 @@ namespace csharp_lksmart
                 }
                 catch
                 {
-                    throw;
+                    return;
                 }
-
-                MessageBox.Show("Transaction saved successfully!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                snackBar.Show(this, "Data berhasil di simpan!",
+                Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+                3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
                 btnReset_Click(sender, e);
                 GenerateNoTransaksi();
             }
@@ -263,7 +266,6 @@ namespace csharp_lksmart
                 MessageBox.Show("Please input something to cart!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
         private void cboxPilihMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboxPilihMenu.SelectedItem != null)
@@ -290,7 +292,6 @@ namespace csharp_lksmart
                 txtQuantitas.Enabled = false;
             }
         }
-
         private void txtQuantitas_TextChanged(object sender, EventArgs e)
         {
             if (int.TryParse(txtQuantitas.Text, out int qty) && decimal.TryParse(txtHargaSatuan.Text, out decimal hargaSatuan))
@@ -298,7 +299,6 @@ namespace csharp_lksmart
                 txtTotalHarga.Text = (qty * hargaSatuan).ToString();
             }
         }
-
         private void cboxNamaPelanggan_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboxNamaPelanggan.SelectedValue != null && cboxNamaPelanggan.SelectedValue is int)
@@ -319,7 +319,6 @@ namespace csharp_lksmart
                 }
             }
         }
-
         private void FormTransaksi_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -333,13 +332,17 @@ namespace csharp_lksmart
         }
         private void btnBayar_Click(object sender, EventArgs e)
         {
-            if (decimal.TryParse(txtUang.Text, out uang))
+            if (decimal.TryParse(txtCash.Text, out uang))
             {
                 if (uang >= totalKeseluruhan)
                 {
                     decimal kembalian = uang - totalKeseluruhan;
-                    labelKembalian.Text = "Jumlah Kembalian: Rp" + kembalian.ToString();
-                    MessageBox.Show("Pembayaran berhasil!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    labelJumlahKembalian.Text = "Jumlah Kembalian: Rp" + kembalian.ToString();
+                    snackBar.Show(this, "Pembayaran berhasil!",
+                    Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+                    3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+                    btnBayar.Enabled = false;
+                    btnSimpan.Enabled = true;
                     if (MessageBox.Show("Do you want to save it?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         btnSimpan_Click(sender, e);
@@ -347,7 +350,7 @@ namespace csharp_lksmart
                 }
                 else
                 {
-                    MessageBox.Show("Uang tidak cukup! \nUang anda: Rp" + uang.ToString() + "\nTotal Keseluruhan: Rp" + totalKeseluruhan.ToString());
+                    MessageBox.Show("Uang tidak cukup! \nUang anda: Rp" + uang.ToString() + "\nTotal Keseluruhan: Rp" + totalKeseluruhan.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
@@ -360,7 +363,6 @@ namespace csharp_lksmart
             totalKeseluruhan = dtKeranjang.AsEnumerable().Sum(r => Convert.ToDecimal(r["Total Harga"]));
             labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp"+totalKeseluruhan.ToString();
         }
-
         public void ExportGridToPdf(DataGridView dgv, string filename)
         {
             if (dgv == null || dgv.Rows.Count == 0)
@@ -387,12 +389,11 @@ namespace csharp_lksmart
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 return;
             }
         }
-
         private PdfPTable CreatePdfTable(DataGridView dgv, iTextSharp.text.Font pdfFont)
         {
             PdfPTable pdfTable = new PdfPTable(dgv.Columns.Count)
@@ -425,7 +426,6 @@ namespace csharp_lksmart
 
             return pdfTable;
         }
-
         private void SavePdfToFile(string filePath, PdfPTable pdfTable)
         {
             using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
@@ -439,5 +439,24 @@ namespace csharp_lksmart
             }
         }
 
+        private void bunifuLabel17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCash_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
