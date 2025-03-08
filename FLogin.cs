@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,11 +18,7 @@ namespace csharp_lksmart
 {
     public partial class FormLogin : Form
     {
-        private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
-        private static SqlConnection conn;
-        private static SqlDataAdapter adp;
-        private static SqlCommand cmd;
-        private static DataTable dt;
+
         private static string query;
         public static string id_user;
 
@@ -55,21 +53,24 @@ namespace csharp_lksmart
                 e.Cancel = true;
             }
         }
-        private void btnLogin_Click_1(object sender, EventArgs e)
+        private async void btnLogin_Click_1(object sender, EventArgs e)
         {
+            var connString = GlobalConfig.getConnection();
+            var conn = new SqlConnection(connString);
+            var db = new DBHelpers();
+            var p = new DynamicParameters();
+
             if (!ValidateInput()) return;
+            if ()
+            p.Add("@username", txtUsername.Text, DbType.String, ParameterDirection.Input);
+            p.Add("@password", txtPassword.Text, DbType.String, ParameterDirection.Input);
+            var res = await db.ToSingleModel<MUser>(connString, "usp_auth_m_user", p);
+            
             try
             {
-                using (conn = new SqlConnection(connString))
+                using (conn = new SqlConnection(FormLogin.connString))
                 {
-                    query = "SELECT * FROM tbl_user WHERE username=@username AND password=@password";
-                    cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@username", txtUsername.Text);
-                    cmd.Parameters.AddWithValue("@password", txtPassword.Text);
-
-                    adp = new SqlDataAdapter(cmd);
-                    dt = new DataTable();
-                    adp.Fill(dt);
+                    
 
                     if (dt.Rows.Count > 0)
                     {

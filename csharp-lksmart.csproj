@@ -108,6 +108,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBHelpers.cs" />
     <Compile Include="FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +145,9 @@
     <Compile Include="FAdminLaporan.Designer.cs">
       <DependentUpon>FAdminLaporan.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalConfig.cs" />
+    <Compile Include="MLog.cs" />
+    <Compile Include="MUser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FLogin.resx">
