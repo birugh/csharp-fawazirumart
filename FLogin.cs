@@ -61,63 +61,44 @@ namespace csharp_lksmart
             var p = new DynamicParameters();
 
             if (!ValidateInput()) return;
-            if ()
-            p.Add("@username", txtUsername.Text, DbType.String, ParameterDirection.Input);
-            p.Add("@password", txtPassword.Text, DbType.String, ParameterDirection.Input);
-            var res = await db.ToSingleModel<MUser>(connString, "usp_auth_m_user", p);
-            
             try
             {
-                using (conn = new SqlConnection(FormLogin.connString))
+                if (conn.State == ConnectionState.Closed) conn.Open();
+                p.Add("@username", txtUsername.Text, DbType.String, ParameterDirection.Input);
+                p.Add("@password", txtPassword.Text, DbType.String, ParameterDirection.Input);
+                var res = await db.ToSingleModel<MUser>(connString, "usp_auth_m_user", p);
+                if (res != null && !string.IsNullOrEmpty(res.username))
                 {
-                    
-
-                    if (dt.Rows.Count > 0)
+                    MessageBox.Show("Login successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    switch (res.tipe_user.ToLower())
                     {
-                        id_user = dt.Rows[0]["id_user"].ToString();
-                        string userType = dt.Rows[0]["tipe_user"].ToString();
-
-                        MessageBox.Show("Login successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        switch (userType)
-                        {
-                            case "Admin":
-                                FormAdminKelolaUser adminForm = new FormAdminKelolaUser();
-                                adminForm.Show();
-                                break;
-                            case "Gudang":
-                                FormGudangBarang gudangForm = new FormGudangBarang();
-                                gudangForm.Show();
-                                break;
-                            case "Kasir":
-                                FormKasirTransaksi transaksiForm = new FormKasirTransaksi();
-                                transaksiForm.Show();
-                                break;
-                            default:
-                                MessageBox.Show("Unknown user type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                break;
-                        }
-
-                        conn.Open();
-                        query = "INSERT INTO tbl_log VALUES (@waktu, @aktivitas, @id_user)";
-                        cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@waktu", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@aktivitas", "Login");
-                        cmd.Parameters.AddWithValue("@id_user", FormLogin.id_user);
-                        cmd.ExecuteNonQuery();
-                        ResetInput();
-                        this.Hide();
+                        case "admin":
+                            FormAdminKelolaUser formAdmin = new FormAdminKelolaUser();
+                            formAdmin.Show();
+                            break;
+                        case "gudang":
+                            FormGudangBarang formGudang = new FormGudangBarang();
+                            formGudang.Show();
+                            break;
+                        case "kasir":
+                            FormKasirTransaksi formKasir = new FormKasirTransaksi();
+                            formKasir.Show();
+                            break;
                     }
-                    else
-                    {
-                        MessageBox.Show("Username or Password is incorrect.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        ResetInput();
-                    }
+
+                    p = new DynamicParameters();
+                    p.Add("@waktu", DateTime.Now, DbType.DateTime, ParameterDirection.Input);
+                    p.Add("@aktivitas", "Login", DbType.String, ParameterDirection.Input);
+                    p.Add("@id_user", FormLogin.id_user, DbType.String, ParameterDirection.Input);
+                    var affected = await db.ExecuteAsyncSP(connString, "usp_insert_m_log", p);
+                    this.Hide();
+                    conn.Close();
                 }
             }
-            catch
+            catch (Exception)
             {
-                return;
+
+                throw;
             }
         }
 
