@@ -16,10 +16,7 @@ namespace csharp_lksmart
             var conn = new SqlConnection(connString);
             try
             {
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
+                if (conn.State == ConnectionState.Closed) conn.Open();
                 var a = await conn.ExecuteAsync(sql, p, null, null, CommandType.StoredProcedure);
                 return a;
             }
@@ -30,10 +27,7 @@ namespace csharp_lksmart
             }
             finally
             {
-                if (conn.State == ConnectionState.Open)
-                {
-                    conn.Close();
-                }
+                if (conn.State == ConnectionState.Open) conn.Close();
                 conn.Dispose();
             }
         }
@@ -42,10 +36,7 @@ namespace csharp_lksmart
             var conn = new SqlConnection(connString);
             try
             {
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
+                if (conn.State == ConnectionState.Closed) conn.Open();
                 var a = await conn.ExecuteAsync(sql, null, null, null, CommandType.Text);
                 return a;
             }
@@ -56,10 +47,7 @@ namespace csharp_lksmart
             }
             finally
             {
-                if (conn.State == ConnectionState.Open)
-                {
-                    conn.Close();
-                }
+                if (conn.State == ConnectionState.Open) conn.Close();
                 conn.Dispose();
             }
         }
@@ -68,11 +56,8 @@ namespace csharp_lksmart
             var conn = new SqlConnection(connString);
             try
             {
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-                var a = await conn.QueryFirstAsync(sql, p, null, null, CommandType.StoredProcedure);
+                if (conn.State == ConnectionState.Closed) conn.Open();
+                var a = await conn.QueryFirstAsync<T>(sql, p, null, null, CommandType.StoredProcedure);
                 return a;
             }
             catch (Exception)
@@ -82,10 +67,7 @@ namespace csharp_lksmart
             }
             finally
             {
-                if (conn.State == ConnectionState.Open)
-                {
-                    conn.Close();
-                }
+                if (conn.State == ConnectionState.Open) conn.Close();
                 conn.Dispose();
             }
         }
@@ -94,10 +76,7 @@ namespace csharp_lksmart
             var conn = new SqlConnection(connString);
             try
             {
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
+                if (conn.State == ConnectionState.Closed) conn.Open();
                 var a = await conn.QueryAsync<T>(sql, p, null, null, CommandType.StoredProcedure);
                 return a;
             }
@@ -108,13 +87,9 @@ namespace csharp_lksmart
             }
             finally
             {
-                if (conn.State == ConnectionState.Open)
-                {
-                    conn.Close();
-                }
+                if (conn.State == ConnectionState.Open) conn.Close();
                 conn.Dispose();
             }
         }
-
     }
 }
