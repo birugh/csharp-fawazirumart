@@ -117,64 +117,67 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DBHelpers.cs" />
-    <Compile Include="FLogin.cs">
+    <Compile Include="Helpers\DBHelpers.cs" />
+    <Compile Include="Forms\FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FLogin.Designer.cs">
+    <Compile Include="Forms\FLogin.Designer.cs">
       <DependentUpon>FLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="FAdminLog.cs">
+    <Compile Include="Forms\Admin\FAdminLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FAdminLog.Designer.cs">
+    <Compile Include="Forms\Admin\FAdminLog.Designer.cs">
       <DependentUpon>FAdminLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="FAdminUsers.cs">
+    <Compile Include="Forms\Admin\FAdminUsers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FAdminUsers.Designer.cs">
+    <Compile Include="Forms\Admin\FAdminUsers.Designer.cs">
       <DependentUpon>FAdminUsers.cs</DependentUpon>
     </Compile>
-    <Compile Include="FGudangBarang.cs">
+    <Compile Include="Forms\Gudang\FGudangBarang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FGudangBarang.Designer.cs">
+    <Compile Include="Forms\Gudang\FGudangBarang.Designer.cs">
       <DependentUpon>FGudangBarang.cs</DependentUpon>
     </Compile>
-    <Compile Include="FKasirTransaksi.cs">
+    <Compile Include="Forms\Kasir\FKasirTransaksi.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FKasirTransaksi.Designer.cs">
+    <Compile Include="Forms\Kasir\FKasirTransaksi.Designer.cs">
       <DependentUpon>FKasirTransaksi.cs</DependentUpon>
     </Compile>
-    <Compile Include="FAdminLaporan.cs">
+    <Compile Include="Forms\Admin\FAdminLaporan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FAdminLaporan.Designer.cs">
+    <Compile Include="Forms\Admin\FAdminLaporan.Designer.cs">
       <DependentUpon>FAdminLaporan.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalConfig.cs" />
-    <Compile Include="MLog.cs" />
-    <Compile Include="MUser.cs" />
+    <Compile Include="Helpers\GlobalConfig.cs" />
+    <Compile Include="Models\MBarang.cs" />
+    <Compile Include="Models\MLog.cs" />
+    <Compile Include="Models\MPelanggan.cs" />
+    <Compile Include="Models\MUser.cs" />
+    <Compile Include="Models\MTransaksi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FLogin.resx">
+    <EmbeddedResource Include="Forms\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FAdminLog.resx">
+    <EmbeddedResource Include="Forms\Admin\FAdminLog.resx">
       <DependentUpon>FAdminLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FAdminUsers.resx">
+    <EmbeddedResource Include="Forms\Admin\FAdminUsers.resx">
       <DependentUpon>FAdminUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FGudangBarang.resx">
+    <EmbeddedResource Include="Forms\Gudang\FGudangBarang.resx">
       <DependentUpon>FGudangBarang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FKasirTransaksi.resx">
+    <EmbeddedResource Include="Forms\Kasir\FKasirTransaksi.resx">
       <DependentUpon>FKasirTransaksi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FAdminLaporan.resx">
+    <EmbeddedResource Include="Forms\Admin\FAdminLaporan.resx">
       <DependentUpon>FAdminLaporan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -203,13 +206,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Logo.png" />
+    <None Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\icon\Eye Outline.png" />
+    <None Include="Resources\icon\Eye Outline.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\icon\Eye Disable Outline.png" />
+    <None Include="Resources\icon\Eye Disable Outline.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
