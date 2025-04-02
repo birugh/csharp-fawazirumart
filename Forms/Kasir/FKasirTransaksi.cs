@@ -50,7 +50,7 @@ namespace csharp_lksmart
 
         private async void LoadMenu()
         {
-            var connString = GlobalConfig.getConn();
+            var connString = GlobalConfig.GetConn();
             var db = new DBHelpers();
             var barang = await db.ToModelSP<MBarang>(connString, "usp_generate_no_transaksi_m_transaksi");
             cboxPilihMenu.DataSource = barang.ToList();
@@ -84,7 +84,7 @@ namespace csharp_lksmart
 
         private async Task<string> GenerateNoTransaksi()
         {
-            var connString = GlobalConfig.getConn();
+            var connString = GlobalConfig.GetConn();
             var db = new DBHelpers();
             return await db.ToSingleModelSP<string>(connString, "usp_generate_no_transaksi_m_transaksi", null);
         }
@@ -147,7 +147,7 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("@waktu", DateTime.Now, DbType.DateTime, ParameterDirection.Input);
             p.Add("@aktivitas", "Logout", DbType.String, ParameterDirection.Input);
@@ -187,7 +187,7 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
 
             p.Add("no_transaksi", currentNoTransaksi, DbType.String, ParameterDirection.Input);
@@ -383,7 +383,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            var connString = GlobalConfig.getConn();
+            var connString = GlobalConfig.GetConn();
             var db = new DBHelpers();
             var p = new DynamicParameters();
             p.Add("telepon", txtTelepon.Text + "%", DbType.String, ParameterDirection.Input);
