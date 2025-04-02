@@ -183,19 +183,19 @@
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -213,6 +213,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon\Eye Disable Outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo-lksmart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-administrator.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-cashier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-gudang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon-tambah.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\icon-eye-disable-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\icon-eye-outline.png.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

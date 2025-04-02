@@ -63,9 +63,9 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap administrator_1 {
+        internal static System.Drawing.Bitmap icon_administrator {
             get {
-                object obj = ResourceManager.GetObject("administrator 1", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-administrator", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap cashier_1 {
+        internal static System.Drawing.Bitmap icon_calendar {
             get {
-                object obj = ResourceManager.GetObject("cashier 1", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-calendar", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Delete {
+        internal static System.Drawing.Bitmap icon_cashier {
             get {
-                object obj = ResourceManager.GetObject("Delete", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-cashier", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Edit {
+        internal static System.Drawing.Bitmap icon_delete {
             get {
-                object obj = ResourceManager.GetObject("Edit", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Eye_Disable_Outline {
+        internal static System.Drawing.Bitmap icon_edit {
             get {
-                object obj = ResourceManager.GetObject("Eye Disable Outline", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-edit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Eye_Outline {
+        internal static System.Drawing.Bitmap icon_eye_disable_outline {
             get {
-                object obj = ResourceManager.GetObject("Eye Outline", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-eye-disable-outline", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gudang {
+        internal static System.Drawing.Bitmap icon_eye_outline_png {
             get {
-                object obj = ResourceManager.GetObject("Gudang", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-eye-outline.png", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Logo {
+        internal static System.Drawing.Bitmap icon_gudang {
             get {
-                object obj = ResourceManager.GetObject("Logo", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-gudang", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,19 @@ namespace csharp_lksmart.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tambah1 {
+        internal static System.Drawing.Bitmap icon_tambah {
             get {
-                object obj = ResourceManager.GetObject("Tambah1", resourceCulture);
+                object obj = ResourceManager.GetObject("icon-tambah", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_lksmart {
+            get {
+                object obj = ResourceManager.GetObject("logo-lksmart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
