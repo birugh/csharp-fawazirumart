@@ -7,8 +7,8 @@ namespace csharp_lksmart
 {
     public partial class FormLogin : Form
     {
-        public static string userId;
-        public static string userName;
+        public static string userId = "ID tidak dikenali";
+        public static string userName = "Username tidak dikenali";
 
         public FormLogin()
         {
@@ -31,12 +31,14 @@ namespace csharp_lksmart
             txtUsername.Clear();
             txtPassword.Clear();
             txtUsername.Focus();
+            userId = "ID tidak dikenali";
+            userName = "Unknown Username";
         }
 
-        private async void btnLogin_Click_1(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-            var connString = GlobalConfig.getConn();
+            var connString = GlobalConfig.GetConn();
             var db = new DBHelpers();
             var p = new DynamicParameters();
 
@@ -44,9 +46,10 @@ namespace csharp_lksmart
             p.Add("@password", txtPassword.Text, DbType.String, ParameterDirection.Input);
             var res = await db.ToSingleModelSP<MUser>(connString, "usp_auth_m_user", p);
 
-            if (res == null && string.IsNullOrEmpty(res.username))
+            if (res == null || string.IsNullOrWhiteSpace(res.username))
             {
-                MessageBox.Show("Username atau password salah!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Username atau password salah!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtUsername.Focus();
                 return;
             }
 
@@ -86,7 +89,7 @@ namespace csharp_lksmart
         {
             if (MessageBox.Show("Apakah anda yakin ingin keluar?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Environment.Exit(0);
+                Environment.Exit(1);
             }
             else
             {
@@ -98,12 +101,12 @@ namespace csharp_lksmart
         {
             if (txtPassword.PasswordChar == '*')
             {
-                txtPassword.IconRight = csharp_lksmart.Properties.Resources.Eye_Outline;
+                txtPassword.IconRight = csharp_lksmart.Properties.Resources.icon_eye_disable_outline;
                 txtPassword.PasswordChar = '\0';
             }
             else
             {
-                txtPassword.IconRight = csharp_lksmart.Properties.Resources.Eye_Disable_Outline;
+                txtPassword.IconRight = csharp_lksmart.Properties.Resources.icon_eye_outline_png;
                 txtPassword.PasswordChar = '*';
             }
         }
