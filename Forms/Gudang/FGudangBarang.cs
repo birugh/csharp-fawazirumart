@@ -26,7 +26,7 @@ namespace csharp_lksmart
         private async void LoadBarangData()
         {
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var a = await db.ToModelSP<MBarang>(conn, "usp_m_barang", null);
             dataGridViewBarang.DataSource = a.ToList();
         }
@@ -48,11 +48,11 @@ namespace csharp_lksmart
         }
         private bool ValidateInput()
         {
-            if (string.IsNullOrEmpty(txtHargaSatuan.Text) ||
-                string.IsNullOrEmpty(txtJumlahBarang.Text) ||
-                string.IsNullOrEmpty(txtKodeBarang.Text) ||
-                string.IsNullOrEmpty(txtNamaBarang.Text) ||
-                string.IsNullOrEmpty(txtSatuan.Text) ||
+            if (string.IsNullOrWhiteSpace(txtHargaSatuan.Text) ||
+                string.IsNullOrWhiteSpace(txtJumlahBarang.Text) ||
+                string.IsNullOrWhiteSpace(txtKodeBarang.Text) ||
+                string.IsNullOrWhiteSpace(txtNamaBarang.Text) ||
+                string.IsNullOrWhiteSpace(txtSatuan.Text) ||
                 !long.TryParse(txtHargaSatuan.Text, out _) ||
                 !long.TryParse(txtJumlahBarang.Text, out _) ||
                 int.Parse(txtHargaSatuan.Text) <= 0 ||
@@ -94,7 +94,7 @@ namespace csharp_lksmart
             try
             {
                 var db = new DBHelpers();
-                var conn = GlobalConfig.getConn();
+                var conn = GlobalConfig.GetConn();
                 var p = new DynamicParameters();
                 p.Add("func", "create", DbType.String, ParameterDirection.Input);
                 p.Add("kode_barang", txtKodeBarang.Text, DbType.String, ParameterDirection.Input);
@@ -138,7 +138,7 @@ namespace csharp_lksmart
             if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("func", "update", DbType.String, ParameterDirection.Input);
             p.Add("id_barang", hasilCari, DbType.String, ParameterDirection.Input);
@@ -177,7 +177,7 @@ namespace csharp_lksmart
             if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("func", "delete", DbType.String, ParameterDirection.Input);
             p.Add("id_barang", hasilCari, DbType.String, ParameterDirection.Input);
@@ -201,7 +201,7 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("@waktu", DateTime.Now, DbType.DateTime, ParameterDirection.Input);
             p.Add("@aktivitas", "Logout", DbType.String, ParameterDirection.Input);
@@ -224,7 +224,7 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("nama_barang", txtCari.Text + "%", DbType.String, ParameterDirection.Input);
             var res = await db.ToSingleModel<MBarang>(conn, "SELECT * FROM tbl_barang WHERE nama_barang LIKE @nama_barang", p);
