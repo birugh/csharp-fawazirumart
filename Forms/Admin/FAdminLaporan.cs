@@ -58,7 +58,7 @@ namespace csharp_lksmart
         private async void LoadData()
         {
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var a = await db.ToModelSP<MTransaksi>(conn, "usp_m_transaksi", null);
             dataGridViewLaporan.DataSource = a.ToList();
         }
@@ -101,7 +101,7 @@ namespace csharp_lksmart
         {
             if (!ValidateInput()) return;
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
 
             p.Add("dateStart", dateStart.Value.ToString("yyyyy-MM-dd"), DbType.String, ParameterDirection.Input);
@@ -113,7 +113,7 @@ namespace csharp_lksmart
         {
             if (!ValidateInput()) return;
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
 
             p.Add("dateStart", dateStart.Value.ToString("yyyyy-MM-dd"), DbType.String, ParameterDirection.Input);
@@ -135,7 +135,7 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
             p.Add("aktivitas", "Logout", DbType.String, ParameterDirection.Input);

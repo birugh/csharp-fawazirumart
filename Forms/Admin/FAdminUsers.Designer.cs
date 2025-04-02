@@ -509,7 +509,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::csharp_lksmart.Properties.Resources.administrator_1;
+            this.pictureBox1.Image = global::csharp_lksmart.Properties.Resources.icon_administrator;
             this.pictureBox1.Location = new System.Drawing.Point(74, 54);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(153, 145);
@@ -1097,7 +1097,7 @@
             this.btnTambah.IdleBorderRadius = 15;
             this.btnTambah.IdleBorderThickness = 1;
             this.btnTambah.IdleFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
-            this.btnTambah.IdleIconLeftImage = global::csharp_lksmart.Properties.Resources.Tambah1;
+            this.btnTambah.IdleIconLeftImage = global::csharp_lksmart.Properties.Resources.icon_tambah;
             this.btnTambah.IdleIconRightImage = null;
             this.btnTambah.IndicateFocus = false;
             this.btnTambah.Location = new System.Drawing.Point(575, 263);
@@ -1124,7 +1124,7 @@
             this.btnTambah.OnIdleState.BorderThickness = 1;
             this.btnTambah.OnIdleState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(133)))), ((int)(((byte)(70)))));
             this.btnTambah.OnIdleState.ForeColor = System.Drawing.Color.White;
-            this.btnTambah.OnIdleState.IconLeftImage = global::csharp_lksmart.Properties.Resources.Tambah1;
+            this.btnTambah.OnIdleState.IconLeftImage = global::csharp_lksmart.Properties.Resources.icon_tambah;
             this.btnTambah.OnIdleState.IconRightImage = null;
             this.btnTambah.OnPressedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(82)))), ((int)(((byte)(43)))));
             this.btnTambah.OnPressedState.BorderRadius = 15;
@@ -1315,7 +1315,7 @@
             this.txtPassword.IconLeft = null;
             this.txtPassword.IconLeftCursor = System.Windows.Forms.Cursors.IBeam;
             this.txtPassword.IconPadding = 10;
-            this.txtPassword.IconRight = global::csharp_lksmart.Properties.Resources.Eye_Disable_Outline;
+            this.txtPassword.IconRight = global::csharp_lksmart.Properties.Resources.icon_eye_disable_outline;
             this.txtPassword.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
             this.txtPassword.Lines = new string[0];
             this.txtPassword.Location = new System.Drawing.Point(575, 166);

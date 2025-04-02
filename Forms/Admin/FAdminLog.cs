@@ -25,7 +25,7 @@ namespace csharp_lksmart
         private async void LoadData()
         {
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var a = await db.ToModelSP<MLog>(conn, "usp_m_log", null);
             dataGridViewLogActivity.DataSource = a.ToList();
         }
@@ -75,7 +75,7 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("dateStart", dateStart.Value.ToString(), DbType.String, ParameterDirection.Input);
             p.Add("dateEnd", dateEnd.Value.ToString(), DbType.String, ParameterDirection.Input);

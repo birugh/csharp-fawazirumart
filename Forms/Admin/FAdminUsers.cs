@@ -27,7 +27,7 @@ namespace csharp_lksmart
         private async void LoadUserData()
         {
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var a = await db.ToModelSP<MUser>(conn, "usp_m_user", null);
             dataGridViewUsers.DataSource = a.ToList();
         }
@@ -51,11 +51,11 @@ namespace csharp_lksmart
         private bool ValidateInput()
         {
             if (cboxTipeUser.SelectedIndex < 0 ||
-                    string.IsNullOrEmpty(txtAlamat.Text) ||
-                    string.IsNullOrEmpty(txtNama.Text) ||
-                    string.IsNullOrEmpty(txtPassword.Text) ||
-                    string.IsNullOrEmpty(txtTelepon.Text) ||
-                    string.IsNullOrEmpty(txtUsername.Text) ||
+                    string.IsNullOrWhiteSpace(txtAlamat.Text) ||
+                    string.IsNullOrWhiteSpace(txtNama.Text) ||
+                    string.IsNullOrWhiteSpace(txtPassword.Text) ||
+                    string.IsNullOrWhiteSpace(txtTelepon.Text) ||
+                    string.IsNullOrWhiteSpace(txtUsername.Text) ||
                     !long.TryParse(txtTelepon.Text, out _) ||
                     txtTelepon.Text.Length < 10 ||
                     txtTelepon.Text.Length > 13 ||
@@ -105,7 +105,7 @@ namespace csharp_lksmart
             if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("func", "create", DbType.String, ParameterDirection.Input);
             p.Add("tipe_user", cboxTipeUser.SelectedItem.ToString().ToLower(), DbType.String, ParameterDirection.Input);
@@ -153,7 +153,7 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("func", "update", DbType.String, ParameterDirection.Input);
             p.Add("id_user", hasilCari, DbType.String, ParameterDirection.Input);
@@ -194,7 +194,7 @@ namespace csharp_lksmart
             try
             {
                 var db = new DBHelpers();
-                var conn = GlobalConfig.getConn();
+                var conn = GlobalConfig.GetConn();
                 var p = new DynamicParameters();
                 p.Add("func", "delete", DbType.String, ParameterDirection.Input);
                 p.Add("id_user", hasilCari, DbType.String, ParameterDirection.Input);
@@ -269,7 +269,7 @@ namespace csharp_lksmart
             try
             {
                 var db = new DBHelpers();
-                var conn = GlobalConfig.getConn();
+                var conn = GlobalConfig.GetConn();
                 var p = new DynamicParameters();
                 p.Add("username", txtCari.Text + "%", DbType.String, ParameterDirection.Input);
                 var res = await db.ToSingleModel<MUser>(conn, "SELECT * FROM tbl_user WHERE username LIKE @username", p);
@@ -313,7 +313,7 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.getConn();
+            var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
             p.Add("waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
             p.Add("aktivitas", "Logout", DbType.String, ParameterDirection.Input);
@@ -379,12 +379,12 @@ namespace csharp_lksmart
         {
             if (txtPassword.PasswordChar == '*')
             {
-                txtPassword.IconRight = csharp_lksmart.Properties.Resources.Eye_Outline;
+                txtPassword.IconRight = csharp_lksmart.Properties.Resources.icon_eye_outline_png;
                 txtPassword.PasswordChar = '\0';
             }
             else
             {
-                txtPassword.IconRight = csharp_lksmart.Properties.Resources.Eye_Disable_Outline;
+                txtPassword.IconRight = csharp_lksmart.Properties.Resources.icon_eye_disable_outline;
                 txtPassword.PasswordChar = '*';
             }
         }

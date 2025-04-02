@@ -360,7 +360,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = global::csharp_lksmart.Properties.Resources.administrator_1;
+            this.pictureBox1.Image = global::csharp_lksmart.Properties.Resources.icon_administrator;
             this.pictureBox1.Location = new System.Drawing.Point(74, 54);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(153, 145);
