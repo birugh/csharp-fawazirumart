@@ -55,7 +55,7 @@ namespace csharp_lksmart
             try
             {
                 if (conn.State == ConnectionState.Closed) conn.Open();
-                var a = await conn.QueryFirstAsync<T>(sql, p, null, null, CommandType.StoredProcedure);
+                var a = await conn.QuerySingleOrDefaultAsync<T>(sql, p, null, null, CommandType.StoredProcedure);
                 return a;
             }
             catch (Exception)
@@ -75,7 +75,7 @@ namespace csharp_lksmart
             try
             {
                 if (conn.State == ConnectionState.Closed) conn.Open();
-                var a = await conn.QueryFirstAsync<T>(sql, p, null, null, CommandType.Text);
+                var a = await conn.QueryFirstOrDefaultAsync<T>(sql, p, null, null, CommandType.Text);
                 return a;
             }
             catch (Exception)
