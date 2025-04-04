@@ -136,8 +136,7 @@ namespace csharp_lksmart
         private async void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-            
-            if (cboxPilihMenu.SelectedValue != null && int.TryParse(txtKuantitas.Text, out int qty) && decimal.TryParse(txtTotalHarga.Text, out decimal totalHarga))
+            if (string.IsNullOrWhiteSpace(currentNoTransaksi))
             {
                 currentNoTransaksi = await GenerateNoTransaksi();
             }
