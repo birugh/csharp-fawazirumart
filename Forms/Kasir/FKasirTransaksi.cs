@@ -209,6 +209,131 @@ namespace csharp_lksmart
             }
         }
 
+        public void ExportGridToPdf(DataGridView dgv, string filename)
+        {
+            if (dgv == null || dgv.Rows.Count == 0)
+            {
+                MessageBox.Show("Please input something to cart.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                // Load the Poppins font
+                string fontPath = Path.Combine(Application.StartupPath, "Poppins-Regular.ttf");
+                string fontPathBold = Path.Combine(Application.StartupPath, "Poppins-Bold.ttf");
+                string fontPathSemiBold = Path.Combine(Application.StartupPath, "Poppins-SemiBold.ttf");
+                BaseFont baseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                BaseFont baseFontBold = BaseFont.CreateFont(fontPathBold, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                BaseFont baseFontSemiBold = BaseFont.CreateFont(fontPathSemiBold, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                Font fontH1 = new Font(baseFontBold, 20);
+                Font fontH2 = new Font(baseFont, 16);
+                Font fontSemiBoldH2 = new Font(baseFontSemiBold, 16);
+                Font fontH3 = new Font(baseFont, 14);
+                Font fontText = new Font(baseFont, 12);
+
+                PdfPTable pdfTable = CreatePdfTable(dgv, fontText);
+
+                using (FileStream stream = new FileStream(filename, FileMode.Create))
+                {
+                    Document pdfDocument = new Document(PageSize.A4, 72f, 72f, 72f, 72f);
+                    PdfWriter.GetInstance(pdfDocument, stream);
+
+                    pdfDocument.Open();
+
+                    // Add header
+                    pdfDocument.Add(new Paragraph("\n\n\n\n\n\n\nLKS Mart", fontH1) { Alignment = Element.ALIGN_CENTER });
+                    Image logo = Image.GetInstance("logo-lksmart.png");
+                    logo.ScaleToFit(100f, 100f);
+                    logo.Alignment = Element.ALIGN_CENTER;
+                    pdfDocument.Add(logo);
+                    pdfDocument.Add(new Paragraph("E-Catalog Store", fontSemiBoldH2) { Alignment = Element.ALIGN_CENTER });
+                    pdfDocument.Add(new Paragraph("Jl. Raya Karadenan No.7", fontH2) { Alignment = Element.ALIGN_CENTER });
+                    pdfDocument.Add(new Paragraph("Telp: 088-0922-0821", fontH2) { Alignment = Element.ALIGN_CENTER });
+                    pdfDocument.Add(new Paragraph("Email: lksmart@gmail.com", fontH2) { Alignment = Element.ALIGN_CENTER });
+
+                    pdfDocument.NewPage();
+
+                    // Add separator
+                    pdfDocument.Add(new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator())));
+
+                    // Add transaction information
+                    pdfDocument.Add(new Paragraph("Informasi Transaksi", fontSemiBoldH2));
+                    pdfDocument.Add(new Paragraph($"Nomor Transaksi : {currentNoTransaksi}", fontText));
+                    pdfDocument.Add(new Paragraph($"Tanggal         : {DateTime.Now.ToString("dd MMMM yyyy")}", fontText));
+                    pdfDocument.Add(new Paragraph($"Waktu           : {DateTime.Now.ToString("HH:mm")} WIB", fontText));
+                    pdfDocument.Add(new Paragraph($"Kasir           : {FormLogin.userName}", fontText));
+
+                    // Add customer information
+                    pdfDocument.Add(new Paragraph("Informasi Pelanggan", fontSemiBoldH2));
+                    pdfDocument.Add(new Paragraph($"Nama Pelanggan  : {namaPelanggan}", fontText));
+                    pdfDocument.Add(new Paragraph($"No. Telepon     : {noTelpPelanggan}", fontText));
+                    pdfDocument.Add(new Paragraph("Alamat          : Jl. Melati No. 45, Bandung", fontText));
+
+                    // Add product list
+                    pdfDocument.Add(new Paragraph("Daftar Produk", fontSemiBoldH2));
+                    pdfDocument.Add(new Paragraph("\n"));
+                    pdfDocument.Add(pdfTable);
+
+                    // Add payment summary
+                    pdfDocument.Add(new Paragraph("Ringkasan Pembayaran", fontSemiBoldH2));
+                    pdfDocument.Add(new Paragraph($"Subtotal        : Rp {totalKeseluruhan - pajak}", fontText));
+                    pdfDocument.Add(new Paragraph($"Pajak (10%)     : + Rp {pajak}", fontText));
+                    pdfDocument.Add(new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator())));
+                    pdfDocument.Add(new Paragraph($"Total Bayar     : Rp {totalKeseluruhan}", fontText));
+                    pdfDocument.Add(new Paragraph($"Dibayar         : Rp {txtCash.Text}", fontText));
+                    pdfDocument.Add(new Paragraph($"Kembalian       : Rp {labelJumlahKembalian.Text.Replace("Jumlah Kembalian: Rp", "")}", fontText));
+
+                    // Add footer
+                    pdfDocument.Add(new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator())));
+                    pdfDocument.Add(new Paragraph("Terima kasih telah berbelanja di E-Catalog Store!", fontText));
+                    pdfDocument.Add(new Paragraph("Barang yang sudah dibeli tidak dapat ditukar/dikembalikan.", fontText));
+                    pdfDocument.Add(new Paragraph($"Dicetak oleh E-Catalog System | {DateTime.Now.ToString("dd MMMM yyyy - HH:mm")} WIB", fontText));
+
+                    pdfDocument.Close();
+                }
+
+                MessageBox.Show("File saved successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private PdfPTable CreatePdfTable(DataGridView dgv, Font pdfFont)
+        {
+            PdfPTable pdfTable = new PdfPTable(dgv.Columns.Count)
+            {
+                DefaultCell = { Padding = 3, BorderWidth = 1 },
+                WidthPercentage = 100,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                PdfPCell headerCell = new PdfPCell(new Phrase(column.HeaderText, pdfFont))
+                {
+                    BackgroundColor = new BaseColor(240, 240, 240)
+                };
+                pdfTable.AddCell(headerCell);
+            }
+
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        string cellValue = cell.Value?.ToString() ?? "";
+                        pdfTable.AddCell(new Phrase(cellValue, pdfFont));
+                    }
+                }
+            }
+
+            return pdfTable;
+        }
+
+
         private async void btnSimpan_Click(object sender, EventArgs e)
         {
             if (!(dataGridViewKeranjang.Rows.Count > 0))
