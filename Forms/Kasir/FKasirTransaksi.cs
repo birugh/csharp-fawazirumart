@@ -62,7 +62,7 @@ namespace csharp_lksmart
 
         private void LoadKasir()
         {
-            if (FormLogin.userId == null || FormLogin.userId == "")
+            if (string.IsNullOrWhiteSpace(FormLogin.userId))
             {
                 labelKasir.Text = "Kasir: Tidak dikenali";
             }
