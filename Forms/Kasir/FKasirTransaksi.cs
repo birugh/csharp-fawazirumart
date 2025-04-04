@@ -132,12 +132,16 @@ namespace csharp_lksmart
             ClearInput();
             ResetComponents();
         }
-        private void btnTambah_Click(object sender, EventArgs e)
+        
+        private async void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
             
             if (cboxPilihMenu.SelectedValue != null && int.TryParse(txtKuantitas.Text, out int qty) && decimal.TryParse(txtTotalHarga.Text, out decimal totalHarga))
             {
+                currentNoTransaksi = await GenerateNoTransaksi();
+            }
+
                 DataRow row = dtKeranjang.NewRow();
                 row["No Transaksi"] = currentNoTransaksi;
                 row["ID Barang"] = cboxPilihMenu.SelectedValue;
@@ -150,8 +154,13 @@ namespace csharp_lksmart
                 snackBar.Show(this, "Barang berhasil di tambahkan!",
                 Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
                 3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+            idBarang = Convert.ToInt32(cboxPilihMenu.SelectedValue);
                 UpdateTotalKeseluruhan();
-                ResetInput();
+            btnBayar.Enabled = true;
+            btnSimpan.Enabled = false;
+            btnPrint.Enabled = false;
+            ClearInput();
+            LockPelangganData();
             }
         }
 
