@@ -162,6 +162,12 @@ namespace csharp_lksmart
             ClearInput();
             LockPelangganData();
             }
+
+        private void LockPelangganData()
+        {
+            txtTelepon.Enabled = false;
+            txtTelepon.Text = noTelpPelanggan;
+            txtNamaPelanggan.Text = namaPelanggan;
         }
 
 
