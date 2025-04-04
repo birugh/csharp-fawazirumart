@@ -91,7 +91,17 @@ namespace csharp_lksmart
             return await db.ToSingleModelSP<string>(connString, "usp_generate_no_transaksi_m_transaksi", null);
         }
 
-        private void ResetInput()
+        private void ResetAll()
+        {
+            ClearInput();
+            ResetComponents();
+            dtKeranjang.Clear();
+            txtTelepon.Enabled = true;
+            txtTelepon.Text = "08";
+            txtNamaPelanggan.Clear();
+        }
+
+        private void ClearInput()
         {
             cboxPilihMenu.SelectedIndex = -1;
             txtHargaSatuan.Clear();
@@ -105,16 +115,21 @@ namespace csharp_lksmart
 
         private void ResetComponents()
         {
-            btnTambah.Enabled = true;
+            labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp?";
+            labelJumlahKembalian.Text = "Jumlah Kembalian: Rp?";
             btnBayar.Enabled = false;
+            btnTambah.Enabled = true;
             btnSimpan.Enabled = false;
             btnPrint.Enabled = false;
-            txtTelepon.Enabled = false;
+            txtKuantitas.Enabled = false;
+            cboxPilihMenu.Enabled = true;
+            txtCash.Enabled = true;
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            ResetInput();
+            ResetAll();
+            ClearInput();
             ResetComponents();
         }
         private void btnTambah_Click(object sender, EventArgs e)
