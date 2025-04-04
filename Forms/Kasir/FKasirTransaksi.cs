@@ -383,7 +383,8 @@ namespace csharp_lksmart
             {
                 MBarang barang = (MBarang)cboxPilihMenu.SelectedItem;
                 txtHargaSatuan.Text = barang.harga_satuan.ToString();
-                txtQuantitas_TextChanged(null, null);
+                txtKuantitas.Enabled = true;
+                //txtKuantitas_TextChanged(null, null);
             }
         }
 
