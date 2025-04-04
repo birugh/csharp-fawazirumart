@@ -435,12 +435,14 @@ namespace csharp_lksmart
             if (!long.TryParse(txtCash.Text, out long uang))
             {
                 MessageBox.Show("Masukkan jumlah uang yang valid!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             long kembalian = (long)(uang - totalKeseluruhan);
             if (!(uang >= totalKeseluruhan))
             {
-                MessageBox.Show("Uang tidak cukup! \nUang anda: Rp" + uang.ToString() + "\nKurang: Rp." + kembalian +"\nTotal Keseluruhan: Rp" + totalKeseluruhan.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Uang tidak cukup! \nUang anda: Rp" + uang.ToString() + "\nKurang: Rp." + kembalian + "\nTotal Keseluruhan: Rp" + totalKeseluruhan.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             labelJumlahKembalian.Text = "Jumlah Kembalian: Rp" + kembalian.ToString();
@@ -449,7 +451,11 @@ namespace csharp_lksmart
             3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
             btnTambah.Enabled = false;
             btnBayar.Enabled = false;
+            txtCash.Enabled = false;
+            cboxPilihMenu.Enabled = false;
+            txtKuantitas.Enabled = false;
             btnSimpan.Enabled = true;
+            btnPrint.Enabled = true;
             txtTelepon.Enabled = false;
             txtTelepon.Text = noTelpPelanggan;
 
