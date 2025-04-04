@@ -18,11 +18,13 @@ namespace csharp_lksmart
     public partial class FormKasirTransaksi : Form
     {
         private DataTable dtKeranjang;
-        private static string currentNoTransaksi;
-        private static decimal totalKeseluruhan;
+        private string currentNoTransaksi;
         private string namaPelanggan;
         private string noTelpPelanggan;
+        private decimal totalKeseluruhan;
+        private decimal pajak;
         private int idPelanggan;
+        private int idBarang;
 
         public FormKasirTransaksi()
         {
