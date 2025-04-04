@@ -54,6 +54,8 @@ namespace csharp_lksmart
             }
 
             MessageBox.Show("Login successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            userId = res.id_user.ToString();
+            userName = res.username;
             switch (res.tipe_user.ToLower())
             {
                 case "admin":
