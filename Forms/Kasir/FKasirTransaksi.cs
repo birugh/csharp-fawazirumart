@@ -388,16 +388,24 @@ namespace csharp_lksmart
             }
         }
 
-        private void txtQuantitas_TextChanged(object sender, EventArgs e)
+        private void txtKuantitas_TextChanged(object sender, EventArgs e)
         {
-            long harga = 0;
-            if (!long.TryParse(txtKuantitas.Text, out long qty) && !long.TryParse(txtHargaSatuan.Text, out harga))
+            long harga;
+            if (string.IsNullOrWhiteSpace(txtKuantitas.Text))
             {
-                MessageBox.Show("Masukkan nilai kuantitas yang valid!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTotalHarga.Clear();
                 return;
             }
 
-            if (qty <= 0)
+            if (!long.TryParse(txtKuantitas.Text, out long qty) && !long.TryParse(txtHargaSatuan.Text, out harga))
+            {
+                MessageBox.Show("Masukkan nilai kuantitas yang valid!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtKuantitas.Clear();
+                txtKuantitas.Focus();
+                return;
+            }
+
+            if (!(qty > 0))
             {
                 MessageBox.Show("Kuantitas tidak boleh kurang dari 1!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtKuantitas.Clear();
@@ -405,6 +413,7 @@ namespace csharp_lksmart
                 return;
             }
 
+            harga = Convert.ToInt64(txtHargaSatuan.Text);
             txtTotalHarga.Text = (qty * harga).ToString();
         }
 
