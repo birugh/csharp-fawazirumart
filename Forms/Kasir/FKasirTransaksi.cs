@@ -355,10 +355,10 @@ namespace csharp_lksmart
             p.Add("no_transaksi", currentNoTransaksi, DbType.String, ParameterDirection.Input);
             p.Add("tgl_transaksi", DateTime.Now, DbType.String, ParameterDirection.Input);
             p.Add("nama_kasir", FormLogin.userName, DbType.String, ParameterDirection.Input);
-            p.Add("total_bayar", totalKeseluruhan, DbType.String, ParameterDirection.Input);
+            p.Add("total_bayar", Convert.ToInt64(totalKeseluruhan), DbType.String, ParameterDirection.Input);
             p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             p.Add("id_pelanggan", idPelanggan, DbType.String, ParameterDirection.Input);
-            p.Add("id_barang", cboxPilihMenu.SelectedValue, DbType.String, ParameterDirection.Input);
+            p.Add("id_barang", idBarang, DbType.String, ParameterDirection.Input);
             var res = await db.ExecuteAsync(conn, "INSERT INTO tbl_transaksi VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan, @id_barang)", p);
 
             if (!(res > 0))
