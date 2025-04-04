@@ -539,6 +539,16 @@ namespace csharp_lksmart
         {
             this.AcceptButton = btnBayar;
         }
+
+        private void txtTelepon_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LockPelangganData();
+                txtKuantitas.Focus();
+                return;
+            }
+        }
         }
     }
 }
