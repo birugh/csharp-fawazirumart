@@ -200,6 +200,8 @@ namespace csharp_lksmart
                 snackBar.Show(this, "Data berhasil di print!",
                 Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
                 3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+                btnPrint.Enabled = false;
+                this.AcceptButton = btnReset;
             }
             else
             {
