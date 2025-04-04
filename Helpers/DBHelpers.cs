@@ -35,7 +35,7 @@ namespace csharp_lksmart
             try
             {
                 if (conn.State == ConnectionState.Closed) conn.Open();
-                var a = await conn.ExecuteAsync(sql, null, null, null, CommandType.Text);
+                var a = await conn.ExecuteAsync(sql, p, null, null, CommandType.Text);
                 return a;
             }
             catch (Exception)
