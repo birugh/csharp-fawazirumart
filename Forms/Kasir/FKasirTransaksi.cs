@@ -492,13 +492,9 @@ namespace csharp_lksmart
                 iTextSharp.text.Font pdfFont = new iTextSharp.text.Font(baseFont, 10, iTextSharp.text.Font.NORMAL);
                 PdfPTable pdfTable = CreatePdfTable(dgv, pdfFont);
 
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+        private async void txtTelepon_TextChanged(object sender, EventArgs e)
                 {
-                    saveFileDialog.FileName = filename;
-                    saveFileDialog.DefaultExt = ".pdf";
-                    saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
-
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (string.IsNullOrWhiteSpace(txtTelepon.Text))
                     {
                         SavePdfToFile(saveFileDialog.FileName, pdfTable);
                         MessageBox.Show("File saved successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -511,59 +507,13 @@ namespace csharp_lksmart
             }
         }
 
-        private PdfPTable CreatePdfTable(DataGridView dgv, iTextSharp.text.Font pdfFont)
-        {
-            PdfPTable pdfTable = new PdfPTable(dgv.Columns.Count)
-            {
-                DefaultCell = { Padding = 3, BorderWidth = 1 },
-                WidthPercentage = 100,
-                HorizontalAlignment = Element.ALIGN_LEFT
-            };
-
-            foreach (DataGridViewColumn column in dgv.Columns)
-            {
-                PdfPCell headerCell = new PdfPCell(new Phrase(column.HeaderText, pdfFont))
-                {
-                    BackgroundColor = new iTextSharp.text.BaseColor(240, 240, 240)
-                };
-                pdfTable.AddCell(headerCell);
-            }
-
-            foreach (DataGridViewRow row in dgv.Rows)
-            {
-                if (!row.IsNewRow)
-                {
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        string cellValue = cell.Value?.ToString() ?? "";
-                        pdfTable.AddCell(new Phrase(cellValue, pdfFont));
-                    }
-                }
-            }
-
-            return pdfTable;
-        }
-
-        private void SavePdfToFile(string filePath, PdfPTable pdfTable)
-        {
-            using (FileStream stream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-            {
-                Document pdfDocument = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
-                PdfWriter.GetInstance(pdfDocument, stream);
-
-                pdfDocument.Open();
-                pdfDocument.Add(pdfTable);
-                pdfDocument.Close();
-            }
-        }
-
-        private async void txtTelepon_TextChanged(object sender, EventArgs e)
-        {
-            if (!long.TryParse(txtTelepon.Text, out long telepon) &&
-                !txtTelepon.Text.StartsWith("08") &&
+            if (!long.TryParse(txtTelepon.Text, out long telepon) ||
+                !txtTelepon.Text.StartsWith("08") ||
                 !Regex.IsMatch(txtTelepon.Text, @"^\d+$"))
             {
                 MessageBox.Show("Kolom telepon tidak valid!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTelepon.Text = "08";
+                txtTelepon.Focus();
                 return;
             }
 
@@ -573,7 +523,7 @@ namespace csharp_lksmart
             p.Add("telepon", txtTelepon.Text + "%", DbType.String, ParameterDirection.Input);
             var res = await db.ToSingleModel<MPelanggan>(connString, "SELECT * FROM tbl_pelanggan WHERE telepon LIKE @telepon", p);
 
-            if (res == null && string.IsNullOrWhiteSpace(res.nama))
+            if (res == null || string.IsNullOrWhiteSpace(res.nama))
             {
                 txtNamaPelanggan.Clear();
                 return;
@@ -582,7 +532,8 @@ namespace csharp_lksmart
             txtNamaPelanggan.Text = res.nama;
             idPelanggan = res.id_pelanggan;
             namaPelanggan = res.nama;
-            noTelpPelanggan = "0" + res.telepon;
+            noTelpPelanggan = res.telepon;
+        }
         }
     }
 }
