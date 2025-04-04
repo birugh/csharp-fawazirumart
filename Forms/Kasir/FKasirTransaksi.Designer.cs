@@ -935,7 +935,6 @@
             this.labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp?";
             this.labelTotalKeseluruhan.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.labelTotalKeseluruhan.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            this.labelTotalKeseluruhan.Click += new System.EventHandler(this.labelTotalKeseluruhan_Click);
             // 
             // btnBayar
             // 
@@ -1769,7 +1768,6 @@
             this.labelPajak.Text = "Pajak: Rp?";
             this.labelPajak.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.labelPajak.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
-            this.labelPajak.Click += new System.EventHandler(this.labelTotalKeseluruhan_Click);
             // 
             // FormKasirTransaksi
             // 
