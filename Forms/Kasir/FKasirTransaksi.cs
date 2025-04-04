@@ -534,6 +534,11 @@ namespace csharp_lksmart
             namaPelanggan = res.nama;
             noTelpPelanggan = res.telepon;
         }
+
+        private void txtCash_TextChanged(object sender, EventArgs e)
+        {
+            this.AcceptButton = btnBayar;
+        }
         }
     }
 }
