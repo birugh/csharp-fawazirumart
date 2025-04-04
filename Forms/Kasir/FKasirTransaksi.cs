@@ -415,6 +415,7 @@ namespace csharp_lksmart
 
             harga = Convert.ToInt64(txtHargaSatuan.Text);
             txtTotalHarga.Text = (qty * harga).ToString();
+            this.AcceptButton = btnTambah;
         }
 
         private void FormTransaksi_FormClosing(object sender, FormClosingEventArgs e)
