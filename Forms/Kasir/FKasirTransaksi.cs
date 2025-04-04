@@ -186,7 +186,7 @@ namespace csharp_lksmart
             p.Add("@id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             var affected = await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
             var formLogin = new FormLogin();
-            logout.Show();
+            formLogin.Show();
             this.Hide();
         }
 
