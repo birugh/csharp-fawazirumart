@@ -471,9 +471,12 @@ namespace csharp_lksmart
             totalKeseluruhan = 0m;
             foreach (DataRow row in dtKeranjang.Rows)
             {
-                totalKeseluruhan += Convert.ToDecimal(row["Total"]);
+                totalKeseluruhan += Convert.ToDecimal(row["Total Harga"]);
             }
-            labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp." + totalKeseluruhan.ToString();
+            pajak = totalKeseluruhan * 0.10m;
+            totalKeseluruhan += pajak;
+            labelTotalKeseluruhan.Text = $"Total Keseluruhan: Rp.{Convert.ToInt64(totalKeseluruhan)}";
+            labelPajak.Text = $"Pajak: Rp.{Convert.ToInt64(pajak)}";
         }
 
         public void ExportGridToPdf(DataGridView dgv, string filename)
