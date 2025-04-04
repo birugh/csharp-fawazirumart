@@ -372,7 +372,9 @@ namespace csharp_lksmart
             snackBar.Show(this, "Data berhasil di simpan!",
             Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
             3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
-            btnReset_Click(null, null);
+            currentNoTransaksi = null;
+            btnSimpan.Enabled = false;
+            this.AcceptButton = btnPrint;
         }
 
         private void cboxPilihMenu_SelectedIndexChanged(object sender, EventArgs e)
