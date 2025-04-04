@@ -54,7 +54,7 @@ namespace csharp_lksmart
         {
             var connString = GlobalConfig.GetConn();
             var db = new DBHelpers();
-            var barang = await db.ToModelSP<MBarang>(connString, "usp_generate_no_transaksi_m_transaksi");
+            var barang = await db.ToModelSP<MBarang>(connString, "usp_m_barang");
             cboxPilihMenu.DataSource = barang.ToList();
             cboxPilihMenu.ValueMember = "id_barang";
             cboxPilihMenu.DisplayMember = "nama_barang";
