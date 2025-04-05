@@ -193,22 +193,6 @@ namespace csharp_lksmart
             LoadBarangData();
         }
 
-        private async void btnLogout_Click(object sender, EventArgs e)
-        {
-            if (!(MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
-            {
-                return;
-            }
-
-            var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
-            var p = new DynamicParameters();
-            p.Add("@waktu", DateTime.Now, DbType.DateTime, ParameterDirection.Input);
-            p.Add("@aktivitas", "Logout", DbType.String, ParameterDirection.Input);
-            p.Add("@id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
-            var affected = await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
-        }
-
         private async void btnCari_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtCari.Text))
@@ -290,6 +274,11 @@ namespace csharp_lksmart
         private void btnReset_Click(object sender, EventArgs e)
         {
             ResetInput();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

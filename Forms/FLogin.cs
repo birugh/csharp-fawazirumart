@@ -9,7 +9,7 @@ namespace csharp_lksmart
     {
         public static string userId = "ID tidak dikenali";
         public static string userName = "Username tidak dikenali";
-
+        private bool isFormOpened = false;
         public FormLogin()
         {
             InitializeComponent();
@@ -53,33 +53,51 @@ namespace csharp_lksmart
                 return;
             }
 
-            MessageBox.Show("Login successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            userId = res.id_user.ToString();
-            userName = res.username;
+            if (isFormOpened)
+                return;
+
+            Form targetForm = null;
             switch (res.tipe_user.ToLower())
             {
                 case "admin":
-                    FormAdminKelolaUser formAdmin = new FormAdminKelolaUser();
-                    formAdmin.Show();
+                    targetForm = new FormAdminKelolaUser();
                     break;
 
                 case "gudang":
-                    FormGudangBarang formGudang = new FormGudangBarang();
-                    formGudang.Show();
+                    targetForm = new FormGudangBarang();
                     break;
 
                 case "kasir":
-                    FormKasirTransaksi formKasir = new FormKasirTransaksi();
-                    formKasir.Show();
+                    targetForm = new FormKasirTransaksi();
                     break;
             }
 
-            p = new DynamicParameters();
-            p.Add("@waktu", DateTime.Now, DbType.DateTime, ParameterDirection.Input);
-            p.Add("@aktivitas", "Login", DbType.String, ParameterDirection.Input);
-            p.Add("@id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
-            var affected = await db.ExecuteAsyncSP(connString, "usp_insert_m_log", p);
+            MessageBox.Show("Login successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            userId = res.id_user.ToString();
+            userName = res.username;
+
+            isFormOpened = true;
+
+            targetForm.FormClosed += async delegate
+            {
+                var logoutParams = new DynamicParameters();
+                logoutParams.Add("@waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
+                logoutParams.Add("@aktivitas", "Logout", DbType.String, ParameterDirection.Input);
+                logoutParams.Add("@id_user", userId, DbType.String, ParameterDirection.Input);
+                await db.ExecuteAsyncSP(connString, "usp_insert_m_log", logoutParams);
+
+                isFormOpened = false;
+                this.Show();
+            };
+
+            var logParams = new DynamicParameters();
+            logParams.Add("@waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
+            logParams.Add("@aktivitas", "Login", DbType.String, ParameterDirection.Input);
+            logParams.Add("@id_user", userId, DbType.String, ParameterDirection.Input);
+            await db.ExecuteAsyncSP(connString, "usp_insert_m_log", logParams);
+
             this.Hide();
+            targetForm.Show();
         }
 
         private void btnReset_Click_1(object sender, EventArgs e)

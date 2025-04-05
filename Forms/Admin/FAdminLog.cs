@@ -19,8 +19,8 @@ namespace csharp_lksmart
         public FormAdminLogActivity()
         {
             InitializeComponent();
-            LoadData();
             InitializeTimer();
+            LoadData();
         }
         private async void LoadData()
         {

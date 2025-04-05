@@ -172,14 +172,14 @@ namespace csharp_lksmart
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConn();
             var p = new DynamicParameters();
-            p.Add("@waktu", DateTime.Now, DbType.DateTime, ParameterDirection.Input);
+            p.Add("@waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
             p.Add("@aktivitas", "Logout", DbType.String, ParameterDirection.Input);
             p.Add("@id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
-            var affected = await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
-            var formLogin = new FormLogin();
-            formLogin.Show();
-            this.Hide();
-        }   
+            await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
+            
+            MessageBox.Show($"There are {Application.OpenForms.Count} forms open in the background.", "Open Forms Count", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Close();
+        }
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
@@ -408,14 +408,14 @@ namespace csharp_lksmart
 
         private void FormTransaksi_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Environment.Exit(1);
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+            //if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            //{
+            //    Environment.Exit(1);
+            //}
+            //else
+            //{
+            //    e.Cancel = true;
+            //}
         }
 
         private void btnBayar_Click(object sender, EventArgs e)
@@ -516,6 +516,11 @@ namespace csharp_lksmart
                 txtKuantitas.Focus();
                 return;
             }
+        }
+
+        private void FormKasirTransaksi_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }
