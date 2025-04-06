@@ -1,0 +1,527 @@
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System;
+using System.Data;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using Dapper;
+using System.Threading.Tasks;
+using csharp_lksmart.Forms.Admin;
+
+namespace csharp_lksmart
+{
+    public partial class FormKasirTransaksi : Form
+    {
+        private DataTable dtKeranjang;
+        private string currentNoTransaksi;
+        private string namaPelanggan;
+        private string noTelpPelanggan;
+        private decimal totalKeseluruhan;
+        private decimal pajak;
+        private int idPelanggan;
+        private int idBarang;
+
+        public FormKasirTransaksi()
+        {
+            InitializeComponent();
+            InitializeKeranjang();
+            LoadMenu();
+            LoadKasir();
+        }
+
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtKuantitas.Text) ||
+                string.IsNullOrWhiteSpace(txtTelepon.Text) ||
+                !long.TryParse(txtTelepon.Text, out long telepon) ||
+                !int.TryParse(txtKuantitas.Text, out int qty) ||
+                !txtTelepon.Text.StartsWith("08") ||
+                !Regex.IsMatch(txtTelepon.Text, @"^\d+$") ||
+                cboxPilihMenu.SelectedIndex == -1)
+            {
+                MessageBox.Show("All fields must be filled out.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            return true;
+        }
+
+        private async void LoadMenu()
+        {
+            var conn = GlobalConfig.GetConnection();
+            var db = new DBHelpers();
+            var barang = await db.ToModelSP<MBarang>(conn, "usp_m_barang");
+            cboxPilihMenu.DataSource = barang.ToList();
+            cboxPilihMenu.ValueMember = "id_barang";
+            cboxPilihMenu.DisplayMember = "nama_barang";
+        }
+
+        private void LoadKasir()
+        {
+            if (string.IsNullOrWhiteSpace(FormLogin.userId))
+            {
+                labelKasir.Text = "Kasir: Tidak dikenali";
+            }
+            else
+            {
+                labelKasir.Text = "Kasir: " + FormLogin.userId + " - " + FormLogin.userName;
+            }
+        }
+
+        private void InitializeKeranjang()
+        {
+            dtKeranjang = new DataTable();
+            dtKeranjang.Columns.Add("No Transaksi");
+            dtKeranjang.Columns.Add("ID Barang");
+            dtKeranjang.Columns.Add("Nama Barang");
+            dtKeranjang.Columns.Add("Harga Satuan");
+            dtKeranjang.Columns.Add("Qty");
+            dtKeranjang.Columns.Add("Total Harga");
+            dataGridViewKeranjang.DataSource = dtKeranjang;
+        }
+
+        private async Task<string> GenerateNoTransaksi()
+        {
+            var conn = GlobalConfig.GetConnection();
+            var db = new DBHelpers();
+            return await db.ToSingleModelSP<string>(conn, "usp_generate_no_transaksi_m_transaksi", null);
+        }
+
+        private void ResetAll()
+        {
+            ClearInput();
+            ResetComponents();
+            dtKeranjang.Clear();
+            txtTelepon.Enabled = true;
+            txtTelepon.Text = "08";
+            txtNamaPelanggan.Clear();
+        }
+
+        private void ClearInput()
+        {
+            cboxPilihMenu.SelectedIndex = -1;
+            txtHargaSatuan.Clear();
+            txtKuantitas.Clear();
+            txtTotalHarga.Clear();
+            txtCash.Clear();
+        }
+
+        private void ResetComponents()
+        {
+            labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp?";
+            labelJumlahKembalian.Text = "Jumlah Kembalian: Rp?";
+            btnBayar.Enabled = false;
+            btnTambah.Enabled = true;
+            btnSimpan.Enabled = false;
+            btnPrint.Enabled = false;
+            txtKuantitas.Enabled = false;
+            cboxPilihMenu.Enabled = true;
+            txtCash.Enabled = true;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            ResetAll();
+            ClearInput();
+            ResetComponents();
+        }
+        
+        private async void btnTambah_Click(object sender, EventArgs e)
+        {
+            if (!ValidateInput()) return;
+            if (string.IsNullOrWhiteSpace(currentNoTransaksi))
+            {
+                currentNoTransaksi = await GenerateNoTransaksi();
+            }
+
+            DataRow row = dtKeranjang.NewRow();
+            row["No Transaksi"] = currentNoTransaksi;
+            row["ID Barang"] = cboxPilihMenu.SelectedValue;
+            row["Nama Barang"] = cboxPilihMenu.Text;
+            row["Harga Satuan"] = txtHargaSatuan.Text;
+            row["Qty"] = txtKuantitas.Text;
+            row["Total Harga"] = txtTotalHarga.Text;
+            dtKeranjang.Rows.Add(row);
+
+            snackBar.Show(this, "Barang berhasil di tambahkan!",
+            Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+            3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+            idBarang = Convert.ToInt32(cboxPilihMenu.SelectedValue);
+            UpdateTotalKeseluruhan();
+            btnBayar.Enabled = true;
+            btnSimpan.Enabled = false;
+            btnPrint.Enabled = false;
+            ClearInput();
+            LockPelangganData();
+        }
+
+        private void LockPelangganData()
+        {
+            txtTelepon.Enabled = false;
+            txtTelepon.Text = noTelpPelanggan;
+            txtNamaPelanggan.Text = namaPelanggan;
+        }
+
+        private async void btnLogout_Click(object sender, EventArgs e)
+        {
+            if (!(MessageBox.Show("Are you sure to logout?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
+            {
+                return;
+            }
+
+            var db = new DBHelpers();
+            var conn = GlobalConfig.GetConnection();
+            var p = new DynamicParameters();
+            p.Add("@waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
+            p.Add("@aktivitas", "Logout", DbType.String, ParameterDirection.Input);
+            p.Add("@id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
+            await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
+            var formLogin = new FormLogin();
+            formLogin.Show();
+            this.Hide();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            string defaultFileName = "ExportedDataKeranjang.pdf";
+
+            if (dataGridViewKeranjang.Rows.Count > 0)
+            {
+                ExportGridToPdf(dataGridViewKeranjang, defaultFileName);
+                snackBar.Show(this, "Data berhasil di print!",
+                Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+                3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+                btnPrint.Enabled = false;
+                this.AcceptButton = btnReset;
+            }
+            else
+            {
+                MessageBox.Show("Please input something to cart!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void ExportGridToPdf(DataGridView dgv, string filename)
+        {
+            if (dgv == null || dgv.Rows.Count == 0)
+            {
+                MessageBox.Show("Please input something to cart.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            try
+            {
+                // Load the Poppins font
+                string fontPath = Path.Combine(Application.StartupPath, "Poppins-Regular.ttf");
+                string fontPathBold = Path.Combine(Application.StartupPath, "Poppins-Bold.ttf");
+                string fontPathSemiBold = Path.Combine(Application.StartupPath, "Poppins-SemiBold.ttf");
+                BaseFont baseFont = BaseFont.CreateFont(fontPath, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                BaseFont baseFontBold = BaseFont.CreateFont(fontPathBold, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                BaseFont baseFontSemiBold = BaseFont.CreateFont(fontPathSemiBold, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+                Font fontH1 = new Font(baseFontBold, 20);
+                Font fontH2 = new Font(baseFont, 16);
+                Font fontSemiBoldH2 = new Font(baseFontSemiBold, 16);
+                Font fontH3 = new Font(baseFont, 14);
+                Font fontText = new Font(baseFont, 12);
+
+                PdfPTable pdfTable = CreatePdfTable(dgv, fontText);
+
+                using (FileStream stream = new FileStream(filename, FileMode.Create))
+                {
+                    Document pdfDocument = new Document(PageSize.A4, 72f, 72f, 72f, 72f);
+                    PdfWriter.GetInstance(pdfDocument, stream);
+
+                    pdfDocument.Open();
+
+                    // Add header
+                    pdfDocument.Add(new Paragraph("\n\n\n\n\n\n\nLKS Mart", fontH1) { Alignment = Element.ALIGN_CENTER });
+                    Image logo = Image.GetInstance("logo-lksmart.png");
+                    logo.ScaleToFit(100f, 100f);
+                    logo.Alignment = Element.ALIGN_CENTER;
+                    pdfDocument.Add(logo);
+                    pdfDocument.Add(new Paragraph("E-Catalog Store", fontSemiBoldH2) { Alignment = Element.ALIGN_CENTER });
+                    pdfDocument.Add(new Paragraph("Jl. Raya Karadenan No.7", fontH2) { Alignment = Element.ALIGN_CENTER });
+                    pdfDocument.Add(new Paragraph("Telp: 088-0922-0821", fontH2) { Alignment = Element.ALIGN_CENTER });
+                    pdfDocument.Add(new Paragraph("Email: lksmart@gmail.com", fontH2) { Alignment = Element.ALIGN_CENTER });
+
+                    pdfDocument.NewPage();
+
+                    // Add separator
+                    pdfDocument.Add(new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator())));
+
+                    // Add transaction information
+                    pdfDocument.Add(new Paragraph("Informasi Transaksi", fontSemiBoldH2));
+                    pdfDocument.Add(new Paragraph($"Nomor Transaksi : {currentNoTransaksi}", fontText));
+                    pdfDocument.Add(new Paragraph($"Tanggal         : {DateTime.Now.ToString("dd MMMM yyyy")}", fontText));
+                    pdfDocument.Add(new Paragraph($"Waktu           : {DateTime.Now.ToString("HH:mm")} WIB", fontText));
+                    pdfDocument.Add(new Paragraph($"Kasir           : {FormLogin.userName}", fontText));
+
+                    // Add customer information
+                    pdfDocument.Add(new Paragraph("Informasi Pelanggan", fontSemiBoldH2));
+                    pdfDocument.Add(new Paragraph($"Nama Pelanggan  : {namaPelanggan}", fontText));
+                    pdfDocument.Add(new Paragraph($"No. Telepon     : {noTelpPelanggan}", fontText));
+                    pdfDocument.Add(new Paragraph("Alamat          : Jl. Melati No. 45, Bandung", fontText));
+
+                    // Add product list
+                    pdfDocument.Add(new Paragraph("Daftar Produk", fontSemiBoldH2));
+                    pdfDocument.Add(new Paragraph("\n"));
+                    pdfDocument.Add(pdfTable);
+
+                    // Add payment summary
+                    pdfDocument.Add(new Paragraph("Ringkasan Pembayaran", fontSemiBoldH2));
+                    pdfDocument.Add(new Paragraph($"Subtotal        : Rp {totalKeseluruhan - pajak}", fontText));
+                    pdfDocument.Add(new Paragraph($"Pajak (10%)     : + Rp {pajak}", fontText));
+                    pdfDocument.Add(new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator())));
+                    pdfDocument.Add(new Paragraph($"Total Bayar     : Rp {totalKeseluruhan}", fontText));
+                    pdfDocument.Add(new Paragraph($"Dibayar         : Rp {txtCash.Text}", fontText));
+                    pdfDocument.Add(new Paragraph($"Kembalian       : Rp {labelJumlahKembalian.Text.Replace("Jumlah Kembalian: Rp", "")}", fontText));
+
+                    // Add footer
+                    pdfDocument.Add(new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator())));
+                    pdfDocument.Add(new Paragraph("Terima kasih telah berbelanja di E-Catalog Store!", fontText));
+                    pdfDocument.Add(new Paragraph("Barang yang sudah dibeli tidak dapat ditukar/dikembalikan.", fontText));
+                    pdfDocument.Add(new Paragraph($"Dicetak oleh E-Catalog System | {DateTime.Now.ToString("dd MMMM yyyy - HH:mm")} WIB", fontText));
+
+                    pdfDocument.Close();
+                }
+
+                MessageBox.Show("File saved successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private PdfPTable CreatePdfTable(DataGridView dgv, Font pdfFont)
+        {
+            PdfPTable pdfTable = new PdfPTable(dgv.Columns.Count)
+            {
+                DefaultCell = { Padding = 3, BorderWidth = 1 },
+                WidthPercentage = 100,
+                HorizontalAlignment = Element.ALIGN_LEFT
+            };
+
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                PdfPCell headerCell = new PdfPCell(new Phrase(column.HeaderText, pdfFont))
+                {
+                    BackgroundColor = new BaseColor(240, 240, 240)
+                };
+                pdfTable.AddCell(headerCell);
+            }
+
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        string cellValue = cell.Value?.ToString() ?? "";
+                        pdfTable.AddCell(new Phrase(cellValue, pdfFont));
+                    }
+                }
+            }
+
+            return pdfTable;
+        }
+
+
+        private async void btnSimpan_Click(object sender, EventArgs e)
+        {
+            if (!(dataGridViewKeranjang.Rows.Count > 0))
+            {
+                MessageBox.Show("Please input something to cart!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (currentNoTransaksi == null || currentNoTransaksi == "")
+            {
+                currentNoTransaksi = await GenerateNoTransaksi();
+            }
+            var db = new DBHelpers();
+            var conn = GlobalConfig.GetConnection();
+            var p = new DynamicParameters();
+            p.Add("no_transaksi", currentNoTransaksi, DbType.String, ParameterDirection.Input);
+            p.Add("tgl_transaksi", DateTime.Now, DbType.String, ParameterDirection.Input);
+            p.Add("nama_kasir", FormLogin.userName, DbType.String, ParameterDirection.Input);
+            p.Add("total_bayar", Convert.ToInt64(totalKeseluruhan), DbType.String, ParameterDirection.Input);
+            p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
+            p.Add("id_pelanggan", idPelanggan, DbType.String, ParameterDirection.Input);
+            p.Add("id_barang", idBarang, DbType.String, ParameterDirection.Input);
+            var res = await db.ExecuteAsync(conn, "INSERT INTO tbl_transaksi VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan, @id_barang)", p);
+
+            if (!(res > 0))
+            {
+                snackBar.Show(this, "Data gagal di simpan!",
+                Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Error,
+                3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+                return;
+            }
+
+            snackBar.Show(this, "Data berhasil di simpan!",
+            Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+            3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+            currentNoTransaksi = null;
+            btnSimpan.Enabled = false;
+            this.AcceptButton = btnPrint;
+        }
+
+        private void cboxPilihMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboxPilihMenu.SelectedIndex > -1)
+            {
+                MBarang barang = (MBarang)cboxPilihMenu.SelectedItem;
+                txtHargaSatuan.Text = barang.harga_satuan.ToString();
+                txtKuantitas.Enabled = true;
+                //txtKuantitas_TextChanged(null, null);
+            }
+        }
+
+        private void txtKuantitas_TextChanged(object sender, EventArgs e)
+        {
+            long harga;
+            if (string.IsNullOrWhiteSpace(txtKuantitas.Text))
+            {
+                txtTotalHarga.Clear();
+                return;
+            }
+
+            if (!long.TryParse(txtKuantitas.Text, out long qty) && !long.TryParse(txtHargaSatuan.Text, out harga))
+            {
+                MessageBox.Show("Masukkan nilai kuantitas yang valid!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtKuantitas.Clear();
+                txtKuantitas.Focus();
+                return;
+            }
+
+            if (!(qty > 0))
+            {
+                MessageBox.Show("Kuantitas tidak boleh kurang dari 1!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtKuantitas.Clear();
+                txtKuantitas.Focus();
+                return;
+            }
+
+            harga = Convert.ToInt64(txtHargaSatuan.Text);
+            txtTotalHarga.Text = (qty * harga).ToString();
+            this.AcceptButton = btnTambah;
+        }
+
+        private void FormTransaksi_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Environment.Exit(1);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void btnBayar_Click(object sender, EventArgs e)
+        {
+            if (!long.TryParse(txtCash.Text, out long uang))
+            {
+                MessageBox.Show("Masukkan jumlah uang yang valid!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            long kembalian = (long)(uang - totalKeseluruhan);
+            if (!(uang >= totalKeseluruhan))
+            {
+                MessageBox.Show("Uang tidak cukup! \nUang anda: Rp" + uang.ToString() + "\nKurang: Rp." + kembalian + "\nTotal Keseluruhan: Rp" + totalKeseluruhan.ToString(), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            labelJumlahKembalian.Text = "Jumlah Kembalian: Rp" + kembalian.ToString();
+            snackBar.Show(this, "Pembayaran berhasil!",
+            Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+            3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+            btnTambah.Enabled = false;
+            btnBayar.Enabled = false;
+            txtCash.Enabled = false;
+            cboxPilihMenu.Enabled = false;
+            txtKuantitas.Enabled = false;
+            btnSimpan.Enabled = true;
+            btnPrint.Enabled = true;
+            txtTelepon.Enabled = false;
+            txtTelepon.Text = noTelpPelanggan;
+
+            if (MessageBox.Show("Do you want to save it?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                btnSimpan_Click(sender, e);
+                btnSimpan.Enabled = false;
+            }
+        }
+
+        private void UpdateTotalKeseluruhan()
+        {
+            totalKeseluruhan = 0m;
+            foreach (DataRow row in dtKeranjang.Rows)
+            {
+                totalKeseluruhan += Convert.ToDecimal(row["Total Harga"]);
+            }
+            pajak = totalKeseluruhan * 0.10m;
+            totalKeseluruhan += pajak;
+            labelTotalKeseluruhan.Text = $"Total Keseluruhan: Rp.{Convert.ToInt64(totalKeseluruhan)}";
+            labelPajak.Text = $"Pajak: Rp.{Convert.ToInt64(pajak)}";
+        }
+
+
+        private async void txtTelepon_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTelepon.Text))
+            {
+                return;
+            }
+
+            if (!long.TryParse(txtTelepon.Text, out long telepon) ||
+                !txtTelepon.Text.StartsWith("08") ||
+                !Regex.IsMatch(txtTelepon.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Kolom telepon tidak valid!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTelepon.Text = "08";
+                txtTelepon.Focus();
+                return;
+            }
+
+            var conn = GlobalConfig.GetConnection();
+            var db = new DBHelpers();
+            var p = new DynamicParameters();
+            p.Add("telepon", txtTelepon.Text + "%", DbType.String, ParameterDirection.Input);
+            var res = await db.ToSingleModel<MPelanggan>(conn, "SELECT * FROM tbl_pelanggan WHERE telepon LIKE @telepon", p);
+
+            if (res == null || string.IsNullOrWhiteSpace(res.nama))
+            {
+                txtNamaPelanggan.Clear();
+                return;
+            }
+
+            txtNamaPelanggan.Text = res.nama;
+            idPelanggan = res.id_pelanggan;
+            namaPelanggan = res.nama;
+            noTelpPelanggan = res.telepon;
+        }
+
+        private void txtCash_TextChanged(object sender, EventArgs e)
+        {
+            this.AcceptButton = btnBayar;
+        }
+
+        private void txtTelepon_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                LockPelangganData();
+                txtKuantitas.Focus();
+                return;
+            }
+        }
+
+        private void FormKasirTransaksi_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+    }
+}
