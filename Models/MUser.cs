@@ -9,6 +9,5 @@
         public string username { get; set; }
         public string telepon { get; set; }
         public string password { get; set; }
-        public int is_deleted { get; set; }
     }
 }
