@@ -9,7 +9,7 @@ namespace csharp_lksmart
     {
         public static string userId = "ID tidak dikenali";
         public static string userName = "Username tidak dikenali";
-        private bool isFormOpened = false;
+
         public FormLogin()
         {
             InitializeComponent();
@@ -38,13 +38,15 @@ namespace csharp_lksmart
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-            var connString = GlobalConfig.GetConn();
+
+            var conn = GlobalConfig.GetConnection();
             var db = new DBHelpers();
             var p = new DynamicParameters();
 
             p.Add("@username", txtUsername.Text, DbType.String, ParameterDirection.Input);
             p.Add("@password", txtPassword.Text, DbType.String, ParameterDirection.Input);
-            var res = await db.ToSingleModelSP<MUser>(connString, "usp_auth_m_user", p);
+
+            var res = await db.ToSingleModelSP<MUser>(conn, "usp_auth_m_user", p);
 
             if (res == null || string.IsNullOrWhiteSpace(res.username))
             {
@@ -52,9 +54,6 @@ namespace csharp_lksmart
                 txtUsername.Focus();
                 return;
             }
-
-            if (isFormOpened)
-                return;
 
             Form targetForm = null;
             switch (res.tipe_user.ToLower())
@@ -73,31 +72,19 @@ namespace csharp_lksmart
             }
 
             MessageBox.Show("Login successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            targetForm.Show();
+
             userId = res.id_user.ToString();
             userName = res.username;
 
-            isFormOpened = true;
+            p = new DynamicParameters();
+            p.Add("waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
+            p.Add("aktivitas", "Login", DbType.String, ParameterDirection.Input);
+            p.Add("id_user", userId, DbType.String, ParameterDirection.Input);
 
-            targetForm.FormClosed += async delegate
-            {
-                var logoutParams = new DynamicParameters();
-                logoutParams.Add("@waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
-                logoutParams.Add("@aktivitas", "Logout", DbType.String, ParameterDirection.Input);
-                logoutParams.Add("@id_user", userId, DbType.String, ParameterDirection.Input);
-                await db.ExecuteAsyncSP(connString, "usp_insert_m_log", logoutParams);
-
-                isFormOpened = false;
-                this.Show();
-            };
-
-            var logParams = new DynamicParameters();
-            logParams.Add("@waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
-            logParams.Add("@aktivitas", "Login", DbType.String, ParameterDirection.Input);
-            logParams.Add("@id_user", userId, DbType.String, ParameterDirection.Input);
-            await db.ExecuteAsyncSP(connString, "usp_insert_m_log", logParams);
+            var affected = await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
 
             this.Hide();
-            targetForm.Show();
         }
 
         private void btnReset_Click_1(object sender, EventArgs e)

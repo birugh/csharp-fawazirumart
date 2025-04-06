@@ -1,51 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
+using csharp_lksmart.Forms.Admin;
 using Dapper;
 
 namespace csharp_lksmart
 {
     public partial class FormGudangBarang : Form
     {
+        private bool isFillingData;
         private string hasilCari;
-        private Timer timer;
+
         public FormGudangBarang()
         {
             InitializeComponent();
-            LoadBarangData();
-            InitializeTimer();
+            TimerHelper.InitializeTimer(Timer_Tick);
+            LoadData();
         }
-        private async void LoadBarangData()
+
+        private async void LoadData()
         {
-            var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
-            var a = await db.ToModelSP<MBarang>(conn, "usp_m_barang", null);
-            dataGridViewBarang.DataSource = a.ToList();
+            var data = await LoadDataHelper.LoadDataModelSP<MBarang>("usp_m_barang");
+            dataGridViewBarang.DataSource = data.ToList();
         }
-        private void InitializeTimer()
-        {
-            timer = new Timer();
-            timer.Interval = 1000;
-            timer.Tick += new EventHandler(Timer_Tick);
-            timer.Start();
-        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             UpdateDateTime();
         }
+
         private void UpdateDateTime()
         {
-            labelDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
+            TimerHelper.InitializeDateTime(labelDate, labelTime);
         }
+
         private bool ValidateInput()
         {
             if (string.IsNullOrWhiteSpace(txtHargaSatuan.Text) ||
@@ -63,18 +53,7 @@ namespace csharp_lksmart
             }
             return true;
         }
-        private bool ValidateLogout()
-        {
-            if (!string.IsNullOrWhiteSpace(txtKodeBarang.Text) ||
-                !string.IsNullOrWhiteSpace(txtNamaBarang.Text) ||
-                !string.IsNullOrWhiteSpace(txtJumlahBarang.Text) ||
-                !string.IsNullOrWhiteSpace(txtSatuan.Text) ||
-                !string.IsNullOrWhiteSpace(txtHargaSatuan.Text))
-            {
-                return true;
-            }
-            return false;
-        }
+
         private void ResetInput()
         {
             txtKodeBarang.Text = "";
@@ -84,6 +63,7 @@ namespace csharp_lksmart
             txtHargaSatuan.Text = "";
             txtCari.Text = "Search by Id";
             dateExpired.Value = DateTime.Now;
+            LoadData();
         }
 
         private async void btnTambah_Click(object sender, EventArgs e)
@@ -94,8 +74,9 @@ namespace csharp_lksmart
             try
             {
                 var db = new DBHelpers();
-                var conn = GlobalConfig.GetConn();
+                var conn = GlobalConfig.GetConnection();
                 var p = new DynamicParameters();
+
                 p.Add("func", "create", DbType.String, ParameterDirection.Input);
                 p.Add("kode_barang", txtKodeBarang.Text, DbType.String, ParameterDirection.Input);
                 p.Add("jumlah_barang", txtJumlahBarang.Text, DbType.String, ParameterDirection.Input);
@@ -103,16 +84,28 @@ namespace csharp_lksmart
                 p.Add("satuan", txtSatuan.Text, DbType.String, ParameterDirection.Input);
                 p.Add("expired_date", dateExpired.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
                 p.Add("harga_satuan", txtHargaSatuan.Text, DbType.String, ParameterDirection.Input);
+                p.Add("status", DbType.Int16, direction: ParameterDirection.Output);
+
                 var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_barang", p);
 
-                if (res == null)
+                int status = p.Get<int>("status");
+                if (status == 2)
                 {
-                    MessageBox.Show("Proses membuat data gagal");
+                    MessageBox.Show("Username atau telepon sudah digunakan.");
                     return;
                 }
+                else if (status == 1)
+                {
+                    MessageBox.Show("Data berhasil ditambahkan.");
+                    LoadData();
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Terjadi kesalahan.");
+                }
 
-                MessageBox.Show("Data berhasil di tambahkan");
-                LoadBarangData();
+                LoadData();
             }
             catch (Exception)
             {
@@ -128,18 +121,20 @@ namespace csharp_lksmart
                 return;
             }
 
-            if (!int.TryParse(txtCari.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
-            {
-                MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             if (!ValidateInput()) return;
+
+            //if (!int.TryParse(txtCari.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
+            //{
+            //    MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+
             if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
+
             p.Add("func", "update", DbType.String, ParameterDirection.Input);
             p.Add("id_barang", hasilCari, DbType.String, ParameterDirection.Input);
             p.Add("kode_barang", txtKodeBarang.Text, DbType.String, ParameterDirection.Input);
@@ -148,18 +143,29 @@ namespace csharp_lksmart
             p.Add("satuan", txtSatuan.Text, DbType.String, ParameterDirection.Input);
             p.Add("expired_date", dateExpired.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
             p.Add("harga_satuan", txtHargaSatuan.Text, DbType.String, ParameterDirection.Input);
+            p.Add("status", DbType.Int16, direction: ParameterDirection.Output);
+
             var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_barang", p);
 
-            if (res == null)
+            int status = p.Get<int>("status");
+            if (status == 2)
             {
-                MessageBox.Show("Proses update data gagal");
+                MessageBox.Show("Username atau telepon sudah digunakan.");
                 return;
             }
+            else if (status == 1)
+            {
+                MessageBox.Show("Data berhasil diupdate.");
+            }
+            else
+            {
+                MessageBox.Show("Terjadi kesalahan.");
+            }
 
-            MessageBox.Show("Data berhasil di update");
-            LoadBarangData();
+            LoadData();
             btnReset_Click(null, null);
         }
+
         private async void btnHapus_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtCari.Text))
@@ -168,19 +174,17 @@ namespace csharp_lksmart
                 return;
             }
 
-            if (!int.TryParse(txtCari.Text, out _))
-            {
-                MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            if (!ValidateInput()) return;
 
             if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
+
             p.Add("func", "delete", DbType.String, ParameterDirection.Input);
             p.Add("id_barang", hasilCari, DbType.String, ParameterDirection.Input);
+
             var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_barang", p);
 
             if (res == null)
@@ -190,51 +194,19 @@ namespace csharp_lksmart
             }
 
             MessageBox.Show("Data berhasil di hapus");
-            LoadBarangData();
+            LoadData();
         }
 
         private async void btnCari_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCari.Text))
-            {
-                MessageBox.Show("Please provide a valid Kode Barang.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!int.TryParse(txtCari.Text, out _))
-            {
-                MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
-            var p = new DynamicParameters();
-            p.Add("nama_barang", txtCari.Text + "%", DbType.String, ParameterDirection.Input);
-            var res = await db.ToSingleModel<MBarang>(conn, "SELECT * FROM tbl_barang WHERE nama_barang LIKE @nama_barang", p);
-
-            if (res == null)
-            {
-                return;
-            }
-
-            dataGridViewBarang.DataSource = new List<MBarang> { res };
-            txtHargaSatuan.Text = res.harga_satuan.ToString();
-            txtJumlahBarang.Text = res.jumlah_barang.ToString();
-            txtKodeBarang.Text = res.kode_barang;
-            txtNamaBarang.Text = res.nama_barang;
-            txtSatuan.Text = res.satuan;
-            dateExpired.Value = res.expired_date;
-            hasilCari = res.id_barang.ToString();
         }
 
         private void txtSearch_Enter(object sender, EventArgs e)
         {
-
         }
+
         private void txtSearch_Leave(object sender, EventArgs e)
         {
-
         }
 
         private void FormGudang_FormClosing(object sender, FormClosingEventArgs e)
@@ -251,7 +223,7 @@ namespace csharp_lksmart
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            LoadBarangData();
+            LoadData();
         }
 
         private void dataGridViewBarang_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -261,6 +233,7 @@ namespace csharp_lksmart
                 return;
             }
 
+            isFillingData = true;
             DataGridViewRow row = dataGridViewBarang.Rows[e.RowIndex];
             txtKodeBarang.Text = row.Cells["kode_barang"].Value.ToString();
             txtNamaBarang.Text = row.Cells["nama_barang"].Value.ToString();
@@ -268,7 +241,9 @@ namespace csharp_lksmart
             txtSatuan.Text = row.Cells["satuan"].Value.ToString();
             dateExpired.Value = Convert.ToDateTime(row.Cells["expired_date"].Value);
             txtHargaSatuan.Text = row.Cells["harga_satuan"].Value.ToString();
-            txtCari.Text = row.Cells["id_barang"].Value.ToString();
+            txtCari.Text = row.Cells["nama_barang"].Value.ToString();
+            hasilCari = row.Cells["id_barang"].Value.ToString();
+            isFillingData = false;
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -278,7 +253,39 @@ namespace csharp_lksmart
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+        }
 
+        private async void txtCari_TextChanged(object sender, EventArgs e)
+        {
+            if (isFillingData == true) return;
+
+            if (string.IsNullOrWhiteSpace(txtCari.Text))
+            {
+                LoadData();
+                return;
+            }
+
+            var db = new DBHelpers();
+            var conn = GlobalConfig.GetConnection();
+            var p = new DynamicParameters();
+
+            p.Add("nama_barang", txtCari.Text + "%", DbType.String, ParameterDirection.Input);
+
+            var res = await db.ToSingleModel<MBarang>(conn, "SELECT * FROM tbl_barang WHERE nama_barang LIKE @nama_barang", p);
+
+            if (res == null)
+            {
+                return;
+            }
+
+            dataGridViewBarang.DataSource = new List<MBarang> { res };
+            txtHargaSatuan.Text = res.harga_satuan.ToString();
+            txtJumlahBarang.Text = res.jumlah_barang.ToString();
+            txtKodeBarang.Text = res.kode_barang;
+            txtNamaBarang.Text = res.nama_barang;
+            txtSatuan.Text = res.satuan;
+            dateExpired.Value = res.expired_date;
+            hasilCari = res.id_barang.ToString();
         }
     }
 }

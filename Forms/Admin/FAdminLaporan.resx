@@ -272,19 +272,6 @@
         OEJ8AEwn/AYxxAjJAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="btnFilter.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAGYAAAAgCAYAAADg3g0TAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGJSURBVGhD7ZotT8RAEIZXIpFIJD/hTHdMd0v4DyQYEiQS
-        1BG6LQZBEHg0GovE8g8uQRASvpPjKzlxzNLeES4jr7cj3kmepMlMK+bJ7FaMmQ3q0xIFt2Vrd2ar4oYq
-        PwbzJ/Y2q4pzCvkO93y5bb8cXNSj4G+z4IfSx8C8cSzIf/AgPFDp11sN/4MO3T4XvcofAJ0S4gRx74M7
-        aXU0EScFUtJjg3+hOt9spPCdYoO7lwrB4mE5T9TfWOFp8btZ5b6lIpCG+ONl2NCFlATpiH9shh8GswmQ
-        nM8oRkqAxECMUiBGKRCjFIhRCsQoBWKUAjFKgRilQIxSIEYpEKMUiFEKxCgFYpQCMUoxNrhHKQHSYSs/
-        MhTclZQESRkYKv1eVvuRkARJcOO4oWnoqFjl4ww7ZUpoFv/yXrNbVubbNvg3qRAsDlu5IV8tx79SJhHv
-        miz4d+kF0D08GF/s4DouYLZK/oJKd8DWnqUXQXfE48vW7lSUMgkuXGuXALFv1jHc5zs+pS6nd8o0jPkB
-        LWGPjOE6ALAAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="bunifuLabel2.BaseStylesheet" xml:space="preserve">
     <value>#bunifu-label { padding: 0px; font-family: 'Poppins SemiBold'; font-size: 24pt; width: 100%; height: 100%; font-style: normal; font-weight: bold; text-decoration: none; color: rgb(78, 86, 132); text-align: left; }</value>
   </data>

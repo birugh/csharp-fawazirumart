@@ -4,8 +4,9 @@ namespace csharp_lksmart
 {
     public class GlobalConfig
     {
-        public readonly static string connString = ConfigurationManager.AppSettings["connString"].ToString();
-        public static string GetConn()
+        private static readonly string connString = ConfigurationManager.AppSettings["connString"].ToString();
+
+        public static string GetConnection()
         {
             return connString;
         }

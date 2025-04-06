@@ -1,4 +1,7 @@
-﻿using Dapper;
+﻿using csharp_lksmart.Forms.Admin;
+using csharp_lksmart.Helpers;
+using csharp_lksmart.Models;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,112 +19,111 @@ namespace csharp_lksmart
 {
     public partial class FormAdminLaporan : Form
     {
-        private static string connString = ConfigurationManager.AppSettings["connString"].ToString();
-        private static SqlConnection conn;
-        private static SqlDataAdapter adp;
-        private static SqlCommand cmd;
-        private static string query;
-        private static DataTable dt;
-        private Timer timer;
         public FormAdminLaporan()
         {
             InitializeComponent();
-            InitializeTimer();
+            TimerHelper.InitializeTimer(Timer_Tick);
             LoadData();
         }
-        private bool ValidateInput()
+
+        private bool ValidateDate()
         {
-            if (dateStart.Value > dateEnd.Value || dateEnd.Value < dateStart.Value)
+            if (dateStart.Value > dateEnd.Value)
             {
-                MessageBox.Show("Date tidak valid");
+                MessageBoxHelper.ShowWarning("Batas waktu awal tidak valid!"+ dateStart.Value + " "+dateEnd.Value);
+                dateStart.Focus();
+                return false;
+            }
+            else if (dateEnd.Value < dateStart.Value)
+            {
+                MessageBoxHelper.ShowWarning("Batas waktu terakhir tidak valid!");
+                dateEnd.Focus();
                 return false;
             }
             return true;
         }
-        private void InitializeTimer()
-        {
-            timer = new Timer();
-            timer.Interval = 1000;
-            timer.Tick += new EventHandler(Timer_Tick);
-            timer.Start();
-        }
+
         private void Timer_Tick(object sender, EventArgs e)
         {
-            UpdateDateTime();
+            TimerHelper.InitializeDateTime(labelDate, labelTime);
         }
-        private void UpdateDateTime()
-        {
-            
-            labelDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
-            labelTime.Text = DateTime.Now.ToString("HH:mm:ss");
-        }
+
         private async void LoadData()
         {
-            var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
-            var a = await db.ToModelSP<MTransaksi>(conn, "usp_m_transaksi", null);
-            dataGridViewLaporan.DataSource = a.ToList();
+            var data = await LoadDataHelper.LoadDataModelSP<MTransaksi>("usp_m_transaksi");
+            dataGridViewLaporan.DataSource = data.ToList();
         }
+
         private void ResetInput()
         {
-            dateStart.ResetText();
-            dateEnd.ResetText();
+            dateStart.ValueChanged -= dateStart_ValueChanged;
+            dateEnd.ValueChanged -= dateEnd_ValueChanged;
+
+            dateEnd.Value = DateTime.Now;
+            dateStart.Value = DateTime.Now;
+            dateStart.Focus();
             ResetChart();
+            LoadData();
+
+            dateStart.ValueChanged += dateStart_ValueChanged;
+            dateEnd.ValueChanged += dateEnd_ValueChanged;
         }
+
         private void ResetChart()
         {
-            chartOmset.Series.Clear();
             chartOmset.DataSource = null;
+            chartOmset.Series.Clear();
             chartOmset.Series.Add("Omset");
         }
+
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            FormAdminKelolaUser kelolaUserForm = new FormAdminKelolaUser();
-            kelolaUserForm.Show();
-            this.Hide();
+            FormClosingHelper.FormChanging<FormAdminKelolaUser>(this);
         }
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("You are in this form right now.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBoxHelper.ShowWarning("Anda saat ini berada di formnya!");
         }
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-            FormAdminLogActivity logForm = new FormAdminLogActivity();
-            logForm.Show();
-            this.Hide();
-        }
-        private void btnFilter_Click(object sender, EventArgs e)
-        {
-            FilterTable();
+            FormClosingHelper.FormChanging<FormAdminLogActivity>(this);
         }
 
-        private async void FilterTable()
+        private async void FilterData()
         {
-            if (!ValidateInput()) return;
+            if (!ValidateDate()) return;
+
             var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
 
-            p.Add("dateStart", dateStart.Value.ToString("yyyyy-MM-dd"), DbType.String, ParameterDirection.Input);
-            p.Add("dateEnd", dateEnd.Value.ToString("yyyyy-MM-dd"), DbType.String, ParameterDirection.Input);
-            var affected = await db.ToModel<MTransaksi>(conn, "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi WHERE waktu BETWEEN @dateStart AND @dateEnd GROUP BY tgl_transaksi", p);
-            dataGridViewLaporan.DataSource = affected.ToList();
+            p.Add("dateStart", dateStart.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
+            p.Add("dateEnd", dateEnd.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
+            
+            var data = await db.ToModel<MLaporan>(conn, "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi WHERE tgl_transaksi BETWEEN @dateStart AND @dateEnd GROUP BY tgl_transaksi", p);
+
+            dataGridViewLaporan.DataSource = null;
+            dataGridViewLaporan.DataSource = data.ToList();
         }
+
         private async void btnGenerate_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput()) return;
+            if (!ValidateDate()) return;
+
             var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
 
-            p.Add("dateStart", dateStart.Value.ToString("yyyyy-MM-dd"), DbType.String, ParameterDirection.Input);
-            p.Add("dateEnd", dateEnd.Value.ToString("yyyyy-MM-dd"), DbType.String, ParameterDirection.Input);
-            var affected = await db.ToModel<MTransaksi>(conn, "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi WHERE waktu BETWEEN @dateStart AND @dateEnd GROUP BY tgl_transaksi", p);
-            chartOmset.DataSource = affected.ToList();
+            p.Add("dateStart", dateStart.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
+            p.Add("dateEnd", dateEnd.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
 
-            foreach (var item in affected)
+            var data = await db.ToModel<MLaporan>(conn, "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi WHERE tgl_transaksi BETWEEN @dateStart AND @dateEnd GROUP BY tgl_transaksi", p);
+            chartOmset.DataSource = data.ToList();
+
+            ResetChart();
+            foreach (var item in data)
             {
                 chartOmset.Series["Omset"].Points.AddXY(item.tgl_transaksi, item.total_bayar);
             }
@@ -129,38 +131,27 @@ namespace csharp_lksmart
 
         private async void btnLogout_Click(object sender, EventArgs e)
         {
-            if (!(MessageBox.Show("Apakah anda yakin?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK))
-            {
-                return;
-            }
-
-            var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
-            var p = new DynamicParameters();
-            p.Add("waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
-            p.Add("aktivitas", "Logout", DbType.String, ParameterDirection.Input);
-            p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
-            var affected = await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
-            var formLogin = new FormLogin();
-            formLogin.Show();
-            this.Hide();
+            await LogoutHelper.LogoutAsync(this);
         }
 
         private void KelolaFormLaporan_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Environment.Exit(1);
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+            FormClosingHelper.FormClosing(e);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
         {
             ResetInput();
+        }
+
+        private void dateStart_ValueChanged(object sender, EventArgs e)
+        {
+            FilterData();
+        }
+
+        private void dateEnd_ValueChanged(object sender, EventArgs e)
+        {
+            FilterData();
         }
     }
 }

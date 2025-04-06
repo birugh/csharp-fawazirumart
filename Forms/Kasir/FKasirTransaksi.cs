@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using Dapper;
 using System.Threading.Tasks;
+using csharp_lksmart.Forms.Admin;
 
 namespace csharp_lksmart
 {
@@ -48,9 +49,9 @@ namespace csharp_lksmart
 
         private async void LoadMenu()
         {
-            var connString = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var db = new DBHelpers();
-            var barang = await db.ToModelSP<MBarang>(connString, "usp_m_barang");
+            var barang = await db.ToModelSP<MBarang>(conn, "usp_m_barang");
             cboxPilihMenu.DataSource = barang.ToList();
             cboxPilihMenu.ValueMember = "id_barang";
             cboxPilihMenu.DisplayMember = "nama_barang";
@@ -82,9 +83,9 @@ namespace csharp_lksmart
 
         private async Task<string> GenerateNoTransaksi()
         {
-            var connString = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var db = new DBHelpers();
-            return await db.ToSingleModelSP<string>(connString, "usp_generate_no_transaksi_m_transaksi", null);
+            return await db.ToSingleModelSP<string>(conn, "usp_generate_no_transaksi_m_transaksi", null);
         }
 
         private void ResetAll()
@@ -170,15 +171,15 @@ namespace csharp_lksmart
             }
 
             var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
             p.Add("@waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
             p.Add("@aktivitas", "Logout", DbType.String, ParameterDirection.Input);
             p.Add("@id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
-            
-            MessageBox.Show($"There are {Application.OpenForms.Count} forms open in the background.", "Open Forms Count", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+            var formLogin = new FormLogin();
+            formLogin.Show();
+            this.Hide();
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -338,7 +339,7 @@ namespace csharp_lksmart
                 currentNoTransaksi = await GenerateNoTransaksi();
             }
             var db = new DBHelpers();
-            var conn = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
             p.Add("no_transaksi", currentNoTransaksi, DbType.String, ParameterDirection.Input);
             p.Add("tgl_transaksi", DateTime.Now, DbType.String, ParameterDirection.Input);
@@ -408,14 +409,14 @@ namespace csharp_lksmart
 
         private void FormTransaksi_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            //{
-            //    Environment.Exit(1);
-            //}
-            //else
-            //{
-            //    e.Cancel = true;
-            //}
+            if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Environment.Exit(1);
+            }
+            else
+            {
+                e.Cancel = true;
+            }
         }
 
         private void btnBayar_Click(object sender, EventArgs e)
@@ -485,11 +486,11 @@ namespace csharp_lksmart
                 return;
             }
 
-            var connString = GlobalConfig.GetConn();
+            var conn = GlobalConfig.GetConnection();
             var db = new DBHelpers();
             var p = new DynamicParameters();
             p.Add("telepon", txtTelepon.Text + "%", DbType.String, ParameterDirection.Input);
-            var res = await db.ToSingleModel<MPelanggan>(connString, "SELECT * FROM tbl_pelanggan WHERE telepon LIKE @telepon", p);
+            var res = await db.ToSingleModel<MPelanggan>(conn, "SELECT * FROM tbl_pelanggan WHERE telepon LIKE @telepon", p);
 
             if (res == null || string.IsNullOrWhiteSpace(res.nama))
             {
