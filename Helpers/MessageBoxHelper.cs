@@ -2,7 +2,7 @@
 
 namespace csharp_lksmart.Forms.Admin
 {
-    public class MessageBoxHelper
+    public static class MessageBoxHelper
     {
         public static void ShowWarning(string message)
         {
@@ -19,9 +19,18 @@ namespace csharp_lksmart.Forms.Admin
             MessageBox.Show(message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        public static void ShowQuestion(string message)
+        private static DialogResult ShowQuestion(string message)
         {
-            MessageBox.Show(message, "Question", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            return MessageBox.Show(message, "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        }
+
+        public static bool ComparisonMsgBox(string message)
+        {
+            if (ShowQuestion(message) == DialogResult.No)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

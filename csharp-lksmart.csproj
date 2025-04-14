@@ -129,6 +129,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Admin\FAdminPelanggan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin\FAdminPelanggan.Designer.cs">
+      <DependentUpon>FAdminPelanggan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SnackBarHelper.cs" />
     <Compile Include="Helpers\MessageBoxHelper.cs" />
     <Compile Include="Helpers\LoadDataHelper.cs" />
@@ -181,6 +187,9 @@
     <Compile Include="Models\MTransaksi.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Admin\FAdminPelanggan.resx">
+      <DependentUpon>FAdminPelanggan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>
     </EmbeddedResource>

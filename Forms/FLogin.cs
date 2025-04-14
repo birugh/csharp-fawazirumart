@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using csharp_lksmart.Forms.Admin;
+using Dapper;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -20,7 +21,7 @@ namespace csharp_lksmart
             if (string.IsNullOrWhiteSpace(txtUsername.Text) ||
                 string.IsNullOrWhiteSpace(txtPassword.Text))
             {
-                MessageBox.Show("Semua kolom harus diisi!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBoxHelper.ShowWarning("Kolom tidak boleh kosong!");
                 return false;
             }
             return true;
@@ -50,7 +51,7 @@ namespace csharp_lksmart
 
             if (res == null || string.IsNullOrWhiteSpace(res.username))
             {
-                MessageBox.Show("Username atau password salah!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxHelper.ShowWarning("Username atau password salah!");
                 txtUsername.Focus();
                 return;
             }
@@ -71,7 +72,7 @@ namespace csharp_lksmart
                     break;
             }
 
-            MessageBox.Show("Login successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBoxHelper.ShowInformation("Login successful!");
             targetForm.Show();
 
             userId = res.id_user.ToString();
