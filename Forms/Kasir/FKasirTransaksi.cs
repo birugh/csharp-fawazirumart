@@ -347,8 +347,9 @@ namespace csharp_lksmart
             p.Add("total_bayar", Convert.ToInt64(totalKeseluruhan), DbType.String, ParameterDirection.Input);
             p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             p.Add("id_pelanggan", idPelanggan, DbType.String, ParameterDirection.Input);
-            p.Add("id_barang", idBarang, DbType.String, ParameterDirection.Input);
-            var res = await db.ExecuteAsync(conn, "INSERT INTO tbl_transaksi VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan, @id_barang)", p);
+            var res = await db.ExecuteAsync(conn, "INSERT INTO tbl_transaksi VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan) " +
+                                                  "SELECT CAST(SCOPE_IDENTITY() as int)", p);
+            var getLastId = await db.ToSingleModel<int>(conn, "SELECT MAX(id_transaksi) FROM tbl_transaksi;", null);
 
             if (!(res > 0))
             {
@@ -356,6 +357,20 @@ namespace csharp_lksmart
                 Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Error,
                 3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
                 return;
+            }
+
+            int idTransaksi = getLastId;
+            MessageBoxHelper.ShowInformation(res.ToString());
+
+            foreach (DataRow row in dtKeranjang.Rows)
+            {
+                p = new DynamicParameters();
+                p.Add("id_transaksi", idTransaksi, DbType.Int32, ParameterDirection.Input);
+                p.Add("id_barang", row["ID Barang"], DbType.Int32, ParameterDirection.Input);
+                p.Add("harga_barang", Convert.ToInt64(row["Harga Satuan"]), DbType.Int64, ParameterDirection.Input);
+                p.Add("kuantitas", Convert.ToInt64(row["Qty"]), DbType.Int64, ParameterDirection.Input);
+                p.Add("total_harga", Convert.ToInt64(row["Total Harga"]), DbType.Int64, ParameterDirection.Input);
+                await db.ExecuteAsync(conn, "INSERT INTO tbl_detail_transaksi (id_transaksi, id_barang, harga_barang, kuantitas, total_harga) VALUES (@id_transaksi, @id_barang, @harga_barang, @kuantitas, @total_harga)", p);
             }
 
             snackBar.Show(this, "Data berhasil di simpan!",
@@ -386,7 +401,7 @@ namespace csharp_lksmart
                 return;
             }
 
-            if (!long.TryParse(txtKuantitas.Text, out long qty) && !long.TryParse(txtHargaSatuan.Text, out harga))
+            if (!long.TryParse(txtKuantitas.Text, out long qty) || !long.TryParse(txtHargaSatuan.Text, out harga))
             {
                 MessageBox.Show("Masukkan nilai kuantitas yang valid!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtKuantitas.Clear();
