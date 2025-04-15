@@ -251,8 +251,9 @@ namespace csharp_lksmart
             ResetInput();
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
+        private async void btnLogout_Click(object sender, EventArgs e)
         {
+            await LogoutHelper.LogoutAsync(this);
         }
 
         private async void txtCari_TextChanged(object sender, EventArgs e)
