@@ -95,6 +95,7 @@ namespace csharp_lksmart
             dtKeranjang.Clear();
             txtTelepon.Enabled = true;
             txtTelepon.Text = "08";
+            labelStok.Text = "Stok tersedia: ?";
             txtNamaPelanggan.Clear();
         }
 
@@ -112,6 +113,7 @@ namespace csharp_lksmart
             labelTotalKeseluruhan.Text = "Total Keseluruhan: Rp?";
             labelJumlahKembalian.Text = "Jumlah Kembalian: Rp?";
             btnBayar.Enabled = false;
+            txtCash.Enabled = false;
             btnTambah.Enabled = true;
             btnSimpan.Enabled = false;
             btnPrint.Enabled = false;
@@ -129,10 +131,17 @@ namespace csharp_lksmart
         
         private async void btnTambah_Click(object sender, EventArgs e)
         {
+            MBarang barang = (MBarang)cboxPilihMenu.SelectedItem;
             if (!ValidateInput()) return;
             if (string.IsNullOrWhiteSpace(currentNoTransaksi))
             {
                 currentNoTransaksi = await GenerateNoTransaksi();
+            }
+
+            if (barang.jumlah_barang <= 0)
+            {
+                MessageBoxHelper.ShowWarning("Stok barang tidak tersedia!");
+                return;
             }
 
             DataRow row = dtKeranjang.NewRow();
@@ -148,7 +157,10 @@ namespace csharp_lksmart
             Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
             3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
             idBarang = Convert.ToInt32(cboxPilihMenu.SelectedValue);
+
             UpdateTotalKeseluruhan();
+            labelStok.Text = "Stok Tersedia: ?";
+            txtCash.Enabled = true;
             btnBayar.Enabled = true;
             btnSimpan.Enabled = false;
             btnPrint.Enabled = false;
@@ -334,10 +346,18 @@ namespace csharp_lksmart
                 return;
             }
 
+            if (string.IsNullOrWhiteSpace(txtTelepon.Text) && string.IsNullOrWhiteSpace(txtNamaPelanggan.Text))
+            {
+                MessageBoxHelper.ShowWarning("Nama pelanggan atau nomor telepon tidak boleh kosong!");
+                btnReset_Click(sender, e);
+                return;
+            }
+
             if (currentNoTransaksi == null || currentNoTransaksi == "")
             {
                 currentNoTransaksi = await GenerateNoTransaksi();
             }
+
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
@@ -347,8 +367,7 @@ namespace csharp_lksmart
             p.Add("total_bayar", Convert.ToInt64(totalKeseluruhan), DbType.String, ParameterDirection.Input);
             p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             p.Add("id_pelanggan", idPelanggan, DbType.String, ParameterDirection.Input);
-            var res = await db.ExecuteAsync(conn, "INSERT INTO tbl_transaksi VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan) " +
-                                                  "SELECT CAST(SCOPE_IDENTITY() as int)", p);
+            var res = await db.ExecuteAsync(conn, "INSERT INTO tbl_transaksi VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan)", p);
             var getLastId = await db.ToSingleModel<int>(conn, "SELECT MAX(id_transaksi) FROM tbl_transaksi;", null);
 
             if (!(res > 0))
@@ -360,7 +379,6 @@ namespace csharp_lksmart
             }
 
             int idTransaksi = getLastId;
-            MessageBoxHelper.ShowInformation(res.ToString());
 
             foreach (DataRow row in dtKeranjang.Rows)
             {
@@ -379,16 +397,18 @@ namespace csharp_lksmart
             currentNoTransaksi = null;
             btnSimpan.Enabled = false;
             this.AcceptButton = btnPrint;
+            cboxPilihMenu.SelectedIndexChanged -= cboxPilihMenu_SelectedIndexChanged;
+            LoadMenu();
         }
-
         private void cboxPilihMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cboxPilihMenu.SelectedIndexChanged += cboxPilihMenu_SelectedIndexChanged;
             if (cboxPilihMenu.SelectedIndex > -1)
             {
                 MBarang barang = (MBarang)cboxPilihMenu.SelectedItem;
                 txtHargaSatuan.Text = barang.harga_satuan.ToString();
                 txtKuantitas.Enabled = true;
-                //txtKuantitas_TextChanged(null, null);
+                labelStok.Text = "Stok Tersedia: "+barang.jumlah_barang.ToString();
             }
         }
 
