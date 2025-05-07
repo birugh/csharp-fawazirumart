@@ -154,7 +154,7 @@
             this.btnLogout.IdleIconLeftImage = null;
             this.btnLogout.IdleIconRightImage = null;
             this.btnLogout.IndicateFocus = false;
-            this.btnLogout.Location = new System.Drawing.Point(62, 493);
+            this.btnLogout.Location = new System.Drawing.Point(61, 488);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnLogout.OnDisabledState.BorderRadius = 15;
@@ -245,7 +245,7 @@
             this.btnKelolaPelanggan.IdleIconLeftImage = null;
             this.btnKelolaPelanggan.IdleIconRightImage = null;
             this.btnKelolaPelanggan.IndicateFocus = false;
-            this.btnKelolaPelanggan.Location = new System.Drawing.Point(62, 438);
+            this.btnKelolaPelanggan.Location = new System.Drawing.Point(61, 431);
             this.btnKelolaPelanggan.Name = "btnKelolaPelanggan";
             this.btnKelolaPelanggan.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnKelolaPelanggan.OnDisabledState.BorderRadius = 15;
@@ -336,7 +336,7 @@
             this.btnLogActivity.IdleIconLeftImage = null;
             this.btnLogActivity.IdleIconRightImage = null;
             this.btnLogActivity.IndicateFocus = false;
-            this.btnLogActivity.Location = new System.Drawing.Point(62, 383);
+            this.btnLogActivity.Location = new System.Drawing.Point(61, 380);
             this.btnLogActivity.Name = "btnLogActivity";
             this.btnLogActivity.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnLogActivity.OnDisabledState.BorderRadius = 15;
@@ -427,7 +427,7 @@
             this.btnKelolaLaporan.IdleIconLeftImage = null;
             this.btnKelolaLaporan.IdleIconRightImage = null;
             this.btnKelolaLaporan.IndicateFocus = false;
-            this.btnKelolaLaporan.Location = new System.Drawing.Point(62, 328);
+            this.btnKelolaLaporan.Location = new System.Drawing.Point(61, 329);
             this.btnKelolaLaporan.Name = "btnKelolaLaporan";
             this.btnKelolaLaporan.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnKelolaLaporan.OnDisabledState.BorderRadius = 15;
@@ -518,7 +518,7 @@
             this.btnKelolaUser.IdleIconLeftImage = null;
             this.btnKelolaUser.IdleIconRightImage = null;
             this.btnKelolaUser.IndicateFocus = false;
-            this.btnKelolaUser.Location = new System.Drawing.Point(62, 273);
+            this.btnKelolaUser.Location = new System.Drawing.Point(61, 278);
             this.btnKelolaUser.Name = "btnKelolaUser";
             this.btnKelolaUser.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.btnKelolaUser.OnDisabledState.BorderRadius = 15;

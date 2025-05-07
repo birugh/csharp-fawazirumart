@@ -1,10 +1,11 @@
-﻿using System;
+﻿using csharp_lksmart.Forms.Admin;
+using csharp_lksmart.Helpers;
+using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using csharp_lksmart.Forms.Admin;
-using Dapper;
 
 namespace csharp_lksmart
 {
@@ -48,7 +49,17 @@ namespace csharp_lksmart
                 int.Parse(txtHargaSatuan.Text) <= 0 ||
                 int.Parse(txtJumlahBarang.Text) <= 0)
             {
-                MessageBox.Show("Input tidak valid.");
+                MessageBoxHelper.ShowWarning("Input tidak valid.");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateSearch()
+        {
+            if (string.IsNullOrWhiteSpace(txtCari.Text))
+            {
+                MessageBoxHelper.ShowWarning("Isi kolom cari dengan Nama barang.");
                 return false;
             }
             return true;
@@ -56,12 +67,12 @@ namespace csharp_lksmart
 
         private void ResetInput()
         {
-            txtKodeBarang.Text = "";
-            txtNamaBarang.Text = "";
-            txtJumlahBarang.Text = "";
-            txtSatuan.Text = "";
-            txtHargaSatuan.Text = "";
-            txtCari.Text = "Search by Id";
+            txtKodeBarang.Clear();
+            txtNamaBarang.Clear();
+            txtJumlahBarang.Clear();
+            txtSatuan.Clear();
+            txtHargaSatuan.Clear();
+            txtCari.Clear();
             dateExpired.Value = DateTime.Now;
             LoadData();
         }
@@ -69,7 +80,8 @@ namespace csharp_lksmart
         private async void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-            if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
+
+            if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin, ingin melakukan ini?")) return;
 
             try
             {
@@ -91,18 +103,19 @@ namespace csharp_lksmart
                 int status = p.Get<int>("status");
                 if (status == 2)
                 {
-                    MessageBox.Show("Username atau telepon sudah digunakan.");
+                    MessageBoxHelper.ShowWarning("Username atau telepon sudah digunakan.");
                     return;
                 }
                 else if (status == 1)
                 {
-                    MessageBox.Show("Data berhasil ditambahkan.");
+                    MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
                     LoadData();
                     return;
                 }
                 else
                 {
-                    MessageBox.Show("Terjadi kesalahan.");
+                    MessageBoxHelper.ShowError("Terjadi kesalahan.");
+                    return;
                 }
 
                 LoadData();
@@ -115,21 +128,8 @@ namespace csharp_lksmart
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCari.Text))
-            {
-                MessageBox.Show("Please fill out all fields and provide a valid Search Id.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!ValidateInput()) return;
-
-            //if (!int.TryParse(txtCari.Text, out _) || !int.TryParse(txtHargaSatuan.Text, out _) || !int.TryParse(txtJumlahBarang.Text, out _))
-            //{
-            //    MessageBox.Show("Input must be numeric!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return;
-            //}
-
-            if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
+            if (!ValidateSearch() || !ValidateInput()) return;
+            if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin, ingin melakukan ini?")) return;
 
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
@@ -150,33 +150,29 @@ namespace csharp_lksmart
             int status = p.Get<int>("status");
             if (status == 2)
             {
-                MessageBox.Show("Username atau telepon sudah digunakan.");
+                MessageBoxHelper.ShowWarning("Nama barang telah digunakan.");
                 return;
             }
             else if (status == 1)
             {
-                MessageBox.Show("Data berhasil diupdate.");
+                MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
+                LoadData();
+                return;
             }
             else
             {
-                MessageBox.Show("Terjadi kesalahan.");
+                MessageBoxHelper.ShowError("Terjadi kesalahan.");
+                return;
             }
 
             LoadData();
-            btnReset_Click(null, null);
+            btnReset_Click(sender, e);
         }
 
         private async void btnHapus_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCari.Text))
-            {
-                MessageBox.Show("Please provide a valid Kode Barang.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!ValidateInput()) return;
-
-            if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
+            if (!ValidateSearch() || !ValidateInput()) return;
+            if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin, ingin melakukan ini?")) return;
 
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
@@ -187,38 +183,19 @@ namespace csharp_lksmart
 
             var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_barang", p);
 
-            if (res == null)
+            if (res > 0)
             {
-                MessageBox.Show("Proses hapus data gagal");
+                MessageBoxHelper.ShowWarning("Data gagal ditambahkan!");
                 return;
             }
 
-            MessageBox.Show("Data berhasil di hapus");
+            MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
             LoadData();
-        }
-
-        private async void btnCari_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void txtSearch_Enter(object sender, EventArgs e)
-        {
-        }
-
-        private void txtSearch_Leave(object sender, EventArgs e)
-        {
         }
 
         private void FormGudang_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Are you sure to close?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Environment.Exit(1);
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+            FormClosingHelper.FormClosing(e);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -228,7 +205,7 @@ namespace csharp_lksmart
 
         private void dataGridViewBarang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (!(e.RowIndex >= 0))
+            if (!(e.RowIndex < 0))
             {
                 return;
             }

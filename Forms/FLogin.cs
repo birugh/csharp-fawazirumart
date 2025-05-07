@@ -1,4 +1,5 @@
 ﻿using csharp_lksmart.Forms.Admin;
+using csharp_lksmart.Helpers;
 using Dapper;
 using System;
 using System.Data;
@@ -33,7 +34,7 @@ namespace csharp_lksmart
             txtPassword.Clear();
             txtUsername.Focus();
             userId = "ID tidak dikenali";
-            userName = "Unknown Username";
+            userName = "Username tidak dikenali";
         }
 
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -60,7 +61,7 @@ namespace csharp_lksmart
             switch (res.tipe_user.ToLower())
             {
                 case "admin":
-                    targetForm = new FormAdminKelolaUser();
+                    targetForm = new FormAdminLogActivity();
                     break;
 
                 case "gudang":
@@ -72,7 +73,7 @@ namespace csharp_lksmart
                     break;
             }
 
-            MessageBoxHelper.ShowInformation("Login successful!");
+            MessageBoxHelper.ShowInformation("Login berhasil!");
             targetForm.Show();
 
             userId = res.id_user.ToString();
@@ -95,14 +96,7 @@ namespace csharp_lksmart
 
         private void FormLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Apakah anda yakin ingin keluar?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Environment.Exit(1);
-            }
-            else
-            {
-                e.Cancel = true;
-            }
+            FormClosingHelper.FormClosing(e);
         }
 
         private void txtPassword_OnIconRightClick(object sender, EventArgs e)

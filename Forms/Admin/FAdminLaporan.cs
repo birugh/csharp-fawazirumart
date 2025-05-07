@@ -153,5 +153,10 @@ namespace csharp_lksmart
         {
             FilterData();
         }
+
+        private void btnKelolaPelanggan_Click(object sender, EventArgs e)
+        {
+            FormClosingHelper.FormChanging<FAdminPelanggan>(this);
+        }
     }
 }

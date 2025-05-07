@@ -100,12 +100,17 @@ namespace csharp_lksmart
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-            MessageBoxHelper.ShowWarning("Anda saat ini berada di formnya!");
+            MessageBoxHelper.ShowWarning("Anda sedang berada di form ini.");
         }
 
         private void FormAdminLogActivity_FormClosing(object sender, FormClosingEventArgs e)
         {
             FormClosingHelper.FormClosing(e);
+        }
+
+        private void btnKelolaPelanggan_Click(object sender, EventArgs e)
+        {
+            FormClosingHelper.FormChanging<FAdminPelanggan>(this);
         }
     }
 }

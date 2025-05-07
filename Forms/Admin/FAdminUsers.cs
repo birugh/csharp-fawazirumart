@@ -1,4 +1,5 @@
 ﻿using csharp_lksmart.Forms.Admin;
+using csharp_lksmart.Helpers;
 using Dapper;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,17 @@ namespace csharp_lksmart
                 !Regex.IsMatch(txtTelepon.Text, @"^\d+$") ||
                 !txtTelepon.Text.StartsWith("08"))
             {
-                MessageBox.Show("Input tidak valid");
+                MessageBoxHelper.ShowWarning("Semua kolom harus diisi!");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateSearch()
+        {
+            if (string.IsNullOrWhiteSpace(txtCari.Text))
+            {
+                MessageBoxHelper.ShowWarning("Isi kolom cari dengan Nama user.");
                 return false;
             }
             return true;
@@ -73,7 +84,7 @@ namespace csharp_lksmart
         {
             if (!ValidateInput()) return;
 
-            if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
+            if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin ingin melakukan ini?")) return;
 
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
@@ -93,18 +104,18 @@ namespace csharp_lksmart
             int status = p.Get<int>("status");
             if (status == 2)
             {
-                MessageBox.Show("Username atau telepon sudah digunakan.");
+                MessageBoxHelper.ShowWarning("Username atau telepon sudah digunakan.");
                 return;
             }
             else if (status == 1)
             {
-                MessageBox.Show("Data berhasil ditambahkan.");
+                MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
                 LoadData();
                 return;
             }
             else
             {
-                MessageBox.Show("Terjadi kesalahan.");
+                MessageBoxHelper.ShowError("Terjadi kesalahan.");
             }
 
             LoadData();
@@ -112,15 +123,9 @@ namespace csharp_lksmart
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCari.Text))
-            {
-                MessageBox.Show("Please provide a valid user ID.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (!ValidateInput() || !ValidateSearch()) return;
 
-            if (!ValidateInput()) return;
-
-            if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
+            if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin ingin melakukan ini?")) return;
 
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
@@ -141,18 +146,18 @@ namespace csharp_lksmart
             int status = p.Get<int>("status");
             if (status == 2)
             {
-                MessageBox.Show("Username atau telepon sudah digunakan.");
+                MessageBoxHelper.ShowWarning("Username atau telepon sudah digunakan.");
                 return;
             }
             else if (status == 1)
             {
-                MessageBox.Show("Data berhasil diupdate.");
+                MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
                 LoadData();
                 return;
             }
             else
             {
-                MessageBox.Show("Terjadi kesalahan.");
+                MessageBoxHelper.ShowError("Terjadi kesalahan.");
             }
 
             MessageBox.Show("Data berhasil di update");
@@ -162,15 +167,9 @@ namespace csharp_lksmart
 
         private async void btnHapus_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCari.Text))
-            {
-                MessageBox.Show("Please provide a valid user ID.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!ValidateInput()) return;
-
-            if (!(MessageBox.Show("Apakah anda yakin ingin melakukan ini?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)) return;
+            if (!ValidateInput() || !ValidateSearch()) return;
+            
+            if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin ingin melakukan ini?")) return;
 
             try
             {
@@ -185,11 +184,11 @@ namespace csharp_lksmart
 
                 if (res == null)
                 {
-                    MessageBox.Show("Proses hapus data gagal");
+                    MessageBoxHelper.ShowWarning("Data gagal di hapus.");
                     return;
                 }
 
-                MessageBox.Show("Data berhasil di hapus");
+                MessageBoxHelper.ShowInformation("Data berhasil di hapus.");
                 LoadData();
             }
             catch (Exception)
@@ -200,62 +199,27 @@ namespace csharp_lksmart
 
         private void btnKelolaUser_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("You are in this form right now.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBoxHelper.ShowWarning("Anda sedang berada di form ini.");
         }
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
-            ResetInput();
-            FormAdminLaporan laporanForm = new FormAdminLaporan();
-            laporanForm.Show();
-            this.Hide();
+            FormClosingHelper.FormChanging<FormAdminLaporan>(this);
         }
 
         private void btnLog_Click(object sender, EventArgs e)
         {
-            ResetInput();
-            FormAdminLogActivity logForm = new FormAdminLogActivity();
-            logForm.Show();
-            this.Hide();
+            FormClosingHelper.FormChanging<FormAdminLogActivity>(this);
         }
 
         private async void btnLogout_Click(object sender, EventArgs e)
         {
-            if (!(MessageBox.Show("Apakah anda yakin?", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK))
-            {
-                return;
-            }
-
-            var db = new DBHelpers();
-            var conn = GlobalConfig.GetConnection();
-            var p = new DynamicParameters();
-            p.Add("waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
-            p.Add("aktivitas", "Logout", DbType.String, ParameterDirection.Input);
-            p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
-            var affected = await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
-            var formLogin = new FormLogin();
-            formLogin.Show();
-            this.Hide();
+            await LogoutHelper.LogoutAsync(this);
         }
 
         private void FKelolaUser_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Are you sure to close?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                Environment.Exit(0);
-            }
-            else
-            {
-                e.Cancel = true;
-            }
-        }
-
-        private void txtSearchId_Enter(object sender, EventArgs e)
-        {
-        }
-
-        private void txtSearchId_Leave(object sender, EventArgs e)
-        {
+            FormClosingHelper.FormClosing(e);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -270,21 +234,23 @@ namespace csharp_lksmart
 
         private void dataGridViewUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (!(e.RowIndex < 0))
             {
-                isFillingData = true;
-                DataGridViewRow row = dataGridViewUsers.Rows[e.RowIndex];
-                txtCari.Text = row.Cells["username"].Value.ToString();
-                cboxTipeUser.SelectedItem = row.Cells["tipe_user"].Value.ToString();
-                txtNama.Text = row.Cells["nama"].Value.ToString();
-                txtAlamat.Text = row.Cells["alamat"].Value.ToString();
-                txtAlamat.Text = row.Cells["alamat"].Value.ToString();
-                txtUsername.Text = row.Cells["username"].Value.ToString();
-                txtTelepon.Text = row.Cells["telepon"].Value.ToString();
-                txtPassword.Text = row.Cells["password"].Value.ToString();
-                hasilCari = row.Cells["id_user"].Value.ToString();
-                isFillingData = false;
+                return;
             }
+
+            isFillingData = true;
+            DataGridViewRow row = dataGridViewUsers.Rows[e.RowIndex];
+            txtCari.Text = row.Cells["username"].Value.ToString();
+            cboxTipeUser.SelectedItem = row.Cells["tipe_user"].Value.ToString();
+            txtNama.Text = row.Cells["nama"].Value.ToString();
+            txtAlamat.Text = row.Cells["alamat"].Value.ToString();
+            txtAlamat.Text = row.Cells["alamat"].Value.ToString();
+            txtUsername.Text = row.Cells["username"].Value.ToString();
+            txtTelepon.Text = row.Cells["telepon"].Value.ToString();
+            txtPassword.Text = row.Cells["password"].Value.ToString();
+            hasilCari = row.Cells["id_user"].Value.ToString();
+            isFillingData = false;
         }
 
         private async void txtCari_TextChanged(object sender, EventArgs e)
@@ -297,34 +263,27 @@ namespace csharp_lksmart
                 return;
             }
 
-            try
+            var db = new DBHelpers();
+            var conn = GlobalConfig.GetConnection();
+            var p = new DynamicParameters();
+
+            p.Add("username", txtCari.Text + "%", DbType.String, ParameterDirection.Input);
+
+            var res = await db.ToSingleModel<MUser>(conn, "SELECT * FROM tbl_user WHERE username LIKE @username", p);
+
+            if (res == null)
             {
-                var db = new DBHelpers();
-                var conn = GlobalConfig.GetConnection();
-                var p = new DynamicParameters();
-
-                p.Add("username", txtCari.Text + "%", DbType.String, ParameterDirection.Input);
-
-                var res = await db.ToSingleModel<MUser>(conn, "SELECT * FROM tbl_user WHERE username LIKE @username", p);
-
-                if (res == null)
-                {
-                    return;
-                }
-
-                dataGridViewUsers.DataSource = new List<MUser> { res };
-                cboxTipeUser.SelectedItem = res.tipe_user;
-                txtAlamat.Text = res.alamat;
-                txtNama.Text = res.nama;
-                txtPassword.Text = res.password;
-                txtTelepon.Text = res.telepon;
-                txtUsername.Text = res.username;
-                hasilCari = res.id_user.ToString();
+                return;
             }
-            catch (Exception)
-            {
-                throw;
-            }
+
+            dataGridViewUsers.DataSource = new List<MUser> { res };
+            cboxTipeUser.SelectedItem = res.tipe_user;
+            txtAlamat.Text = res.alamat;
+            txtNama.Text = res.nama;
+            txtPassword.Text = res.password;
+            txtTelepon.Text = res.telepon;
+            txtUsername.Text = res.username;
+            hasilCari = res.id_user.ToString();
         }
 
         private void txtPassword_OnIconRightClick(object sender, EventArgs e)
@@ -339,6 +298,11 @@ namespace csharp_lksmart
                 txtPassword.IconRight = csharp_lksmart.Properties.Resources.icon_eye_outline_png;
                 txtPassword.PasswordChar = '*';
             }
+        }
+
+        private void btnKelolaPelanggan_Click(object sender, EventArgs e)
+        {
+            FormClosingHelper.FormChanging<FAdminPelanggan>(this);
         }
     }
 }
