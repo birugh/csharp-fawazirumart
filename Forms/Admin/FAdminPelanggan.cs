@@ -228,7 +228,7 @@ namespace csharp_lksmart.Forms.Admin
 
         private async void btnLogout_Click(object sender, EventArgs e)
         {
-            await LogoutHelper.LogoutAsync(this);
+            await LogoutHelper.LogoutAsync(this, FormLogin.userName);
         }
 
         private void Timer_Tick(object sender, EventArgs e)

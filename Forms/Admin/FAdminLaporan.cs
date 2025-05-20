@@ -1,19 +1,11 @@
-﻿using csharp_lksmart.Forms.Admin;
+﻿using System;
+using System.Data;
+using System.Linq;
+using System.Windows.Forms;
+using csharp_lksmart.Forms.Admin;
 using csharp_lksmart.Helpers;
 using csharp_lksmart.Models;
 using Dapper;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace csharp_lksmart
 {
@@ -30,7 +22,7 @@ namespace csharp_lksmart
         {
             if (dateStart.Value > dateEnd.Value)
             {
-                MessageBoxHelper.ShowWarning("Batas waktu awal tidak valid!"+ dateStart.Value + " "+dateEnd.Value);
+                MessageBoxHelper.ShowWarning("Batas waktu awal tidak valid!" + dateStart.Value + " " + dateEnd.Value);
                 dateStart.Focus();
                 return false;
             }
@@ -101,8 +93,8 @@ namespace csharp_lksmart
 
             p.Add("dateStart", dateStart.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
             p.Add("dateEnd", dateEnd.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
-            
-            var data = await db.ToModel<MLaporan>(conn, "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi WHERE tgl_transaksi BETWEEN @dateStart AND @dateEnd GROUP BY tgl_transaksi", p);
+
+            var data = await db.ToModelSP<MLaporan>(conn, "usp_group_m_transaksi", p);
 
             dataGridViewLaporan.DataSource = null;
             dataGridViewLaporan.DataSource = data.ToList();
@@ -119,7 +111,7 @@ namespace csharp_lksmart
             p.Add("dateStart", dateStart.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
             p.Add("dateEnd", dateEnd.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
 
-            var data = await db.ToModel<MLaporan>(conn, "SELECT tgl_transaksi, SUM(total_bayar) AS total_bayar FROM tbl_transaksi WHERE tgl_transaksi BETWEEN @dateStart AND @dateEnd GROUP BY tgl_transaksi", p);
+            var data = await db.ToModelSP<MLaporan>(conn, "usp_group_m_transaksi", p);
             chartOmset.DataSource = data.ToList();
 
             ResetChart();
@@ -131,7 +123,7 @@ namespace csharp_lksmart
 
         private async void btnLogout_Click(object sender, EventArgs e)
         {
-            await LogoutHelper.LogoutAsync(this);
+            await LogoutHelper.LogoutAsync(this, FormLogin.userName);
         }
 
         private void KelolaFormLaporan_FormClosing(object sender, FormClosingEventArgs e)

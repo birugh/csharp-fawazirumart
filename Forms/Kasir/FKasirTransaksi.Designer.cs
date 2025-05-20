@@ -397,11 +397,12 @@
             this.bunifuLabel20.Location = new System.Drawing.Point(318, 31);
             this.bunifuLabel20.Name = "bunifuLabel20";
             this.bunifuLabel20.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel20.Size = new System.Drawing.Size(203, 56);
+            this.bunifuLabel20.Size = new System.Drawing.Size(301, 56);
             this.bunifuLabel20.TabIndex = 55;
-            this.bunifuLabel20.Text = "KELOLA USER";
+            this.bunifuLabel20.Text = "KELOLA TRANSAKSI";
             this.bunifuLabel20.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.bunifuLabel20.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            this.bunifuLabel20.Click += new System.EventHandler(this.bunifuLabel20_Click);
             // 
             // dataGridViewKeranjang
             // 

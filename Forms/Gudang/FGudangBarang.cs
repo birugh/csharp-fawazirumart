@@ -160,6 +160,7 @@ namespace csharp_lksmart
                 return;
             }
             else
+
             {
                 MessageBoxHelper.ShowError("Terjadi kesalahan.");
                 return;
@@ -230,7 +231,7 @@ namespace csharp_lksmart
 
         private async void btnLogout_Click(object sender, EventArgs e)
         {
-            await LogoutHelper.LogoutAsync(this);
+            await LogoutHelper.LogoutAsync(this, FormLogin.userName);
         }
 
         private async void txtCari_TextChanged(object sender, EventArgs e)

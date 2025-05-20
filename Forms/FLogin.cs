@@ -81,10 +81,10 @@ namespace csharp_lksmart
 
             p = new DynamicParameters();
             p.Add("waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
-            p.Add("aktivitas", "Login", DbType.String, ParameterDirection.Input);
+            p.Add("aktivitas_detail", "Username: "+txtUsername.Text+" telah login", DbType.String, ParameterDirection.Input);
             p.Add("id_user", userId, DbType.String, ParameterDirection.Input);
 
-            var affected = await db.ExecuteAsyncSP(conn, "usp_insert_m_log", p);
+            var affected = await db.ExecuteAsyncSP(conn, "usp_login_m_log", p);
 
             this.Hide();
         }

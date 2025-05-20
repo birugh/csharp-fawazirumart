@@ -437,12 +437,12 @@
             this.bunifuLabel6.CursorType = null;
             this.bunifuLabel6.Font = new System.Drawing.Font("Poppins SemiBold", 26.25F, System.Drawing.FontStyle.Bold);
             this.bunifuLabel6.ForeColor = System.Drawing.SystemColors.Control;
-            this.bunifuLabel6.Location = new System.Drawing.Point(69, 169);
+            this.bunifuLabel6.Location = new System.Drawing.Point(28, 169);
             this.bunifuLabel6.Name = "bunifuLabel6";
             this.bunifuLabel6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel6.Size = new System.Drawing.Size(151, 62);
+            this.bunifuLabel6.Size = new System.Drawing.Size(252, 62);
             this.bunifuLabel6.TabIndex = 9;
-            this.bunifuLabel6.Text = "LKS Mart";
+            this.bunifuLabel6.Text = "Fawaziru Mart";
             this.bunifuLabel6.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.bunifuLabel6.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 

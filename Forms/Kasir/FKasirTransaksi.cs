@@ -84,7 +84,7 @@ namespace csharp_lksmart
         {
             var conn = GlobalConfig.GetConnection();
             var db = new DBHelpers();
-            return await db.ToSingleModelSP<string>(conn, "usp_generate_no_transaksi_m_transaksi", null);
+            return await db.ToSingleModelSP<string>(conn, "usp_generate_no_transaksi", null);
         }
 
         private void ResetAll()
@@ -176,7 +176,7 @@ namespace csharp_lksmart
 
         private async void btnLogout_Click(object sender, EventArgs e)
         {
-            await LogoutHelper.LogoutAsync(this);
+            await LogoutHelper.LogoutAsync(this, FormLogin.userName);
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -339,7 +339,7 @@ namespace csharp_lksmart
             p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             p.Add("id_pelanggan", idPelanggan, DbType.String, ParameterDirection.Input);
 
-            var res = await db.ExecuteAsync(conn, "INSERT INTO tbl_transaksi VALUES (@no_transaksi, @tgl_transaksi, @nama_kasir, @total_bayar, @id_user, @id_pelanggan)", p);
+            var res = await db.ExecuteAsync(conn, "usp_insert_m_transaksi", p);
 
             var getLastId = await db.ToSingleModel<int>(conn, "SELECT MAX(id_transaksi) FROM tbl_transaksi;", null);
 
@@ -361,7 +361,7 @@ namespace csharp_lksmart
                 p.Add("kuantitas", Convert.ToInt64(row["Qty"]), DbType.Int64, ParameterDirection.Input);
                 p.Add("total_harga", Convert.ToInt64(row["Total Harga"]), DbType.Int64, ParameterDirection.Input);
 
-                await db.ExecuteAsync(conn, "INSERT INTO tbl_detail_transaksi (id_transaksi, id_barang, harga_barang, kuantitas, total_harga) VALUES (@id_transaksi, @id_barang, @harga_barang, @kuantitas, @total_harga)", p);
+                await db.ExecuteAsync(conn, "usp_insert_m_detail_transaksi", p);
             }
 
             SnackBarHelper.ShowSuccessInformation(this, "Data berhasil di simpan!");
@@ -538,6 +538,11 @@ namespace csharp_lksmart
         private void UpdateDateTime()
         {
             TimerHelper.InitializeDateTime(labelDate, labelTime);
+        }
+
+        private void bunifuLabel20_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

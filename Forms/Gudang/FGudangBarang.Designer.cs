@@ -1304,9 +1304,9 @@
             this.bunifuLabel2.Location = new System.Drawing.Point(314, 32);
             this.bunifuLabel2.Name = "bunifuLabel2";
             this.bunifuLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel2.Size = new System.Drawing.Size(203, 56);
+            this.bunifuLabel2.Size = new System.Drawing.Size(261, 56);
             this.bunifuLabel2.TabIndex = 34;
-            this.bunifuLabel2.Text = "KELOLA USER";
+            this.bunifuLabel2.Text = "KELOLA BARANG";
             this.bunifuLabel2.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
             this.bunifuLabel2.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 

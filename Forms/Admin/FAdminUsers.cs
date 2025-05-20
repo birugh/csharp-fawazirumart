@@ -102,7 +102,7 @@ namespace csharp_lksmart
             var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_user", p);
 
             int status = p.Get<int>("status");
-            if (status == 2)
+            if (status == 0)
             {
                 MessageBoxHelper.ShowWarning("Username atau telepon sudah digunakan.");
                 return;
@@ -110,6 +110,12 @@ namespace csharp_lksmart
             else if (status == 1)
             {
                 MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
+                LoadData();
+                return;
+            }
+            else if (status == 2)
+            {
+                MessageBoxHelper.ShowInformation("Restore data gagal, silahkan coba lagi.");
                 LoadData();
                 return;
             }
@@ -168,7 +174,7 @@ namespace csharp_lksmart
         private async void btnHapus_Click(object sender, EventArgs e)
         {
             if (!ValidateInput() || !ValidateSearch()) return;
-            
+
             if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin ingin melakukan ini?")) return;
 
             try
@@ -214,7 +220,7 @@ namespace csharp_lksmart
 
         private async void btnLogout_Click(object sender, EventArgs e)
         {
-            await LogoutHelper.LogoutAsync(this);
+            await LogoutHelper.LogoutAsync(this, FormLogin.userName);
         }
 
         private void FKelolaUser_FormClosing(object sender, FormClosingEventArgs e)

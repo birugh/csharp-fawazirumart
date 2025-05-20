@@ -58,7 +58,7 @@ namespace csharp_lksmart
 
             p.Add("dateStart", dateStart.Value.ToString(), DbType.String, ParameterDirection.Input);
             p.Add("dateEnd", dateEnd.Value.ToString(), DbType.String, ParameterDirection.Input);
-            var a = await db.ToModel<MLog>(conn, "select id_log, waktu, aktivitas, username from tbl_log inner join tbl_user on tbl_log.id_user = tbl_user.id_user WHERE waktu BETWEEN @dateStart AND @dateEnd", p);
+            var a = await db.ToModel<MLog>(conn, "usp_filter_m_log", p);
 
             dataGridViewLogActivity.DataSource = a.ToList();
         }
@@ -80,7 +80,7 @@ namespace csharp_lksmart
 
         private async void btnLogout_Click(object sender, EventArgs e)
         {
-            await LogoutHelper.LogoutAsync(this);
+            await LogoutHelper.LogoutAsync(this, FormLogin.userName);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
