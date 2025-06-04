@@ -47,7 +47,7 @@ namespace csharp_lksmart
 
             p.Add("@username", txtUsername.Text, DbType.String, ParameterDirection.Input);
             p.Add("@password", txtPassword.Text, DbType.String, ParameterDirection.Input);
-
+            
             var res = await db.ToSingleModelSP<MUser>(conn, "usp_auth_m_user", p);
 
             if (res == null || string.IsNullOrWhiteSpace(res.username))

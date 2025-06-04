@@ -14,6 +14,11 @@ namespace csharp_lksmart
         {
             InitializeComponent();
             TimerHelper.InitializeTimer(Timer_Tick);
+
+            cboxSearch.SelectedIndex = 0;
+            dateStart.Value = DateTime.Now.Date.AddDays(-1);
+            dateEnd.Value = DateTime.Now;
+
             LoadData();
         }
 
@@ -25,10 +30,17 @@ namespace csharp_lksmart
 
         private void ResetInput()
         {
+            dateStart.ValueChanged -= dateStart_ValueChanged;
+            dateEnd.ValueChanged -= dateEnd_ValueChanged;
+
             dateStart.Value = DateTime.Now;
             dateEnd.Value = DateTime.Now;
             dateStart.Focus();
+            cboxSearch.SelectedIndex = 0;
             LoadData();
+
+            dateStart.ValueChanged += dateStart_ValueChanged;
+            dateEnd.ValueChanged += dateEnd_ValueChanged;
         }
 
         private bool ValidateDate()
@@ -47,7 +59,7 @@ namespace csharp_lksmart
             }
             return true;
         }
-
+            
         private async void FilterDate()
         {
             if (!ValidateDate()) return;
@@ -55,10 +67,20 @@ namespace csharp_lksmart
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
+            string func = "default";
+            switch (cboxSearch.SelectedIndex)
+            {
+                case 1: func = "login"; break;
+                case 2: func = "logout"; break;
+                case 3: func = "insert"; break;
+                case 4: func = "update"; break;
+                case 5: func = "delete"; break;
+            }
 
+            p.Add("func", func, DbType.String, ParameterDirection.Input);
             p.Add("dateStart", dateStart.Value.ToString(), DbType.String, ParameterDirection.Input);
             p.Add("dateEnd", dateEnd.Value.ToString(), DbType.String, ParameterDirection.Input);
-            var a = await db.ToModel<MLog>(conn, "usp_filter_m_log", p);
+            var a = await db.ToModelSP<MLog>(conn, "usp_filter_m_log", p);
 
             dataGridViewLogActivity.DataSource = a.ToList();
         }
@@ -111,6 +133,11 @@ namespace csharp_lksmart
         private void btnKelolaPelanggan_Click(object sender, EventArgs e)
         {
             FormClosingHelper.FormChanging<FAdminPelanggan>(this);
+        }
+
+        private void cboxSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterDate();
         }
     }
 }

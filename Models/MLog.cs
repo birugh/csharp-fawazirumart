@@ -7,6 +7,7 @@ namespace csharp_lksmart
         public int id_log { get; set; }
         public DateTime waktu { get; set; }
         public string aktivitas { get; set; }
-        public int id_user { get; set; }
+        public string aktivitas_detail { get; set; }
+        public string username { get; set; }
     }
 }

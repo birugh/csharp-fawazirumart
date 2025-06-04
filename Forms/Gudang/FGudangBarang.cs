@@ -17,6 +17,7 @@ namespace csharp_lksmart
         public FormGudangBarang()
         {
             InitializeComponent();
+            cboxSearch.SelectedIndex = 0;
             TimerHelper.InitializeTimer(Timer_Tick);
             LoadData();
         }
@@ -55,6 +56,16 @@ namespace csharp_lksmart
             return true;
         }
 
+        private bool ValidateDate()
+        {
+            if (dateExpired.Value < DateTime.Today)
+            {
+                MessageBoxHelper.ShowWarning("Tanggal expired tidak boleh kurang dari hari ini.");
+                return false;
+            }
+            return true;
+        }
+
         private bool ValidateSearch()
         {
             if (string.IsNullOrWhiteSpace(txtCari.Text))
@@ -80,6 +91,7 @@ namespace csharp_lksmart
         private async void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
+            if (!ValidateDate()) return;
 
             if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin, ingin melakukan ini?")) return;
 
@@ -89,7 +101,14 @@ namespace csharp_lksmart
                 var conn = GlobalConfig.GetConnection();
                 var p = new DynamicParameters();
 
-                p.Add("func", "create", DbType.String, ParameterDirection.Input);
+                p.Add("@key", "id_user", DbType.String);
+                p.Add("@value", FormLogin.userId, DbType.Int32);
+
+                var res = await db.ExecuteAsyncSP(conn, "sp_set_session_context", p);
+
+                p = new DynamicParameters();
+
+                p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
                 p.Add("kode_barang", txtKodeBarang.Text, DbType.String, ParameterDirection.Input);
                 p.Add("jumlah_barang", txtJumlahBarang.Text, DbType.String, ParameterDirection.Input);
                 p.Add("nama_barang", txtNamaBarang.Text, DbType.String, ParameterDirection.Input);
@@ -98,7 +117,7 @@ namespace csharp_lksmart
                 p.Add("harga_satuan", txtHargaSatuan.Text, DbType.String, ParameterDirection.Input);
                 p.Add("status", DbType.Int16, direction: ParameterDirection.Output);
 
-                var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_barang", p);
+                res = await db.ExecuteAsyncSP(conn, "usp_insert_m_barang", p);
 
                 int status = p.Get<int>("status");
                 if (status == 2)
@@ -117,7 +136,7 @@ namespace csharp_lksmart
                     MessageBoxHelper.ShowError("Terjadi kesalahan.");
                     return;
                 }
-
+                
                 LoadData();
             }
             catch (Exception)
@@ -135,7 +154,8 @@ namespace csharp_lksmart
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
 
-            p.Add("func", "update", DbType.String, ParameterDirection.Input);
+            p = new DynamicParameters();
+            p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             p.Add("id_barang", hasilCari, DbType.String, ParameterDirection.Input);
             p.Add("kode_barang", txtKodeBarang.Text, DbType.String, ParameterDirection.Input);
             p.Add("jumlah_barang", txtJumlahBarang.Text, DbType.String, ParameterDirection.Input);
@@ -145,7 +165,7 @@ namespace csharp_lksmart
             p.Add("harga_satuan", txtHargaSatuan.Text, DbType.String, ParameterDirection.Input);
             p.Add("status", DbType.Int16, direction: ParameterDirection.Output);
 
-            var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_barang", p);
+            await db.ExecuteAsyncSP(conn, "usp_update_m_barang", p);
 
             int status = p.Get<int>("status");
             if (status == 2)
@@ -160,7 +180,6 @@ namespace csharp_lksmart
                 return;
             }
             else
-
             {
                 MessageBoxHelper.ShowError("Terjadi kesalahan.");
                 return;
@@ -169,6 +188,7 @@ namespace csharp_lksmart
             LoadData();
             btnReset_Click(sender, e);
         }
+
 
         private async void btnHapus_Click(object sender, EventArgs e)
         {
@@ -179,14 +199,27 @@ namespace csharp_lksmart
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
 
-            p.Add("func", "delete", DbType.String, ParameterDirection.Input);
+            p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             p.Add("id_barang", hasilCari, DbType.String, ParameterDirection.Input);
+            p.Add("status", DbType.Int16, direction: ParameterDirection.Output);
 
-            var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_barang", p);
+            var res = await db.ExecuteAsyncSP(conn, "usp_delete_m_barang", p);
 
-            if (res > 0)
+            int status = p.Get<int>("status");
+            if (status == 2)
             {
-                MessageBoxHelper.ShowWarning("Data gagal ditambahkan!");
+                MessageBoxHelper.ShowWarning("Data gagal dihapus.");
+                return;
+            }
+            else if (status == 1)
+            {
+                MessageBoxHelper.ShowInformation("Data berhasil dihapus.");
+                LoadData();
+                return;
+            }
+            else
+            {
+                MessageBoxHelper.ShowError("Terjadi kesalahan.");
                 return;
             }
 
@@ -206,7 +239,7 @@ namespace csharp_lksmart
 
         private void dataGridViewBarang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (!(e.RowIndex < 0))
+            if (e.RowIndex < 0)
             {
                 return;
             }
@@ -219,7 +252,20 @@ namespace csharp_lksmart
             txtSatuan.Text = row.Cells["satuan"].Value.ToString();
             dateExpired.Value = Convert.ToDateTime(row.Cells["expired_date"].Value);
             txtHargaSatuan.Text = row.Cells["harga_satuan"].Value.ToString();
-            txtCari.Text = row.Cells["nama_barang"].Value.ToString();
+
+            if (cboxSearch.SelectedIndex == 0)
+            {
+                txtCari.Text = row.Cells["id_barang"].Value.ToString();
+            }
+            else if (cboxSearch.SelectedIndex == 1)
+            {
+                txtCari.Text = row.Cells["kode_barang"].Value.ToString();
+            }
+            else if (cboxSearch.SelectedIndex == 2)
+            {
+                txtCari.Text = row.Cells["nama_barang"].Value.ToString();
+            }
+
             hasilCari = row.Cells["id_barang"].Value.ToString();
             isFillingData = false;
         }
@@ -236,35 +282,59 @@ namespace csharp_lksmart
 
         private async void txtCari_TextChanged(object sender, EventArgs e)
         {
-            if (isFillingData == true) return;
-
-            if (string.IsNullOrWhiteSpace(txtCari.Text))
-            {
-                LoadData();
-                return;
-            }
-
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
+            List<MBarang> res = null;
 
-            p.Add("nama_barang", txtCari.Text + "%", DbType.String, ParameterDirection.Input);
-
-            var res = await db.ToSingleModel<MBarang>(conn, "SELECT * FROM tbl_barang WHERE nama_barang LIKE @nama_barang", p);
-
-            if (res == null)
+            if (cboxSearch.SelectedIndex == 0)
             {
+                if (!int.TryParse(txtCari.Text, out int id))
+                {
+                    return;
+                }
+                p.Add("func", "id", DbType.String, ParameterDirection.Input);
+                p.Add("id_barang", id, DbType.String, ParameterDirection.Input);
+            }
+            else if (cboxSearch.SelectedIndex == 1)
+            {
+                p.Add("func", "kode", DbType.String, ParameterDirection.Input);
+                p.Add("kode_barang", txtCari.Text, DbType.String, ParameterDirection.Input);
+            }
+            else if (cboxSearch.SelectedIndex == 2)
+            {
+                p.Add("func", "nama", DbType.String, ParameterDirection.Input);
+                p.Add("nama_barang", txtCari.Text, DbType.String, ParameterDirection.Input);
+            }
+            else
+            {
+                MessageBoxHelper.ShowError("Pencarian tidak valid, silahkan coba lagi.");
                 return;
             }
 
-            dataGridViewBarang.DataSource = new List<MBarang> { res };
-            txtHargaSatuan.Text = res.harga_satuan.ToString();
-            txtJumlahBarang.Text = res.jumlah_barang.ToString();
-            txtKodeBarang.Text = res.kode_barang;
-            txtNamaBarang.Text = res.nama_barang;
-            txtSatuan.Text = res.satuan;
-            dateExpired.Value = res.expired_date;
-            hasilCari = res.id_barang.ToString();
+            var result = await db.ToModelSP<MBarang>(conn, "usp_search_m_barang", p);
+            res = result?.ToList();
+
+            if (res == null || res.Count == 0)
+            {
+                dataGridViewBarang.DataSource = null;
+                return;
+            }
+
+            dataGridViewBarang.DataSource = res;
+
+            var first = res.FirstOrDefault();
+            if (first != null)
+            {
+                txtHargaSatuan.Text = first.harga_satuan.ToString();
+                txtJumlahBarang.Text = first.jumlah_barang.ToString();
+                txtKodeBarang.Text = first.kode_barang;
+                txtNamaBarang.Text = first.nama_barang;
+                txtSatuan.Text = first.satuan;
+                dateExpired.Value = first.expired_date;
+                hasilCari = first.id_barang.ToString();
+            }
         }
+
     }
 }
