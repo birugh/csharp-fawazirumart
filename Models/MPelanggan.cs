@@ -11,5 +11,6 @@ namespace csharp_lksmart
         public int id_pelanggan { get; set; }
         public string nama { get; set; }
         public string telepon { get; set; }
+        public string alamat { get; set; }
     }
 }

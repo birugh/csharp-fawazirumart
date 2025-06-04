@@ -22,7 +22,7 @@ namespace csharp_lksmart.Forms.Admin
             var logParam = new DynamicParameters();
 
             logParam.Add("waktu", DateTime.Now, DbType.String, ParameterDirection.Input);
-            logParam.Add("aktivitas_detaiil", "Username: "+ username +" telah logout", DbType.String, ParameterDirection.Input);
+            logParam.Add("aktivitas_detail", "Username: "+ username + " telah logout", DbType.String, ParameterDirection.Input);
             logParam.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
 
             var affected = await db.ExecuteAsyncSP(conn, "usp_logout_m_log", logParam);

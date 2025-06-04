@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Data.SqlClient;
 
 namespace csharp_lksmart
 {
@@ -9,6 +10,11 @@ namespace csharp_lksmart
         public static string GetConnection()
         {
             return connString;
+        }
+
+        public static SqlConnection GetSqlConnection()
+        {
+            return new SqlConnection(connString);
         }
     }
 }

@@ -15,6 +15,12 @@ namespace csharp_lksmart
         {
             InitializeComponent();
             TimerHelper.InitializeTimer(Timer_Tick);
+            dateStart.ValueChanged -= dateStart_ValueChanged;
+            dateEnd.ValueChanged -= dateEnd_ValueChanged;
+            dateStart.Value = DateTime.Now.Date.AddDays(-1);
+            dateEnd.Value = DateTime.Now;
+            dateStart.ValueChanged += dateStart_ValueChanged;
+            dateEnd.ValueChanged += dateEnd_ValueChanged;
             LoadData();
         }
 
@@ -23,13 +29,13 @@ namespace csharp_lksmart
             if (dateStart.Value > dateEnd.Value)
             {
                 MessageBoxHelper.ShowWarning("Batas waktu awal tidak valid!" + dateStart.Value + " " + dateEnd.Value);
-                dateStart.Focus();
+                ResetInput();
                 return false;
             }
             else if (dateEnd.Value < dateStart.Value)
             {
                 MessageBoxHelper.ShowWarning("Batas waktu terakhir tidak valid!");
-                dateEnd.Focus();
+                ResetInput();
                 return false;
             }
             return true;
@@ -83,7 +89,7 @@ namespace csharp_lksmart
             FormClosingHelper.FormChanging<FormAdminLogActivity>(this);
         }
 
-        private async void FilterData()
+        private async void GenerateChart()
         {
             if (!ValidateDate()) return;
 
@@ -98,21 +104,6 @@ namespace csharp_lksmart
 
             dataGridViewLaporan.DataSource = null;
             dataGridViewLaporan.DataSource = data.ToList();
-        }
-
-        private async void btnGenerate_Click(object sender, EventArgs e)
-        {
-            if (!ValidateDate()) return;
-
-            var db = new DBHelpers();
-            var conn = GlobalConfig.GetConnection();
-            var p = new DynamicParameters();
-
-            p.Add("dateStart", dateStart.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
-            p.Add("dateEnd", dateEnd.Value.ToString("yyyy-MM-dd"), DbType.String, ParameterDirection.Input);
-
-            var data = await db.ToModelSP<MLaporan>(conn, "usp_group_m_transaksi", p);
-            chartOmset.DataSource = data.ToList();
 
             ResetChart();
             foreach (var item in data)
@@ -138,12 +129,12 @@ namespace csharp_lksmart
 
         private void dateStart_ValueChanged(object sender, EventArgs e)
         {
-            FilterData();
+            GenerateChart();
         }
 
         private void dateEnd_ValueChanged(object sender, EventArgs e)
         {
-            FilterData();
+            GenerateChart();
         }
 
         private void btnKelolaPelanggan_Click(object sender, EventArgs e)

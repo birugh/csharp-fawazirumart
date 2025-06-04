@@ -328,6 +328,8 @@ namespace csharp_lksmart
                 currentNoTransaksi = await GenerateNoTransaksi();
             }
 
+            MessageBoxHelper.ShowWarning(currentNoTransaksi);
+
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
@@ -339,7 +341,7 @@ namespace csharp_lksmart
             p.Add("id_user", FormLogin.userId, DbType.String, ParameterDirection.Input);
             p.Add("id_pelanggan", idPelanggan, DbType.String, ParameterDirection.Input);
 
-            var res = await db.ExecuteAsync(conn, "usp_insert_m_transaksi", p);
+            var res = await db.ExecuteAsyncSP(conn, "usp_insert_m_transaksi", p);
 
             var getLastId = await db.ToSingleModel<int>(conn, "SELECT MAX(id_transaksi) FROM tbl_transaksi;", null);
 
@@ -361,7 +363,7 @@ namespace csharp_lksmart
                 p.Add("kuantitas", Convert.ToInt64(row["Qty"]), DbType.Int64, ParameterDirection.Input);
                 p.Add("total_harga", Convert.ToInt64(row["Total Harga"]), DbType.Int64, ParameterDirection.Input);
 
-                await db.ExecuteAsync(conn, "usp_insert_m_detail_transaksi", p);
+                await db.ExecuteAsyncSP(conn, "usp_insert_m_detail_transaksi", p);
             }
 
             SnackBarHelper.ShowSuccessInformation(this, "Data berhasil di simpan!");

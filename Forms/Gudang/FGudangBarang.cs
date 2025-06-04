@@ -289,10 +289,7 @@ namespace csharp_lksmart
 
             if (cboxSearch.SelectedIndex == 0)
             {
-                if (!int.TryParse(txtCari.Text, out int id))
-                {
-                    return;
-                }
+                if (!int.TryParse(txtCari.Text, out int id)) return;
                 p.Add("func", "id", DbType.String, ParameterDirection.Input);
                 p.Add("id_barang", id, DbType.String, ParameterDirection.Input);
             }
@@ -336,5 +333,9 @@ namespace csharp_lksmart
             }
         }
 
+        private void cboxSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCari.Focus();
+        }
     }
 }

@@ -7,9 +7,12 @@ namespace csharp_lksmart.Forms.Admin
         private static Bunifu.UI.WinForms.BunifuSnackbar snackBar;
         public static void ShowSuccessInformation(Form currentForm, string message)
         {
+            if (snackBar == null)
+                snackBar = new Bunifu.UI.WinForms.BunifuSnackbar();
+
             snackBar.Show(currentForm, message,
-            Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
-            3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
+                Bunifu.UI.WinForms.BunifuSnackbar.MessageTypes.Success,
+                3000, null, Bunifu.UI.WinForms.BunifuSnackbar.Positions.BottomLeft);
         }
     }
 }

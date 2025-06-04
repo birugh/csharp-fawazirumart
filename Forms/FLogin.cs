@@ -58,17 +58,17 @@ namespace csharp_lksmart
             }
 
             Form targetForm = null;
-            switch (res.tipe_user.ToLower())
+            switch (res.tipe_user)
             {
-                case "admin":
+                case "Admin":
                     targetForm = new FormAdminLogActivity();
                     break;
 
-                case "gudang":
+                case "Gudang":
                     targetForm = new FormGudangBarang();
                     break;
 
-                case "kasir":
+                case "Kasir":
                     targetForm = new FormKasirTransaksi();
                     break;
             }

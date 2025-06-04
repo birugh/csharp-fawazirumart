@@ -18,6 +18,7 @@ namespace csharp_lksmart.Forms.Admin
         {
             InitializeComponent();
             TimerHelper.InitializeTimer(Timer_Tick);
+            cboxSearch.SelectedIndex = 0;
             LoadData();
         }
 
@@ -31,6 +32,7 @@ namespace csharp_lksmart.Forms.Admin
         {
             if (string.IsNullOrWhiteSpace(txtNama.Text) ||
                string.IsNullOrWhiteSpace(txtNama.Text) ||
+               string.IsNullOrWhiteSpace(txtAlamat.Text) ||
                !long.TryParse(txtTelepon.Text, out _) ||
                (txtTelepon.Text.Length < 10) ||
                (txtTelepon.Text.Length > 13) ||
@@ -57,14 +59,16 @@ namespace csharp_lksmart.Forms.Admin
         {
             txtNama.Clear();
             txtTelepon.Text = "08";
+            txtAlamat.Clear();
             txtCari.Clear();
             txtNama.Focus();
+            cboxSearch.SelectedIndex = 0;
             LoadData();
         }
 
         private async void btnTambah_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput() || !ValidateSearch()) return;
+            if (!ValidateInput()) return;
 
             if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin?")) return;
 
@@ -72,12 +76,13 @@ namespace csharp_lksmart.Forms.Admin
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
 
-            p.Add("func", "create", DbType.String, ParameterDirection.Input);
+            p.Add("id_user", FormLogin.userId.ToString(), DbType.String, ParameterDirection.Input);
             p.Add("nama", txtNama.Text, DbType.String, ParameterDirection.Input);
             p.Add("telepon", txtTelepon.Text, DbType.String, ParameterDirection.Input);
+            p.Add("alamat", txtAlamat.Text, DbType.String, ParameterDirection.Input);
             p.Add("status", DbType.Int16, direction: ParameterDirection.Output);
 
-            var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_pelanggan", p);
+            var res = await db.ExecuteAsyncSP(conn, "usp_insert_m_pelanggan", p);
 
             int status = p.Get<int>("status");
             if (status == 2)
@@ -104,7 +109,13 @@ namespace csharp_lksmart.Forms.Admin
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput() || !ValidateSearch()) return;
+            if (!ValidateInput()) return;
+
+            if (int.TryParse(hasilCari, out int id))
+            {
+                MessageBoxHelper.ShowWarning("Silahkan pilih filter pencarian ID.");
+                return;
+            }
 
             if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin?")) return;
 
@@ -113,12 +124,13 @@ namespace csharp_lksmart.Forms.Admin
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
 
-            p.Add("func", "update", DbType.String, ParameterDirection.Input);
+            p.Add("id_user", FormLogin.userId.ToString(), DbType.String, ParameterDirection.Input);
             p.Add("nama", txtNama.Text, DbType.String, ParameterDirection.Input);
             p.Add("telepon", txtTelepon.Text, DbType.String, ParameterDirection.Input);
+            p.Add("alamat", txtAlamat.Text, DbType.String, ParameterDirection.Input);
             p.Add("status", DbType.Int16, direction: ParameterDirection.Output);
 
-            var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_user", p);
+            var res = await db.ExecuteAsyncSP(conn, "usp_update_m_pelanggan", p);
 
             int status = p.Get<int>("status");
             if (status == 2)
@@ -141,9 +153,7 @@ namespace csharp_lksmart.Forms.Admin
 
         private async void btnHapus_Click(object sender, EventArgs e)
         {
-            
-
-            if (!ValidateInput()) return;
+            if (!ValidateInput() || !ValidateSearch()) return;
             
             if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin?")) return;
 
@@ -151,16 +161,29 @@ namespace csharp_lksmart.Forms.Admin
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
 
-            p.Add("func", "delete", DbType.String, ParameterDirection.Input);
+            p.Add("id_user", FormLogin.userId.ToString(), DbType.String, ParameterDirection.Input);
             p.Add("id_pelanggan", hasilCari, DbType.String, ParameterDirection.Input);
+            p.Add("status", DbType.Int16, direction: ParameterDirection.Output);
 
-            var res = await db.ExecuteAsyncSP(conn, "usp_create_update_delete_m_pelanggan", p);
+            var res = await db.ExecuteAsyncSP(conn, "usp_delete_m_pelanggan", p);
 
-            if (res == null)
+            int status = p.Get<int>("status");
+            if (status == 0)
             {
-                MessageBoxHelper.ShowWarning("Proses hapus data gagal.");
+                MessageBoxHelper.ShowWarning("Username atau telepon sudah digunakan.");
                 return;
             }
+            else if (status == 1)
+            {
+                MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
+                LoadData();
+                return;
+            }
+            else
+            {
+                MessageBoxHelper.ShowError("Terjadi kesalahan.");
+            }
+
 
             MessageBoxHelper.ShowWarning("Data berhasil di hapus!");
             LoadData();
@@ -168,7 +191,7 @@ namespace csharp_lksmart.Forms.Admin
 
         private async void txtCari_TextChanged(object sender, EventArgs e)
         {
-            if (isFillingData == true) return;
+            if (isFillingData) return;
 
             if (string.IsNullOrWhiteSpace(txtCari.Text))
             {
@@ -179,34 +202,77 @@ namespace csharp_lksmart.Forms.Admin
             var db = new DBHelpers();
             var conn = GlobalConfig.GetConnection();
             var p = new DynamicParameters();
+            List<MPelanggan> res = null;
 
-            p.Add("nama", txtCari.Text + "%", DbType.String, ParameterDirection.Input);
-
-            var res = await db.ToSingleModel<MPelanggan>(conn, "SELECT * FROM tbl_pelanggan WHERE nama LIKE @nama", p);
-
-            if (res == null)
+            if (cboxSearch.SelectedIndex == 0)
             {
+                if (!int.TryParse(txtCari.Text, out int id)) return;
+                p.Add("func", "id", DbType.String, ParameterDirection.Input);
+                p.Add("id_pelanggan", txtCari.Text, DbType.String, ParameterDirection.Input);
+            }
+            else if (cboxSearch.SelectedIndex == 1)
+            {
+                p.Add("func", "nama", DbType.String, ParameterDirection.Input);
+                p.Add("nama", txtCari.Text, DbType.String, ParameterDirection.Input);
+            }
+            else if (cboxSearch.SelectedIndex == 2)
+            {
+                p.Add("func", "telepon", DbType.String, ParameterDirection.Input);
+                p.Add("telepon", txtCari.Text, DbType.String, ParameterDirection.Input);
+            }
+            else
+            {
+                MessageBoxHelper.ShowError("Filter pencarian tidak valid.");
                 return;
             }
 
-            dataGridViewPelanggan.DataSource = new List<MPelanggan> { res };
-            txtNama.Text = res.nama;
-            txtTelepon.Text = res.telepon;
-            hasilCari = res.id_pelanggan.ToString();
+            var result = await db.ToModelSP<MPelanggan>(conn, "usp_search_m_pelanggan", p);
+            res = result?.ToList();
+
+            if (res == null || res.Count == 0)
+            {
+                dataGridViewPelanggan.DataSource = null;
+                return;
+            }
+
+            dataGridViewPelanggan.DataSource = res;
+
+            var first = res.FirstOrDefault();
+            if (first != null)
+            {
+                txtNama.Text = first.nama;
+                txtTelepon.Text = first.telepon;
+                txtAlamat.Text = first.alamat;
+                hasilCari = first.id_pelanggan.ToString();
+            }
         }
 
         private void dataGridViewPelanggan_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (!(e.RowIndex < 0))
+            if (e.RowIndex < 0)
             {
                 return;
             }
 
             isFillingData = true;
             DataGridViewRow row = dataGridViewPelanggan.Rows[e.RowIndex];
-            txtCari.Text = row.Cells["nama"].Value.ToString();
             txtNama.Text = row.Cells["nama"].Value.ToString();
             txtTelepon.Text = row.Cells["telepon"].Value.ToString();
+            txtAlamat.Text = row.Cells["alamat"].Value.ToString();
+
+            if (cboxSearch.SelectedIndex == 0)
+            {
+                txtCari.Text = row.Cells["id_pelanggan"].Value.ToString();
+            }
+            else if (cboxSearch.SelectedIndex == 1)
+            {
+                txtCari.Text = row.Cells["nama"].Value.ToString();
+            }
+            else if (cboxSearch.SelectedIndex == 2)
+            {
+                txtCari.Text = row.Cells["telepon"].Value.ToString();
+            }
+
             hasilCari = row.Cells["id_pelanggan"].Value.ToString();
             isFillingData = false;
         }
@@ -239,6 +305,11 @@ namespace csharp_lksmart.Forms.Admin
         private void btnKelolaPelanggan_Click(object sender, EventArgs e)
         {
             MessageBoxHelper.ShowWarning("Anda sedang berada di form ini.");
+        }
+
+        private void cboxSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCari.Focus();
         }
     }
 }

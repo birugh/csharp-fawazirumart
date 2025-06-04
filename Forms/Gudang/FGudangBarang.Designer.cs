@@ -1063,7 +1063,7 @@
             this.txtCari.Padding = new System.Windows.Forms.Padding(3);
             this.txtCari.PasswordChar = '\0';
             this.txtCari.PlaceholderForeColor = System.Drawing.Color.Silver;
-            this.txtCari.PlaceholderText = "Search by Id";
+            this.txtCari.PlaceholderText = "";
             this.txtCari.ReadOnly = false;
             this.txtCari.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtCari.SelectedText = "";
@@ -1077,7 +1077,7 @@
             this.txtCari.TextMarginBottom = 0;
             this.txtCari.TextMarginLeft = 3;
             this.txtCari.TextMarginTop = 0;
-            this.txtCari.TextPlaceholder = "Search by Id";
+            this.txtCari.TextPlaceholder = "";
             this.txtCari.UseSystemPasswordChar = false;
             this.txtCari.WordWrap = true;
             this.txtCari.TextChanged += new System.EventHandler(this.txtCari_TextChanged);
@@ -1547,6 +1547,7 @@
             this.cboxSearch.TextAlignment = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
             this.cboxSearch.TextLeftMargin = 5;
             this.cboxSearch.ValueMember = "0";
+            this.cboxSearch.SelectedIndexChanged += new System.EventHandler(this.cboxSearch_SelectedIndexChanged);
             // 
             // FormGudangBarang
             // 
