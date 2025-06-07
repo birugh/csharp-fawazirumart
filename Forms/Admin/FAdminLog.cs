@@ -14,11 +14,13 @@ namespace csharp_lksmart
         {
             InitializeComponent();
             TimerHelper.InitializeTimer(Timer_Tick);
-
             cboxSearch.SelectedIndex = 0;
+            dateStart.ValueChanged -= dateStart_ValueChanged;
+            dateEnd.ValueChanged -= dateEnd_ValueChanged;
             dateStart.Value = DateTime.Now.Date.AddDays(-1);
-            dateEnd.Value = DateTime.Now;
-
+            dateEnd.Value = DateTime.Today.AddHours(23).AddMinutes(59).AddSeconds(59);
+            dateStart.ValueChanged += dateStart_ValueChanged;
+            dateEnd.ValueChanged += dateEnd_ValueChanged;
             LoadData();
         }
 
@@ -33,8 +35,8 @@ namespace csharp_lksmart
             dateStart.ValueChanged -= dateStart_ValueChanged;
             dateEnd.ValueChanged -= dateEnd_ValueChanged;
 
-            dateStart.Value = DateTime.Now;
-            dateEnd.Value = DateTime.Now;
+            dateStart.Value = DateTime.Now.Date.AddDays(-1);
+            dateEnd.Value = DateTime.Today.AddHours(23).AddMinutes(59).AddSeconds(59);
             dateStart.Focus();
             cboxSearch.SelectedIndex = 0;
             LoadData();
@@ -48,13 +50,13 @@ namespace csharp_lksmart
             if (dateStart.Value > dateEnd.Value)
             {
                 MessageBoxHelper.ShowWarning("Batas waktu awal tidak valid!");
-                dateStart.Focus();
+                ResetInput();
                 return false;
             }
             else if (dateEnd.Value < dateStart.Value)
             {
                 MessageBoxHelper.ShowWarning("Batas waktu terakhir tidak valid!");
-                dateEnd.Focus();
+                ResetInput();
                 return false;
             }
             return true;
@@ -75,6 +77,7 @@ namespace csharp_lksmart
                 case 3: func = "insert"; break;
                 case 4: func = "update"; break;
                 case 5: func = "delete"; break;
+                case 6: func = "soft delete"; break;
             }
 
             p.Add("func", func, DbType.String, ParameterDirection.Input);
@@ -117,7 +120,7 @@ namespace csharp_lksmart
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
-            FormClosingHelper.FormChanging<FormAdminKelolaUser>(this);
+            FormClosingHelper.FormChanging<FormAdminLaporan>(this);
         }
 
         private void btnLog_Click(object sender, EventArgs e)
@@ -138,6 +141,11 @@ namespace csharp_lksmart
         private void cboxSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             FilterDate();
+        }
+
+        private void FormAdminLogActivity_Load(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

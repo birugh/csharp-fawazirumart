@@ -41,7 +41,7 @@ namespace csharp_lksmart
 
         private bool ValidateInput()
         {
-            if (cboxTipeUser.SelectedIndex < 0 ||
+            if (
                 string.IsNullOrWhiteSpace(txtNama.Text) ||
                 string.IsNullOrWhiteSpace(txtPassword.Text) ||
                 string.IsNullOrWhiteSpace(txtUsername.Text))
@@ -49,6 +49,25 @@ namespace csharp_lksmart
                 MessageBoxHelper.ShowWarning("Semua kolom harus diisi!");
                 return false;
             }
+            else if (txtUsername.Text.Length < 5 ||
+                     txtNama.Text.Length < 5 ||
+                     txtPassword.Text.Length < 5)
+            {
+                MessageBoxHelper.ShowWarning("Kolom minimal harus 5 karakter!");
+                return false;
+            }
+
+            if (cboxTipeUser.Text == "Admin")
+            {
+
+            }
+            else if (cboxTipeUser.SelectedIndex > -1)
+            {
+                MessageBoxHelper.ShowWarning("Tipe user harus valid!");
+                cboxTipeUser.Focus();
+                return false;
+            }
+
             return true;
         }
 
@@ -64,6 +83,7 @@ namespace csharp_lksmart
 
         private void ResetInput()
         {
+            cboxTipeUser.Text = null;
             cboxTipeUser.SelectedIndex = -1;
             txtNama.Text = "";
             txtUsername.Text = "";
@@ -72,6 +92,20 @@ namespace csharp_lksmart
             cboxTipeUser.Enabled = true;
             hasilCari = null;
             LoadData();
+        }
+
+        private void ToggleButton(string typeToggle)
+        {
+            if (typeToggle == "false")
+            {
+                btnEdit.Enabled = false;
+                btnHapus.Enabled = false;
+            }
+            else if (typeToggle == "true")
+            {
+                btnEdit.Enabled = true;
+                btnHapus.Enabled = true;
+            }
         }
 
         private async void btnTambah_Click(object sender, EventArgs e)
@@ -85,7 +119,7 @@ namespace csharp_lksmart
             var p = new DynamicParameters();
 
             p.Add("id_user", FormLogin.userId.ToString(), DbType.String, ParameterDirection.Input);
-            p.Add("tipe_user", cboxTipeUser.SelectedItem.ToString(), DbType.String, ParameterDirection.Input);
+            p.Add("tipe_user", cboxTipeUser.Text.ToString(), DbType.String, ParameterDirection.Input);
             p.Add("nama", txtNama.Text, DbType.String, ParameterDirection.Input);
             p.Add("username", txtUsername.Text, DbType.String, ParameterDirection.Input);
             p.Add("password", txtPassword.Text, DbType.String, ParameterDirection.Input);
@@ -94,23 +128,19 @@ namespace csharp_lksmart
             var res = await db.ExecuteAsyncSP(conn, "usp_insert_m_user", p);
 
             int status = p.Get<int>("status");
-            if (status == 0)
+            if (status == 2)
             {
-                MessageBoxHelper.ShowWarning("Username atau telepon sudah digunakan.");
-                return;
+                MessageBoxHelper.ShowInformation("Data berhasil dikembalikan.");
+                ResetInput();
             }
             else if (status == 1)
             {
                 MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
                 ResetInput();
-                LoadData();
-                return;
             }
-            else if (status == 2)
+            else if (status == 0)
             {
-                MessageBoxHelper.ShowInformation("Restore data gagal, silahkan coba lagi.");
-                LoadData();
-                return;
+                MessageBoxHelper.ShowInformation("Data gagal ditambahkan.");
             }
             else
             {
@@ -131,7 +161,7 @@ namespace csharp_lksmart
             var p = new DynamicParameters();
 
             p.Add("id_user", hasilCari, DbType.String, ParameterDirection.Input);
-            p.Add("tipe_user", cboxTipeUser.SelectedItem, DbType.String, ParameterDirection.Input);
+            p.Add("tipe_user", cboxTipeUser.Text, DbType.String, ParameterDirection.Input);
             p.Add("nama", txtNama.Text, DbType.String, ParameterDirection.Input);
             p.Add("username", txtUsername.Text, DbType.String, ParameterDirection.Input);
             p.Add("password", txtPassword.Text, DbType.String, ParameterDirection.Input);
@@ -140,14 +170,10 @@ namespace csharp_lksmart
             var res = await db.ExecuteAsyncSP(conn, "usp_update_m_user", p);
 
             int status = p.Get<int>("status");
-            if (status == 2)
-            {
-                MessageBoxHelper.ShowWarning("Username atau telepon sudah digunakan.");
-                return;
-            }
-            else if (status == 1)
+            if (status == 1)
             {
                 MessageBoxHelper.ShowInformation("Data berhasil diedit.");
+                ResetInput();
             }
             else if (status == 0)
             {
@@ -159,12 +185,11 @@ namespace csharp_lksmart
             }
 
             LoadData();
-            ResetInput();
         }
 
         private async void btnHapus_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput() || !ValidateSearch()) return;
+            if (!ValidateSearch()) return;
 
             if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin ingin melakukan ini?")) return;
 
@@ -183,21 +208,17 @@ namespace csharp_lksmart
                 if (status == 0)
                 {
                     MessageBoxHelper.ShowWarning("Data gagal dihapus.");
-                    return;
                 }
                 else if (status == 1)
                 {
                     MessageBoxHelper.ShowInformation("Data berhasil dihapus.");
                     ResetInput();
-                    LoadData();
-                    return;
                 }
                 else
                 {
                     MessageBoxHelper.ShowError("Terjadi kesalahan.");
                 }
 
-                MessageBoxHelper.ShowInformation("Data berhasil di hapus.");
                 LoadData();
             }
             catch (Exception)
@@ -213,7 +234,7 @@ namespace csharp_lksmart
 
         private void btnKelolaLaporan_Click(object sender, EventArgs e)
         {
-            FormClosingHelper.FormChanging<FormAdminLaporan>(this);
+            FormClosingHelper.FormChanging<FAdminPelanggan>(this);
         }
 
         private void btnLog_Click(object sender, EventArgs e)
@@ -234,11 +255,14 @@ namespace csharp_lksmart
         private void btnReset_Click(object sender, EventArgs e)
         {
             ResetInput();
+            ToggleButton("false");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             LoadData();
+            txtCari.Clear();
+            ToggleButton("false");
         }
 
         private void dataGridViewUsers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -283,6 +307,7 @@ namespace csharp_lksmart
             }
 
             hasilCari = row.Cells["id_user"].Value.ToString();
+            ToggleButton("true");
             isFillingData = false;
         }
 
@@ -292,6 +317,7 @@ namespace csharp_lksmart
 
             if (string.IsNullOrWhiteSpace(txtCari.Text))
             {
+                ToggleButton("false");
                 LoadData();
                 return;
             }
@@ -331,11 +357,21 @@ namespace csharp_lksmart
             if (res == null || res.Count == 0)
             {
                 dataGridViewUsers.DataSource = null;
+                ToggleButton("false");
                 return;
             }
 
             dataGridViewUsers.DataSource = res;
-
+            ToggleButton("true");
+            if (txtCari.Text == "1")
+            {
+                cboxTipeUser.Text = "Admin";
+                cboxTipeUser.Enabled = false;
+            }
+            else
+            {
+                cboxTipeUser.Enabled = true;
+            }
             var first = res.FirstOrDefault();
             if (first != null)
             {
@@ -371,6 +407,11 @@ namespace csharp_lksmart
         private void cboxSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtCari.Focus();
+        }
+
+        private void FormAdminKelolaUser_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

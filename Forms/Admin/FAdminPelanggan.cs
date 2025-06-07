@@ -66,6 +66,20 @@ namespace csharp_lksmart.Forms.Admin
             LoadData();
         }
 
+        private void ToggleButton(string typeToggle)
+        {
+            if (typeToggle == "false")
+            {
+                btnEdit.Enabled = false;
+                btnHapus.Enabled = false;
+            }
+            else if (typeToggle == "true")
+            {
+                btnEdit.Enabled = true;
+                btnHapus.Enabled = true;
+            }
+        }
+
         private async void btnTambah_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
@@ -85,18 +99,23 @@ namespace csharp_lksmart.Forms.Admin
             var res = await db.ExecuteAsyncSP(conn, "usp_insert_m_pelanggan", p);
 
             int status = p.Get<int>("status");
-            if (status == 2)
+            if (status == 0)
             {
-                MessageBox.Show("Nama atau telepon sudah digunakan.");
-                return;
+                MessageBoxHelper.ShowWarning("Data gagal diupdate.");
             }
             else if (status == 1)
             {
-                MessageBox.Show("Data berhasil ditambahkan.");
+                MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
+                ResetInput();
+            }
+            else if (status == 2)
+            {
+                MessageBoxHelper.ShowWarning("Data berhasil dikembalikan.");
+                ResetInput();
             }
             else
             {
-                MessageBox.Show("Terjadi kesalahan.");
+                MessageBoxHelper.ShowError("Terjadi kesalahan.");
             }
 
             LoadData();
@@ -105,17 +124,12 @@ namespace csharp_lksmart.Forms.Admin
         private void btnReset_Click(object sender, EventArgs e)
         {
             ResetInput();
+            ToggleButton("false");
         }
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-
-            if (int.TryParse(hasilCari, out int id))
-            {
-                MessageBoxHelper.ShowWarning("Silahkan pilih filter pencarian ID.");
-                return;
-            }
 
             if (!MessageBoxHelper.ComparisonMsgBox("Apakah anda yakin?")) return;
 
@@ -125,6 +139,7 @@ namespace csharp_lksmart.Forms.Admin
             var p = new DynamicParameters();
 
             p.Add("id_user", FormLogin.userId.ToString(), DbType.String, ParameterDirection.Input);
+            p.Add("id_pelanggan", hasilCari, DbType.String, ParameterDirection.Input);
             p.Add("nama", txtNama.Text, DbType.String, ParameterDirection.Input);
             p.Add("telepon", txtTelepon.Text, DbType.String, ParameterDirection.Input);
             p.Add("alamat", txtAlamat.Text, DbType.String, ParameterDirection.Input);
@@ -133,18 +148,18 @@ namespace csharp_lksmart.Forms.Admin
             var res = await db.ExecuteAsyncSP(conn, "usp_update_m_pelanggan", p);
 
             int status = p.Get<int>("status");
-            if (status == 2)
+            if (status == 0)
             {
-                MessageBox.Show("Username atau telepon sudah digunakan.");
+                MessageBoxHelper.ShowWarning("Data gagal diupdate.");
                 return;
             }
             else if (status == 1)
             {
-                MessageBox.Show("Data berhasil diupdate.");
+                MessageBoxHelper.ShowInformation("Data berhasil diupdate.");
             }
             else
             {
-                MessageBox.Show("Terjadi kesalahan.");
+                MessageBoxHelper.ShowError("Terjadi kesalahan.");
             }
 
             LoadData();
@@ -170,22 +185,18 @@ namespace csharp_lksmart.Forms.Admin
             int status = p.Get<int>("status");
             if (status == 0)
             {
-                MessageBoxHelper.ShowWarning("Username atau telepon sudah digunakan.");
-                return;
+                MessageBoxHelper.ShowWarning("Data gagal dihapus.");
             }
             else if (status == 1)
             {
-                MessageBoxHelper.ShowInformation("Data berhasil ditambahkan.");
-                LoadData();
-                return;
+                MessageBoxHelper.ShowInformation("Data berhasil dihapus.");
+                ResetInput();
             }
             else
             {
                 MessageBoxHelper.ShowError("Terjadi kesalahan.");
             }
 
-
-            MessageBoxHelper.ShowWarning("Data berhasil di hapus!");
             LoadData();
         }
 
@@ -232,10 +243,12 @@ namespace csharp_lksmart.Forms.Admin
             if (res == null || res.Count == 0)
             {
                 dataGridViewPelanggan.DataSource = null;
+                ToggleButton("false");
                 return;
             }
 
             dataGridViewPelanggan.DataSource = res;
+            ToggleButton("true");
 
             var first = res.FirstOrDefault();
             if (first != null)
@@ -274,6 +287,7 @@ namespace csharp_lksmart.Forms.Admin
             }
 
             hasilCari = row.Cells["id_pelanggan"].Value.ToString();
+            ToggleButton("true");
             isFillingData = false;
         }
 
@@ -310,6 +324,26 @@ namespace csharp_lksmart.Forms.Admin
         private void cboxSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtCari.Focus();
+        }
+
+        private void txtTelepon_TextChanged(object sender, EventArgs e)
+        {
+            if (!txtTelepon.Text.StartsWith("08"))
+            {
+                txtTelepon.Text = "08" + txtTelepon.Text.TrimStart('0', '8');
+                txtTelepon.SelectionStart = txtTelepon.Text.Length;
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            LoadData();
+            ToggleButton("false");
+        }
+
+        private void FAdminPelanggan_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FormClosingHelper.FormClosing(e);
         }
     }
 }

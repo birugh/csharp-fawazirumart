@@ -29,7 +29,8 @@ namespace csharp_lksmart
             InitializeComponent();
             InitializeKeranjang();
             LoadMenu();
-            LoadKasir();
+            cboxPilihMenu.SelectedIndex = -1;
+            btnReset_Click(null, null);
         }
 
         private bool ValidateInput()
@@ -54,18 +55,6 @@ namespace csharp_lksmart
             cboxPilihMenu.DataSource = barang.ToList();
             cboxPilihMenu.ValueMember = "id_barang";
             cboxPilihMenu.DisplayMember = "nama_barang";
-        }
-
-        private void LoadKasir()
-        {
-            if (string.IsNullOrWhiteSpace(FormLogin.userId))
-            {
-                labelKasir.Text = "Kasir: Tidak dikenali";
-            }
-            else
-            {
-                labelKasir.Text = "Kasir: " + FormLogin.userId + " - " + FormLogin.userName;
-            }
         }
 
         private void InitializeKeranjang()
@@ -118,7 +107,7 @@ namespace csharp_lksmart
             btnPrint.Enabled = false;
             txtKuantitas.Enabled = false;
             cboxPilihMenu.Enabled = true;
-            txtCash.Enabled = true;
+            txtCash.Enabled = false;
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -484,14 +473,21 @@ namespace csharp_lksmart
                 return;
             }
 
-            if (!long.TryParse(txtTelepon.Text, out long telepon) ||
-                !txtTelepon.Text.StartsWith("08") ||
-                !Regex.IsMatch(txtTelepon.Text, @"^\d+$"))
-            {
-                MessageBoxHelper.ShowWarning("Kolom telepon tidak valid!");
+            //if (!long.TryParse(txtTelepon.Text, out long telepon) ||
+            //    !txtTelepon.Text.StartsWith("08") ||
+            //    !Regex.IsMatch(txtTelepon.Text, @"^\d+$"))
+            //{
+            //    MessageBoxHelper.ShowWarning("Kolom telepon tidak valid!");
 
-                txtTelepon.Text = "08";
-                txtTelepon.Focus();
+            //    txtTelepon.Text = "08";
+            //    txtTelepon.Focus();
+            //    return;
+            //}
+
+            if (!txtTelepon.Text.StartsWith("08"))
+            {
+                txtTelepon.Text = "08" + txtTelepon.Text.TrimStart('0', '8');
+                txtTelepon.SelectionStart = txtTelepon.Text.Length;
                 return;
             }
 
@@ -543,6 +539,71 @@ namespace csharp_lksmart
         }
 
         private void bunifuLabel20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormKasirTransaksi_Load(object sender, EventArgs e)
+        {
+            cboxPilihMenu.SelectedIndex = -1;
+        }
+
+        private void bunifuLabel15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuSeparator1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNamaPelanggan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTotalHarga_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtHargaSatuan_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelStok_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboxPilihMenu_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuLabel10_Click(object sender, EventArgs e)
         {
 
         }

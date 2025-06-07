@@ -18,7 +18,7 @@ namespace csharp_lksmart
             dateStart.ValueChanged -= dateStart_ValueChanged;
             dateEnd.ValueChanged -= dateEnd_ValueChanged;
             dateStart.Value = DateTime.Now.Date.AddDays(-1);
-            dateEnd.Value = DateTime.Now;
+            dateEnd.Value = DateTime.Today.AddHours(23).AddMinutes(59).AddSeconds(59);
             dateStart.ValueChanged += dateStart_ValueChanged;
             dateEnd.ValueChanged += dateEnd_ValueChanged;
             LoadData();
@@ -28,7 +28,7 @@ namespace csharp_lksmart
         {
             if (dateStart.Value > dateEnd.Value)
             {
-                MessageBoxHelper.ShowWarning("Batas waktu awal tidak valid!" + dateStart.Value + " " + dateEnd.Value);
+                MessageBoxHelper.ShowWarning("Batas waktu awal tid%ak valid!" + dateStart.Value + " " + dateEnd.Value);
                 ResetInput();
                 return false;
             }
@@ -140,6 +140,11 @@ namespace csharp_lksmart
         private void btnKelolaPelanggan_Click(object sender, EventArgs e)
         {
             FormClosingHelper.FormChanging<FAdminPelanggan>(this);
+        }
+
+        private void dataGridViewLaporan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
