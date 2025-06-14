@@ -52,7 +52,7 @@ Aplikasi POS sederhana berbasis Windows Forms (C#) untuk kebutuhan administrasi,
 ├── csharp-lksmart.sln
 ```
 
-## Techstack
+## Tech Stack
 
 - C# Windows Forms
 - SQL Server
@@ -64,9 +64,9 @@ Aplikasi POS sederhana berbasis Windows Forms (C#) untuk kebutuhan administrasi,
 
 ### 1. Clone Repository
 
-\`\`\`bash
+```bash
 git clone https://github.com/your-username/csharp-lksmart.git
-\`\`\`
+```
 
 ### 2. Buka & Jalankan
 
