@@ -1,14 +1,15 @@
-# csharp-lksmart
+# csharp-fawazirumart
 
-Aplikasi **Windows Forms** berbasis C# untuk mengelola operasi administrasi, gudang, dan kasir.
+Aplikasi POS sederhana berbasis Windows Forms (C#) untuk kebutuhan administrasi, gudang, dan kasir.
 
 ## Fitur
 
-- **Modul Admin**: Mengelola log pengguna, membuat laporan, dan mengatur akun pengguna.
-- **Modul Gudang**: Mengelola data inventaris dan stok barang.
-- **Modul Kasir**: Menangani transaksi dan interaksi dengan pelanggan.
-- **Helpers**: Kelas-kelas utilitas untuk operasi database, interaksi UI, dan lainnya.
-- **Models**: Model data untuk entitas seperti `Barang`, `Laporan`, `Log`, `Pelanggan`, `User`, dan `Transaksi`.
+- 🔐 **Login Role-Based**: Admin, Gudang, dan Kasir
+- 📊 **Manajemen Laporan & Log**
+- 📦 **Manajemen Barang dan Stok**
+- 💸 **Transaksi Kasir dengan Nomor Otomatis**
+- 📁 **Struktur Modular**: `Forms`, `Models`, `Helpers`
+- 🔧 **Trigger & Stored Procedure SQL Server**
 
 ## Struktur Proyek
 
@@ -51,24 +52,24 @@ Aplikasi **Windows Forms** berbasis C# untuk mengelola operasi administrasi, gud
 ├── csharp-lksmart.sln
 ```
 
-## Kebutuhan
+## Techstack
 
-- **.NET Framework 4.8.1**
-- **Visual Studio 2022 atau versi yang lebih baru**
+- C# Windows Forms
+- SQL Server
+- Stored Procedures & Triggers
+- Visual Studio 2022
+- .NET Framework 4.8.1
 
-## Memulai Proyek
+## Cara Instalasi
 
-1. Clone repositori:
-   ```bash
-   git clone https://github.com/your-repo/csharp-lksmart.git
-   ```
-2. Buka file solusi `csharp-lksmart.sln` menggunakan Visual Studio.
-3. Build solusi untuk mengunduh paket NuGet dan meng-compile proyek.
-4. Jalankan aplikasi.
+### 1. Clone Repository
 
-## Penggunaan
+\`\`\`bash
+git clone https://github.com/your-username/csharp-lksmart.git
+\`\`\`
 
-- **Login**: Masuk ke aplikasi melalui form login.
-- **Admin**: Mengelola log, laporan, dan akun pengguna.
-- **Gudang**: Mengelola data stok dan inventaris barang.
-- **Kasir**: Memproses transaksi dan mengatur data pelanggan.
+### 2. Buka & Jalankan
+
+- Buka `csharp-lksmart.sln` di **Visual Studio 2022**
+- Pastikan target .NET Framework 4.8.1 sudah terpasang
+- Tekan `Execute` untuk menjalankan aplikasi
