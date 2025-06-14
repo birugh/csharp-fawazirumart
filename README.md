@@ -19,6 +19,8 @@ Aplikasi **Windows Forms** berbasis C# untuk mengelola operasi administrasi, gud
 │   ├── Admin/
 │   │   ├── FAdminLog.cs
 │   │   ├── FAdminLaporan.cs
+│   │   ├── FAdminUsers.cs
+│   │   ├── FAdminPelanggan.cs
 │   ├── Gudang/
 │   │   ├── FGudangBarang.cs
 │   ├── Kasir/
@@ -43,8 +45,6 @@ Aplikasi **Windows Forms** berbasis C# untuk mengelola operasi administrasi, gud
 │       ├── Administrator.png
 │       ├── Cashier.png
 │       ├── Gudang.png
-├── Exported PDF/
-│   ├── ExportedDataKeranjang.pdf
 ├── Program.cs
 ├── App.config
 ├── csharp-lksmart.csproj
